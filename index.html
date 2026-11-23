@@ -131,17 +131,11 @@
 
     .academy-strip {
       background: var(--surface-2); border-radius: var(--radius); padding: 16px 20px;
-      margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 26px; display: flex; align-items: center; justify-content: space-between;
       gap: 16px; flex-wrap: wrap;
     }
     .academy-strip strong { font-size: 0.95rem; display: block; margin-bottom: 2px; }
     .academy-strip span { font-size: 0.83rem; color: var(--text-muted); }
-
-    /* Stats */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 26px; }
-    .stat-card { background: var(--surface-2); border-radius: var(--radius); padding: 18px 20px; }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
-    .stat-value { font-size: 1.55rem; font-weight: 700; line-height: 1.2; }
 
     /* Board Header & Kanban */
     .board-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
@@ -342,13 +336,6 @@
 
       <!-- BOARD -->
       <section id="section-board">
-        <div class="stats-grid">
-          <div class="stat-card"><div class="stat-label">قيد العمل</div><div class="stat-value" id="stat-active">0</div></div>
-          <div class="stat-card"><div class="stat-label">بانتظار العميل</div><div class="stat-value" id="stat-review">0</div></div>
-          <div class="stat-card"><div class="stat-label">مكتملة</div><div class="stat-value" id="stat-done">0</div></div>
-          <div class="stat-card"><div class="stat-label">إجمالي القيمة</div><div class="stat-value" id="stat-revenue">0 ر.س</div></div>
-        </div>
-
         <div class="board-header">
           <h2 style="font-size:1.15rem; font-weight:700;">لوحة المشاريع</h2>
           <div class="board-controls">
@@ -894,10 +881,6 @@
 
     function renderBoard() {
       const board = $("kanban-board"); board.innerHTML = "";
-      let active = 0, review = 0, done = 0, revenue = 0;
-      state.projects.forEach(p => { revenue += Number(p.price || 0); if (p.stage === "done") done++; else if (p.stage === "review") review++; else active++; });
-      $("stat-active").textContent = active; $("stat-review").textContent = review; $("stat-done").textContent = done; $("stat-revenue").textContent = revenue.toLocaleString("en-US") + " ر.س";
-
       const filtered = state.projects.filter(p => (!state.search || (p.title || "").toLowerCase().includes(state.search) || (p.client || "").toLowerCase().includes(state.search)) && (!state.onlyOverdue || isOverdue(p)));
       STAGES.forEach(st => {
         const items = filtered.filter(p => p.stage === st.id);
