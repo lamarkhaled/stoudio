@@ -24,12 +24,11 @@
       --text-muted: #6E6E73;
       --danger: #D93025;
       --success: #1E8E3E;
-      --warning: #B06000;
       --radius: 16px;
       --radius-sm: 10px;
       --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
       --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
-      --glass: rgba(255, 255, 255, 0.78);
+      --glass: rgba(255, 255, 255, 0.8);
     }
 
     [data-theme="dark"] {
@@ -42,7 +41,7 @@
       --accent-soft: rgba(255, 255, 255, 0.1);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.65);
-      --glass: rgba(22, 22, 25, 0.78);
+      --glass: rgba(22, 22, 25, 0.8);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,14 +55,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    button, input, select, textarea {
-      font-family: inherit;
-      color: inherit;
-    }
-
+    button, input, select, textarea { font-family: inherit; color: inherit; }
     .hidden { display: none !important; }
 
-    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -79,18 +73,14 @@
       cursor: pointer;
       transition: all 0.18s ease;
     }
-    .btn:hover { transform: translateY(-1px); background: var(--surface-2); }
-    .btn-primary {
-      background: var(--accent);
-      color: #FFFFFF;
-      border-color: transparent;
-    }
-    .btn-primary:hover { opacity: 0.9; background: var(--accent); }
+    .btn:hover:not(:disabled) { transform: translateY(-1px); background: var(--surface-2); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: #FFFFFF; border-color: transparent; }
+    .btn-primary:hover:not(:disabled) { opacity: 0.9; background: var(--accent); }
     .btn-danger { color: var(--danger); border-color: rgba(217, 48, 37, 0.25); }
     .btn-sm { padding: 6px 13px; font-size: 0.82rem; }
     .btn-icon { width: 38px; height: 38px; padding: 0; border-radius: 50%; }
 
-    /* Inputs */
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
     .field label { font-size: 0.83rem; font-weight: 500; color: var(--text-muted); }
     .input, select.input, textarea.input {
@@ -106,7 +96,6 @@
     }
     .input:focus { border-color: var(--accent); }
 
-    /* Cards */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -115,7 +104,6 @@
       box-shadow: var(--shadow);
     }
 
-    /* Auth & Pending Views */
     .center-screen {
       min-height: 100vh;
       display: flex;
@@ -123,54 +111,36 @@
       justify-content: center;
       padding: 24px;
     }
-    .auth-box {
-      width: 100%;
-      max-width: 430px;
-      padding: 36px 32px;
-    }
+    .auth-box { width: 100%; max-width: 430px; padding: 36px 32px; }
     .brand-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
-      background: var(--accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      overflow: hidden;
+      width: 46px; height: 46px; border-radius: 13px;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-weight: 700; font-size: 1.1rem; overflow: hidden;
     }
     .brand-mark img { width: 100%; height: 100%; object-fit: cover; }
     .auth-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
-    .auth-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; }
+    .auth-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 22px; }
     .alert {
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      margin-bottom: 14px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      font-size: 0.85rem; margin-bottom: 14px;
+      background: var(--surface-2); border: 1px solid var(--border);
     }
-    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.3); }
-    .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); }
+    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: rgba(217, 48, 37, 0.06); }
+    .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
 
-    /* Top Header */
+    .spinner {
+      width: 34px; height: 34px; border: 3px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin 0.7s linear infinite; margin: 0 auto 14px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 40;
+      background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border); padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
     .topbar-brand { display: flex; align-items: center; gap: 12px; }
     .topbar-logo {
@@ -181,301 +151,90 @@
     }
     .topbar-logo img { width: 100%; height: 100%; object-fit: cover; }
     .nav-pills {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--surface-2);
-      padding: 4px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface-2); padding: 4px; border-radius: 999px;
+      border: 1px solid var(--border); flex-wrap: wrap;
     }
     .nav-pill {
-      padding: 7px 15px;
-      border-radius: 999px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.86rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s;
+      padding: 7px 15px; border-radius: 999px; border: none; background: transparent;
+      color: var(--text-muted); font-size: 0.86rem; font-weight: 500; cursor: pointer; transition: all 0.18s;
     }
-    .nav-pill.active {
-      background: var(--surface);
-      color: var(--text);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
+    .nav-pill.active { background: var(--surface); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
-    /* Main Container */
     .container { max-width: 1380px; margin: 0 auto; padding: 26px 24px 100px; }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
     .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
     .stat-value { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; }
 
-    /* Kanban Board */
-    .board-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .kanban {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(245px, 1fr));
-      gap: 14px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-    }
+    .board-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
+    .kanban { display: grid; grid-template-columns: repeat(5, minmax(245px, 1fr)); gap: 14px; overflow-x: auto; padding-bottom: 12px; }
     .kanban-col {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      min-height: 460px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px;
     }
     .kanban-col.drag-over { border-color: var(--accent); background: var(--accent-soft); }
-    .col-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 4px 4px 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    .col-count {
-      font-size: 0.76rem;
-      padding: 2px 9px;
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
+    .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px; font-size: 0.88rem; font-weight: 600; }
+    .col-count { font-size: 0.76rem; padding: 2px 9px; border-radius: 999px; background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
     .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 13px;
-      cursor: pointer;
-      transition: transform 0.16s, box-shadow 0.16s;
-      box-shadow: var(--shadow);
+      background: var(--surface); border: 1px solid var(--border); border-radius: 13px;
+      padding: 13px; cursor: pointer; transition: transform 0.16s; box-shadow: var(--shadow);
     }
     .project-card:hover { transform: translateY(-2px); }
-    .project-thumb {
-      width: 100%;
-      height: 115px;
-      border-radius: 9px;
-      object-fit: cover;
-      background: var(--surface-2);
-      margin-bottom: 10px;
-      display: block;
-    }
+    .project-thumb { width: 100%; height: 115px; border-radius: 9px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
     .project-title { font-size: 0.94rem; font-weight: 600; margin-bottom: 4px; }
-    .project-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 500;
-      background: var(--surface-2);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
+    .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 8px; }
+    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 500; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); background: rgba(30, 142, 62, 0.08); }
 
-    /* Modal */
     .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 80;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px;
     }
     .modal {
-      width: 100%;
-      max-width: 860px;
-      max-height: 90vh;
-      overflow-y: auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 26px;
-      box-shadow: var(--shadow-lg);
+      width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-lg);
     }
-    .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 16px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-      gap: 12px;
-    }
-    .tabs {
-      display: flex;
-      gap: 6px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 18px;
-      overflow-x: auto;
-    }
-    .tab-btn {
-      padding: 9px 14px;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      font-weight: 500;
-      cursor: pointer;
-      white-space: nowrap;
-    }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border); gap: 12px; }
+    .tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 18px; overflow-x: auto; }
+    .tab-btn { padding: 9px 14px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 0.88rem; font-weight: 500; cursor: pointer; white-space: nowrap; }
     .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
 
-    /* Swatches & Lists */
     .swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-    .swatch {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      cursor: pointer;
-      font-size: 0.82rem;
-    }
+    .swatch { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; font-size: 0.82rem; }
     .swatch-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
-    .list-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      margin-bottom: 8px;
-      font-size: 0.88rem;
-    }
+    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-2); margin-bottom: 8px; font-size: 0.88rem; }
 
-    /* Interactive Draft Canvas (Figma-style Pins) */
-    .draft-stage {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      cursor: crosshair;
-      user-select: none;
-    }
+    .draft-stage { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
     .draft-stage img { width: 100%; display: block; max-height: 520px; object-fit: contain; background: #111; }
     .pin {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      cursor: pointer;
+      position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); cursor: pointer;
     }
 
-    /* Focus Timer Pill */
     .timer-pill {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 50;
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: var(--shadow-lg);
+      position: fixed; bottom: 20px; left: 20px; z-index: 50;
+      background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px;
+      display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-lg);
     }
     .timer-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1rem; min-width: 54px; text-align: center; }
 
-    /* Stepper (Client View) */
-    .stepper {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin: 22px 0;
-    }
-    .step-item {
-      text-align: center;
-      padding: 10px 6px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+    .stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 22px 0; }
+    .step-item { text-align: center; padding: 10px 6px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); font-size: 0.8rem; color: var(--text-muted); }
     .step-item.done { border-color: var(--accent); color: var(--text); font-weight: 600; background: var(--accent-soft); }
     .step-item.current { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
 
-    /* Tables */
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
     th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); }
     th { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
 
-    /* Toast */
     .toast {
-      position: fixed;
-      top: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 120;
-      background: var(--text);
-      color: var(--bg);
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 500;
-      box-shadow: var(--shadow-lg);
+      position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120;
+      background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 999px;
+      font-size: 0.86rem; font-weight: 500; box-shadow: var(--shadow-lg);
     }
 
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
@@ -492,13 +251,26 @@
 
   <div id="toast" class="toast hidden"></div>
 
+  <!-- 0. LOADING / ERROR VIEW (يمنع الشاشة البيضاء نهائياً) -->
+  <section id="loading-view" class="center-screen">
+    <div class="card auth-box" style="text-align:center;">
+      <div id="loading-spinner" class="spinner"></div>
+      <h2 id="loading-title" style="font-size:1.1rem; margin-bottom:8px;">جاري تحميل الاستوديو...</h2>
+      <p id="loading-error-text" class="alert alert-error hidden" style="text-align:right; direction:ltr; font-size:0.8rem; word-break:break-word;"></p>
+      <div id="loading-actions" class="hidden" style="margin-top:14px;">
+        <button type="button" id="loading-retry-btn" class="btn btn-primary btn-sm">إعادة المحاولة</button>
+        <button type="button" id="loading-logout-btn" class="btn btn-sm">تسجيل الخروج</button>
+      </div>
+    </div>
+  </section>
+
   <!-- 1. AUTH VIEW -->
   <section id="auth-view" class="center-screen hidden">
     <div class="card auth-box">
       <div class="brand-mark">س</div>
       <h1 class="auth-title" id="auth-heading">تسجيل الدخول للاستوديو</h1>
       <p class="auth-sub" id="auth-subheading">مساحة عمل إبداعية لإدارة مشاريعك وتجربة عملائك باحترافية.</p>
-      <div id="auth-error" class="alert alert-error hidden"></div>
+      <div id="auth-msg" class="alert hidden"></div>
       <form id="auth-form">
         <div class="field hidden" id="auth-name-wrap">
           <label>اسم المصمم / الاستوديو</label>
@@ -509,12 +281,15 @@
           <input type="email" id="auth-email" class="input" placeholder="name@example.com" required />
         </div>
         <div class="field">
-          <label>كلمة المرور</label>
+          <label>كلمة المرور (6 خانات على الأقل)</label>
           <input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required />
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">دخول</button>
       </form>
-      <div style="text-align:center; margin-top:18px; font-size:0.86rem; color:var(--text-muted);">
+      <div style="text-align:center; margin-top:14px;">
+        <button type="button" id="forgot-pass-btn" style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;">نسيت كلمة المرور؟</button>
+      </div>
+      <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
         <span id="auth-toggle-text">ما عندك حساب؟</span>
         <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب جديد</button>
       </div>
@@ -527,8 +302,8 @@
       <div class="brand-mark" style="margin:0 auto 18px;">
         <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
-      <h2 class="auth-title">حسابك بانتظار التفعيل</h2>
-      <p class="auth-sub">أدخل كود التفعيل الذي حصلت عليه عند الشراء لفتح الاستوديو فوراً، أو انتظر موافقة الإدارة.</p>
+      <h2 class="auth-title">تم تسجيل حسابك بنجاح</h2>
+      <p class="auth-sub">حسابك الآن بانتظار التفعيل. أدخل كود التفعيل الذي حصلت عليه عند الشراء لفتح الاستوديو فوراً، أو انتظر موافقة الإدارة.</p>
       <div id="pending-msg" class="alert hidden"></div>
       <div class="field" style="text-align:right;">
         <label>كود التفعيل السريع</label>
@@ -546,7 +321,7 @@
         <div class="topbar-logo" id="studio-logo-wrap">س</div>
         <div>
           <div style="font-weight:700; font-size:0.98rem;" id="studio-name-display">استوديو التصميم</div>
-          <span class="mode-pill" id="sync-mode-badge">مزامنة سحابية</span>
+          <span class="mode-pill" id="sync-mode-badge">متصل بـ Firebase</span>
         </div>
       </div>
 
@@ -566,25 +341,12 @@
     </header>
 
     <main class="container">
-      <!-- SECTION: BOARD -->
       <section id="section-board">
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">مشاريع قيد العمل</div>
-            <div class="stat-value" id="stat-active">0</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">بانتظار رد العميل</div>
-            <div class="stat-value" id="stat-review">0</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">مشاريع مكتملة</div>
-            <div class="stat-value" id="stat-done">0</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">إجمالي قيمة المشاريع</div>
-            <div class="stat-value" id="stat-revenue">0 ر.س</div>
-          </div>
+          <div class="stat-card"><div class="stat-label">مشاريع قيد العمل</div><div class="stat-value" id="stat-active">0</div></div>
+          <div class="stat-card"><div class="stat-label">بانتظار رد العميل</div><div class="stat-value" id="stat-review">0</div></div>
+          <div class="stat-card"><div class="stat-label">مشاريع مكتملة</div><div class="stat-value" id="stat-done">0</div></div>
+          <div class="stat-card"><div class="stat-label">إجمالي قيمة المشاريع</div><div class="stat-value" id="stat-revenue">0 ر.س</div></div>
         </div>
 
         <div class="board-header">
@@ -601,71 +363,44 @@
         <div class="kanban" id="kanban-board"></div>
       </section>
 
-      <!-- SECTION: PRICING CALCULATOR -->
       <section id="section-pricing" class="hidden">
         <div class="grid-2">
           <div class="card">
             <h2 style="font-size:1.15rem; margin-bottom:6px;">حاسبة التسعير السريعة</h2>
             <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:18px;">احسب سعر مشروعك بدقة وانسخ عرض السعر جاهزاً للعميل.</p>
-            <div class="field">
-              <label>اسم الخدمة / المشروع</label>
-              <input type="text" id="calc-service" class="input" placeholder="مثال: تصميم هوية بصرية كاملة" value="تصميم هوية بصرية متكاملة" />
+            <div class="field"><label>اسم الخدمة / المشروع</label><input type="text" id="calc-service" class="input" value="تصميم هوية بصرية متكاملة" /></div>
+            <div class="grid-2" style="gap:10px;">
+              <div class="field"><label>السعر الأساسي (ر.س)</label><input type="number" id="calc-base" class="input" value="1500" min="0" /></div>
+              <div class="field"><label>عدد التعديلات المشمولة</label><input type="number" id="calc-revs" class="input" value="3" min="1" /></div>
             </div>
             <div class="grid-2" style="gap:10px;">
-              <div class="field">
-                <label>السعر الأساسي (ر.س)</label>
-                <input type="number" id="calc-base" class="input" value="1500" min="0" />
-              </div>
-              <div class="field">
-                <label>عدد التعديلات المشمولة</label>
-                <input type="number" id="calc-revs" class="input" value="3" min="1" />
-              </div>
-            </div>
-            <div class="grid-2" style="gap:10px;">
-              <div class="field">
-                <label>ساعات إضافية (اختياري)</label>
-                <input type="number" id="calc-hours" class="input" value="0" min="0" />
-              </div>
-              <div class="field">
-                <label>سعر الساعة (ر.س)</label>
-                <input type="number" id="calc-rate" class="input" value="120" min="0" />
-              </div>
+              <div class="field"><label>ساعات إضافية (اختياري)</label><input type="number" id="calc-hours" class="input" value="0" min="0" /></div>
+              <div class="field"><label>سعر الساعة (ر.س)</label><input type="number" id="calc-rate" class="input" value="120" min="0" /></div>
             </div>
             <div class="field">
               <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text);">
-                <input type="checkbox" id="calc-rush" />
-                إضافة رسوم تسليم مستعجل (+25%)
+                <input type="checkbox" id="calc-rush" /> إضافة رسوم تسليم مستعجل (+25%)
               </label>
             </div>
-            <div class="field">
-              <label>مدة التنفيذ المتوقعة</label>
-              <input type="text" id="calc-duration" class="input" value="5 أيام عمل" />
-            </div>
+            <div class="field"><label>مدة التنفيذ المتوقعة</label><input type="text" id="calc-duration" class="input" value="5 أيام عمل" /></div>
           </div>
 
           <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div style="font-size:0.84rem; color:var(--text-muted);">الإجمالي المقترح</div>
               <div style="font-size:2.2rem; font-weight:700; margin:6px 0 18px;" id="calc-total">1,500 ر.س</div>
-              <div class="field">
-                <label>نص عرض السعر الجاهز للواتساب</label>
-                <textarea id="calc-output" class="input" rows="8" readonly></textarea>
-              </div>
+              <div class="field"><label>نص عرض السعر الجاهز للواتساب</label><textarea id="calc-output" class="input" rows="8" readonly></textarea></div>
             </div>
             <button class="btn btn-primary" id="copy-quote-btn" style="width:100%;">نسخ عرض السعر</button>
           </div>
         </div>
       </section>
 
-      <!-- SECTION: BRANDING -->
       <section id="section-brand" class="hidden">
         <div class="card" style="max-width:600px;">
           <h2 style="font-size:1.15rem; margin-bottom:6px;">تخصيص هوية الاستوديو</h2>
           <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">تظهر هذه الهوية تلقائياً للعميل عند فتح رابط المتابعة الخاص به.</p>
-          <div class="field">
-            <label>اسم الاستوديو أو المصمم</label>
-            <input type="text" id="brand-name-input" class="input" />
-          </div>
+          <div class="field"><label>اسم الاستوديو أو المصمم</label><input type="text" id="brand-name-input" class="input" /></div>
           <div class="field">
             <label>اللون الأساسي للهوية</label>
             <div class="row">
@@ -673,15 +408,11 @@
               <span id="brand-color-hex" style="font-size:0.88rem; color:var(--text-muted);">#1D1D1F</span>
             </div>
           </div>
-          <div class="field">
-            <label>شعار الاستوديو (يُضغط تلقائياً)</label>
-            <input type="file" id="brand-logo-file" class="input" accept="image/*" />
-          </div>
+          <div class="field"><label>شعار الاستوديو (يُضغط تلقائياً)</label><input type="file" id="brand-logo-file" class="input" accept="image/*" /></div>
           <button class="btn btn-primary" id="save-brand-btn">حفظ الهوية</button>
         </div>
       </section>
 
-      <!-- SECTION: ADMIN PANEL -->
       <section id="section-admin" class="hidden">
         <div class="grid-2" style="margin-bottom:20px;">
           <div class="card">
@@ -697,13 +428,7 @@
             <h3 style="font-size:1.05rem; margin-bottom:12px;">المصممون المسجلون</h3>
             <div class="table-wrap">
               <table>
-                <thead>
-                  <tr>
-                    <th>الاسم / البريد</th>
-                    <th>الحالة</th>
-                    <th>إجراء</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>الاسم / البريد</th><th>الحالة</th><th>إجراء</th></tr></thead>
                 <tbody id="admin-users-tbody"></tbody>
               </table>
             </div>
@@ -712,7 +437,6 @@
       </section>
     </main>
 
-    <!-- FOCUS TIMER PILL -->
     <div class="timer-pill">
       <button class="btn btn-sm" id="timer-mode-25" style="padding:4px 10px;">25د</button>
       <button class="btn btn-sm" id="timer-mode-50" style="padding:4px 10px;">50د</button>
@@ -723,7 +447,7 @@
     </div>
   </div>
 
-  <!-- 4. CLIENT PORTAL VIEW (NO LOGIN REQUIRED) -->
+  <!-- 4. CLIENT PORTAL VIEW -->
   <div id="client-view" class="hidden">
     <header class="topbar">
       <div class="topbar-brand">
@@ -748,7 +472,6 @@
       <div class="stepper" id="client-stepper"></div>
 
       <div class="grid-2" style="align-items:start;">
-        <!-- Draft & Interactive Pins -->
         <div class="card">
           <div class="row" style="justify-content:space-between; margin-bottom:12px;">
             <h3 style="font-size:1.02rem;">معرض المسودات والتعديلات</h3>
@@ -757,7 +480,6 @@
           <div id="client-draft-stage" class="draft-stage" style="min-height:240px; display:flex; align-items:center; justify-content:center;">
             <span style="color:var(--text-muted); font-size:0.88rem;">لم يتم رفع مسودة بعد</span>
           </div>
-
           <div style="margin-top:16px;">
             <div class="row" style="margin-bottom:12px;">
               <input type="text" id="client-general-comment" class="input" placeholder="أو اكتب ملاحظة عامة هنا..." style="flex:1;" />
@@ -767,18 +489,11 @@
           </div>
         </div>
 
-        <!-- Vault & Final Files -->
         <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card">
-            <h3 style="font-size:1.02rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3>
-            <div id="client-vault-list"></div>
-          </div>
-
+          <div class="card"><h3 style="font-size:1.02rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3><div id="client-vault-list"></div></div>
           <div class="card" id="client-final-card">
             <h3 style="font-size:1.02rem; margin-bottom:8px;">الملفات النهائية</h3>
-            <div id="client-final-box" style="font-size:0.88rem; color:var(--text-muted);">
-              تُفتح الملفات النهائية تلقائياً فور ضغطك على زر «اعتماد التصميم النهائي».
-            </div>
+            <div id="client-final-box" style="font-size:0.88rem; color:var(--text-muted);">تُفتح الملفات النهائية تلقائياً فور ضغطك على زر «اعتماد التصميم النهائي».</div>
           </div>
         </div>
       </div>
@@ -793,28 +508,13 @@
         <button class="btn btn-sm" data-close-modal="new-project-modal">إغلاق</button>
       </div>
       <form id="new-project-form">
-        <div class="field">
-          <label>اسم المشروع</label>
-          <input type="text" id="np-title" class="input" placeholder="مثال: هوية متجر عود" required />
-        </div>
-        <div class="field">
-          <label>اسم العميل</label>
-          <input type="text" id="np-client" class="input" placeholder="اسم العميل أو البراند" required />
-        </div>
+        <div class="field"><label>اسم المشروع</label><input type="text" id="np-title" class="input" placeholder="مثال: هوية متجر عود" required /></div>
+        <div class="field"><label>اسم العميل</label><input type="text" id="np-client" class="input" placeholder="اسم العميل أو البراند" required /></div>
         <div class="grid-2" style="gap:10px;">
-          <div class="field">
-            <label>قيمة المشروع (ر.س)</label>
-            <input type="number" id="np-price" class="input" value="1000" min="0" />
-          </div>
-          <div class="field">
-            <label>تاريخ التسليم</label>
-            <input type="date" id="np-due" class="input" />
-          </div>
+          <div class="field"><label>قيمة المشروع (ر.س)</label><input type="number" id="np-price" class="input" value="1000" min="0" /></div>
+          <div class="field"><label>تاريخ التسليم</label><input type="date" id="np-due" class="input" /></div>
         </div>
-        <div class="field">
-          <label>الحد الأقصى للتعديلات</label>
-          <input type="number" id="np-max-rev" class="input" value="3" min="1" />
-        </div>
+        <div class="field"><label>الحد الأقصى للتعديلات</label><input type="number" id="np-max-rev" class="input" value="3" min="1" /></div>
         <button type="submit" class="btn btn-primary" style="width:100%;">إضافة للوحة</button>
       </form>
     </div>
@@ -843,13 +543,9 @@
         <button class="tab-btn" data-pm-tab="messages">رسالة للعميل</button>
       </div>
 
-      <!-- TAB: OVERVIEW -->
       <div id="pm-tab-overview">
         <div class="grid-2" style="margin-bottom:16px;">
-          <div class="field">
-            <label>المرحلة الحالية</label>
-            <select id="pm-stage" class="input"></select>
-          </div>
+          <div class="field"><label>المرحلة الحالية</label><select id="pm-stage" class="input"></select></div>
           <div class="field">
             <label>عدد التعديلات المستخدمة</label>
             <div class="row">
@@ -869,7 +565,6 @@
         <div id="pm-tasks-list"></div>
       </div>
 
-      <!-- TAB: MOODBOARD -->
       <div id="pm-tab-mood" class="hidden">
         <div class="field">
           <label>أكواد الألوان (اضغط على اللون لنسخ الكود)</label>
@@ -897,12 +592,8 @@
         </div>
       </div>
 
-      <!-- TAB: DRAFTS -->
       <div id="pm-tab-drafts" class="hidden">
-        <div class="field">
-          <label>رفع صورة مسودة جديدة (تُضغط تلقائياً)</label>
-          <input type="file" id="pm-draft-file" class="input" accept="image/*" />
-        </div>
+        <div class="field"><label>رفع صورة مسودة جديدة (تُضغط تلقائياً)</label><input type="file" id="pm-draft-file" class="input" accept="image/*" /></div>
         <div id="pm-draft-preview" class="draft-stage" style="margin-bottom:16px; min-height:180px; display:flex; align-items:center; justify-content:center;">
           <span style="color:var(--text-muted); font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>
         </div>
@@ -910,12 +601,11 @@
         <div id="pm-comments-list"></div>
       </div>
 
-      <!-- TAB: VAULT -->
       <div id="pm-tab-vault" class="hidden">
         <div class="field">
           <label>إضافة ملف (عقد، بريف، فاتورة، أو ملف نهائي)</label>
           <div class="row">
-            <input type="text" id="pm-file-name" class="input" placeholder="اسم الملف (مثال: عقد التصميم PDF)" style="flex:1;" />
+            <input type="text" id="pm-file-name" class="input" placeholder="اسم الملف" style="flex:1;" />
             <input type="url" id="pm-file-url" class="input" placeholder="رابط الملف (Drive / Dropbox)" style="flex:1;" />
             <select id="pm-file-type" class="input" style="width:auto;">
               <option value="ref">مرجعي / عقد</option>
@@ -927,7 +617,6 @@
         <div id="pm-vault-list" style="margin-top:12px;"></div>
       </div>
 
-      <!-- TAB: CLIENT MESSAGES -->
       <div id="pm-tab-messages" class="hidden">
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">اختر نوع الرسالة وانسخها جاهزة للعميل مع رابط المتابعة الخاص به.</p>
         <div class="row" style="margin-bottom:12px;">
@@ -942,9 +631,6 @@
   </div>
 
   <script>
-    /****************************************************************
-     * 1. إعدادات فايربيس (مدمجة وجاهزة)
-     ****************************************************************/
     const FIREBASE_CONFIG = {
       apiKey: "AIzaSyDgeJPH3a7sw_G0Ha9F-Htt8Ux2dFCqdh4",
       authDomain: "stoudio.firebaseapp.com",
@@ -964,23 +650,12 @@
       { id: "done", label: "مكتمل" }
     ];
 
-    const IS_CLOUD = FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey !== "YOUR_API_KEY";
-    let auth = null, db = null;
-    if (IS_CLOUD) {
-      firebase.initializeApp(FIREBASE_CONFIG);
-      auth = firebase.auth();
-      db = firebase.firestore();
-    }
+    firebase.initializeApp(FIREBASE_CONFIG);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    // App State
-    let state = {
-      user: null,
-      projects: [],
-      activeProjectId: null,
-      isRegister: false
-    };
+    let state = { user: null, projects: [], activeProjectId: null, isRegister: false, pendingName: "" };
 
-    // Helpers
     const $ = (id) => document.getElementById(id);
     const esc = (s = "") => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
     const uid = () => "p_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -989,8 +664,32 @@
       el.textContent = msg;
       el.classList.remove("hidden");
       clearTimeout(window._t);
-      window._t = setTimeout(() => el.classList.add("hidden"), 2600);
+      window._t = setTimeout(() => el.classList.add("hidden"), 3000);
     };
+
+    function showView(name) {
+      ["loading-view", "auth-view", "pending-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
+      $(name).classList.remove("hidden");
+    }
+
+    function showFatalError(title, err) {
+      showView("loading-view");
+      $("loading-spinner").classList.add("hidden");
+      $("loading-title").textContent = title;
+      $("loading-error-text").textContent = err?.message || String(err);
+      $("loading-error-text").classList.remove("hidden");
+      $("loading-actions").classList.remove("hidden");
+    }
+
+    function translateAuthError(err) {
+      const code = err?.code || "";
+      if (code === "auth/email-already-in-use") return "هذا البريد الإلكتروني مسجّل مسبقاً، جرب تسجيل الدخول.";
+      if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+      if (code === "auth/weak-password") return "كلمة المرور ضعيفة، يجب أن تكون 6 خانات على الأقل.";
+      if (code === "auth/invalid-email") return "صيغة البريد الإلكتروني غير صحيحة.";
+      if (code === "auth/operation-not-allowed") return "تسجيل الدخول بالبريد غير مفعّل في إعدادات Firebase.";
+      return err?.message || "حدث خطأ غير متوقع، حاول مرة أخرى.";
+    }
 
     function applyBrandColor(hex) {
       document.documentElement.style.setProperty("--accent", hex || "#1D1D1F");
@@ -1015,129 +714,56 @@
       });
     }
 
-    /****************************************************************
-     * 2. طبقة البيانات الموحدة (Firebase)
-     ****************************************************************/
-    const LocalDB = {
-      get: (k, def) => JSON.parse(localStorage.getItem("studio_" + k) || JSON.stringify(def)),
-      set: (k, v) => localStorage.setItem("studio_" + k, JSON.stringify(v))
-    };
-
     const Store = {
       async getUser(uidVal) {
-        if (IS_CLOUD) {
-          const snap = await db.collection("users").doc(uidVal).get();
-          return snap.exists ? snap.data() : null;
-        }
-        return LocalDB.get("users", {})[uidVal] || null;
+        const snap = await db.collection("users").doc(uidVal).get();
+        return snap.exists ? snap.data() : null;
       },
       async saveUser(uidVal, data) {
-        if (IS_CLOUD) {
-          await db.collection("users").doc(uidVal).set(data, { merge: true });
-        } else {
-          const users = LocalDB.get("users", {});
-          users[uidVal] = { ...(users[uidVal] || {}), ...data };
-          LocalDB.set("users", users);
-        }
+        await db.collection("users").doc(uidVal).set(data, { merge: true });
       },
       async getAllUsers() {
-        if (IS_CLOUD) {
-          const snap = await db.collection("users").get();
-          return snap.docs.map(d => ({ uid: d.id, ...d.data() }));
-        }
-        const users = LocalDB.get("users", {});
-        return Object.keys(users).map(k => ({ uid: k, ...users[k] }));
+        const snap = await db.collection("users").get();
+        return snap.docs.map(d => ({ uid: d.id, ...d.data() }));
       },
       async getCodes() {
-        if (IS_CLOUD) {
-          const snap = await db.collection("codes").get();
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        }
-        return LocalDB.get("codes", []);
+        const snap = await db.collection("codes").get();
+        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
       },
       async addCode(codeObj) {
-        if (IS_CLOUD) {
-          await db.collection("codes").doc(codeObj.code).set(codeObj);
-        } else {
-          const codes = LocalDB.get("codes", []);
-          codes.unshift(codeObj);
-          LocalDB.set("codes", codes);
-        }
+        await db.collection("codes").doc(codeObj.code).set(codeObj);
       },
       async deleteCode(codeStr) {
-        if (IS_CLOUD) {
-          await db.collection("codes").doc(codeStr).delete();
-        } else {
-          const codes = LocalDB.get("codes", []).filter(c => c.code !== codeStr);
-          LocalDB.set("codes", codes);
-        }
+        await db.collection("codes").doc(codeStr).delete();
       },
       async redeemCode(codeStr, userUid, email) {
         const clean = codeStr.trim().toUpperCase();
-        if (IS_CLOUD) {
-          const ref = db.collection("codes").doc(clean);
-          const snap = await ref.get();
-          if (!snap.exists || snap.data().used) return false;
-          await ref.update({ used: true, usedBy: email });
-          await db.collection("users").doc(userUid).update({ status: "active" });
-          return true;
-        } else {
-          const codes = LocalDB.get("codes", []);
-          const found = codes.find(c => c.code === clean && !c.used);
-          if (!found) return false;
-          found.used = true;
-          found.usedBy = email;
-          LocalDB.set("codes", codes);
-          await Store.saveUser(userUid, { status: "active" });
-          return true;
-        }
+        const ref = db.collection("codes").doc(clean);
+        const snap = await ref.get();
+        if (!snap.exists || snap.data().used) return false;
+        await ref.update({ used: true, usedBy: email });
+        await db.collection("users").doc(userUid).update({ status: "active" });
+        return true;
       },
       async getProjects(ownerUid) {
-        if (IS_CLOUD) {
-          const snap = await db.collection("projects").where("ownerUid", "==", ownerUid).get();
-          return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        }
-        return LocalDB.get("projects", []).filter(p => p.ownerUid === ownerUid);
+        const snap = await db.collection("projects").where("ownerUid", "==", ownerUid).get();
+        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
       },
       async getProjectById(id) {
-        if (IS_CLOUD) {
-          const snap = await db.collection("projects").doc(id).get();
-          return snap.exists ? { id: snap.id, ...snap.data() } : null;
-        }
-        return LocalDB.get("projects", []).find(p => p.id === id) || null;
+        const snap = await db.collection("projects").doc(id).get();
+        return snap.exists ? { id: snap.id, ...snap.data() } : null;
       },
       async saveProject(project) {
-        if (IS_CLOUD) {
-          await db.collection("projects").doc(project.id).set(project, { merge: true });
-        } else {
-          const all = LocalDB.get("projects", []);
-          const idx = all.findIndex(p => p.id === project.id);
-          if (idx >= 0) all[idx] = project; else all.unshift(project);
-          LocalDB.set("projects", all);
-        }
+        await db.collection("projects").doc(project.id).set(project, { merge: true });
       },
       async deleteProject(id) {
-        if (IS_CLOUD) {
-          await db.collection("projects").doc(id).delete();
-        } else {
-          LocalDB.set("projects", LocalDB.get("projects", []).filter(p => p.id !== id));
-        }
+        await db.collection("projects").doc(id).delete();
       }
     };
-
-    /****************************************************************
-     * 3. التوجيه والبدء (Router)
-     ****************************************************************/
-    function showView(name) {
-      ["auth-view", "pending-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
-      $(name).classList.remove("hidden");
-    }
 
     async function init() {
       const savedTheme = localStorage.getItem("studio_theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
-
-      $("sync-mode-badge").textContent = IS_CLOUD ? "متصل بـ Firebase" : "وضع تجريبي محلي";
 
       if (location.hash.startsWith("#client=")) {
         const pid = location.hash.replace("#client=", "").trim();
@@ -1145,16 +771,18 @@
         return;
       }
 
-      if (IS_CLOUD) {
-        auth.onAuthStateChanged(async (fbUser) => {
-          if (!fbUser) return showView("auth-view");
-          await handleSignedInUser(fbUser.uid, fbUser.email, fbUser.displayName);
-        });
-      } else {
-        const cur = LocalDB.get("session", null);
-        if (!cur) showView("auth-view");
-        else await handleSignedInUser(cur.uid, cur.email, cur.name);
-      }
+      auth.onAuthStateChanged(async (fbUser) => {
+        if (!fbUser) {
+          showView("auth-view");
+          return;
+        }
+        try {
+          await handleSignedInUser(fbUser.uid, fbUser.email, state.pendingName || fbUser.displayName);
+          state.pendingName = "";
+        } catch (err) {
+          showFatalError("تعذر الاتصال بقاعدة البيانات (Firestore)", err);
+        }
+      });
     }
 
     async function handleSignedInUser(userUid, email, nameFallback) {
@@ -1186,17 +814,21 @@
 
       showView("app-view");
       renderStudioBrand();
-      if (profile.role === "admin") $("nav-admin").classList.remove("hidden");
-      else $("nav-admin").classList.add("hidden");
+      $("nav-admin").classList.toggle("hidden", profile.role !== "admin");
 
       state.projects = await Store.getProjects(profile.uid);
       renderBoard();
       updatePricingCalc();
     }
 
-    /****************************************************************
-     * 4. الدخول والتسجيل والتفعيل
-     ****************************************************************/
+    // Auth UI
+    function setAuthMsg(text, isSuccess = false) {
+      const el = $("auth-msg");
+      el.textContent = text;
+      el.className = "alert " + (isSuccess ? "alert-success" : "alert-error");
+      el.classList.remove("hidden");
+    }
+
     $("auth-mode-toggle").addEventListener("click", () => {
       state.isRegister = !state.isRegister;
       $("auth-name-wrap").classList.toggle("hidden", !state.isRegister);
@@ -1204,7 +836,7 @@
       $("auth-submit-btn").textContent = state.isRegister ? "إنشاء الحساب" : "دخول";
       $("auth-toggle-text").textContent = state.isRegister ? "عندك حساب مسبقاً؟" : "ما عندك حساب؟";
       $("auth-mode-toggle").textContent = state.isRegister ? "تسجيل الدخول" : "إنشاء حساب جديد";
-      $("auth-error").classList.add("hidden");
+      $("auth-msg").classList.add("hidden");
     });
 
     $("auth-form").addEventListener("submit", async (e) => {
@@ -1212,67 +844,69 @@
       const email = $("auth-email").value.trim().toLowerCase();
       const pass = $("auth-pass").value;
       const name = $("auth-name").value.trim() || "استوديو التصميم";
-      $("auth-error").classList.add("hidden");
+      const btn = $("auth-submit-btn");
+      $("auth-msg").classList.add("hidden");
+
+      btn.disabled = true;
+      btn.textContent = state.isRegister ? "جاري إنشاء الحساب..." : "جاري الدخول...";
 
       try {
-        if (IS_CLOUD) {
-          if (state.isRegister) {
-            const cred = await auth.createUserWithEmailAndPassword(email, pass);
-            await cred.user.updateProfile({ displayName: name });
-            await handleSignedInUser(cred.user.uid, email, name);
-          } else {
-            await auth.signInWithEmailAndPassword(email, pass);
-          }
+        if (state.isRegister) {
+          state.pendingName = name;
+          const cred = await auth.createUserWithEmailAndPassword(email, pass);
+          await cred.user.updateProfile({ displayName: name });
+          toast("تم إنشاء حسابك بنجاح");
         } else {
-          const accounts = LocalDB.get("accounts", {});
-          if (state.isRegister) {
-            if (accounts[email]) throw new Error("هذا البريد مسجل مسبقاً.");
-            const newUid = uid();
-            accounts[email] = { uid: newUid, email, pass, name };
-            LocalDB.set("accounts", accounts);
-            LocalDB.set("session", accounts[email]);
-            await handleSignedInUser(newUid, email, name);
-          } else {
-            const acc = accounts[email];
-            if (!acc || acc.pass !== pass) throw new Error("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
-            LocalDB.set("session", acc);
-            await handleSignedInUser(acc.uid, acc.email, acc.name);
-          }
+          await auth.signInWithEmailAndPassword(email, pass);
+          toast("تم تسجيل الدخول بنجاح");
         }
       } catch (err) {
-        $("auth-error").textContent = err.message || "حدث خطأ أثناء الدخول";
-        $("auth-error").classList.remove("hidden");
+        setAuthMsg(translateAuthError(err), false);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = state.isRegister ? "إنشاء الحساب" : "دخول";
+      }
+    });
+
+    $("forgot-pass-btn").addEventListener("click", async () => {
+      const email = $("auth-email").value.trim();
+      if (!email) return setAuthMsg("اكتب بريدك الإلكتروني في الخانة أعلاه أولاً ثم اضغط نسيت كلمة المرور.", false);
+      try {
+        await auth.sendPasswordResetEmail(email);
+        setAuthMsg("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.", true);
+      } catch (err) {
+        setAuthMsg(translateAuthError(err), false);
       }
     });
 
     $("activate-code-btn").addEventListener("click", async () => {
       const code = $("pending-code-input").value;
       if (!code.trim()) return;
-      const ok = await Store.redeemCode(code, state.user.uid, state.user.email);
       const msg = $("pending-msg");
-      msg.classList.remove("hidden", "alert-error", "alert-success");
-      if (ok) {
-        msg.classList.add("alert-success");
-        msg.textContent = "تم تفعيل حسابك بنجاح، جاري الدخول...";
-        setTimeout(() => handleSignedInUser(state.user.uid, state.user.email, state.user.name), 700);
-      } else {
-        msg.classList.add("alert-error");
-        msg.textContent = "كود التفعيل غير صحيح أو مستخدم مسبقاً.";
+      try {
+        const ok = await Store.redeemCode(code, state.user.uid, state.user.email);
+        msg.className = "alert " + (ok ? "alert-success" : "alert-error");
+        msg.textContent = ok ? "تم تفعيل حسابك بنجاح، جاري فتح الاستوديو..." : "كود التفعيل غير صحيح أو مستخدم مسبقاً.";
+        msg.classList.remove("hidden");
+        if (ok) setTimeout(() => handleSignedInUser(state.user.uid, state.user.email, state.user.name), 700);
+      } catch (err) {
+        msg.className = "alert alert-error";
+        msg.textContent = "خطأ في التفعيل: " + err.message;
+        msg.classList.remove("hidden");
       }
     });
 
     async function logout() {
-      if (IS_CLOUD) await auth.signOut();
-      else LocalDB.set("session", null);
+      await auth.signOut();
       state.user = null;
       showView("auth-view");
     }
     $("logout-btn").addEventListener("click", logout);
     $("pending-logout-btn").addEventListener("click", logout);
+    $("loading-logout-btn").addEventListener("click", logout);
+    $("loading-retry-btn").addEventListener("click", () => location.reload());
 
-    /****************************************************************
-     * 5. التنقل والمظهر وهوية الاستوديو
-     ****************************************************************/
+    // Navigation & Theme
     document.querySelectorAll(".nav-pill").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active"));
@@ -1318,13 +952,10 @@
       toast("تم حفظ هوية الاستوديو");
     });
 
-    /****************************************************************
-     * 6. لوحة المشاريع (Kanban + السحب والإفلات)
-     ****************************************************************/
+    // Kanban Board
     function renderBoard() {
       const board = $("kanban-board");
       board.innerHTML = "";
-
       let active = 0, review = 0, done = 0, revenue = 0;
       state.projects.forEach(p => {
         revenue += Number(p.price || 0);
@@ -1341,13 +972,7 @@
         const items = state.projects.filter(p => p.stage === st.id);
         const col = document.createElement("div");
         col.className = "kanban-col";
-        col.dataset.stage = st.id;
-        col.innerHTML = `
-          <div class="col-head">
-            <span>${st.label}</span>
-            <span class="col-count">${items.length}</span>
-          </div>
-        `;
+        col.innerHTML = `<div class="col-head"><span>${st.label}</span><span class="col-count">${items.length}</span></div>`;
 
         col.addEventListener("dragover", (e) => { e.preventDefault(); col.classList.add("drag-over"); });
         col.addEventListener("dragleave", () => col.classList.remove("drag-over"));
@@ -1388,24 +1013,10 @@
     $("new-project-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const proj = {
-        id: uid(),
-        ownerUid: state.user.uid,
-        title: $("np-title").value.trim(),
-        client: $("np-client").value.trim(),
-        price: Number($("np-price").value || 0),
-        due: $("np-due").value,
-        maxRevisions: Number($("np-max-rev").value || 3),
-        revisionsUsed: 0,
-        stage: "pending",
-        approved: false,
-        tasks: [],
-        colors: [],
-        fonts: [],
-        links: [],
-        draft: "",
-        comments: [],
-        vault: [],
-        brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
+        id: uid(), ownerUid: state.user.uid, title: $("np-title").value.trim(), client: $("np-client").value.trim(),
+        price: Number($("np-price").value || 0), due: $("np-due").value, maxRevisions: Number($("np-max-rev").value || 3),
+        revisionsUsed: 0, stage: "pending", approved: false, tasks: [], colors: [], fonts: [], links: [],
+        draft: "", comments: [], vault: [], brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
       };
       await Store.saveProject(proj);
       state.projects.unshift(proj);
@@ -1415,17 +1026,11 @@
       toast("تمت إضافة المشروع");
     });
 
-    /****************************************************************
-     * 7. مساحة المشروع التفصيلية (Modal)
-     ****************************************************************/
-    function getActiveProject() {
-      return state.projects.find(p => p.id === state.activeProjectId);
-    }
+    function getActiveProject() { return state.projects.find(p => p.id === state.activeProjectId); }
 
     function openProjectModal(id) {
       state.activeProjectId = id;
-      const p = getActiveProject();
-      if (!p) return;
+      const p = getActiveProject(); if (!p) return;
       $("pm-title").textContent = p.title;
       $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
       $("pm-stage").innerHTML = STAGES.map(s => `<option value="${s.id}" ${s.id === p.stage ? "selected" : ""}>${s.label}</option>`).join("");
@@ -1434,133 +1039,61 @@
     }
 
     function renderProjectDetails() {
-      const p = getActiveProject();
-      if (!p) return;
+      const p = getActiveProject(); if (!p) return;
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
-
       $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `
         <div class="list-item">
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1; ${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}">
-            <input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" />
-            ${esc(t.text)}
+            <input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" /> ${esc(t.text)}
           </label>
           <button class="btn btn-sm" onclick="removeTask(${i})">حذف</button>
-        </div>
-      `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
+        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
 
       $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `
         <div class="swatch" onclick="copyText('${c}')">
-          <span class="swatch-dot" style="background:${c}"></span>
-          <span>${c}</span>
+          <span class="swatch-dot" style="background:${c}"></span><span>${c}</span>
           <span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span>
-        </div>
-      `).join("");
+        </div>`).join("");
 
-      $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `
-        <div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm" onclick="removeFont(${i})">حذف</button></div>
-      `).join("");
-
-      $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `
-        <div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>
-      `).join("");
+      $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm" onclick="removeFont(${i})">حذف</button></div>`).join("");
+      $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>`).join("");
 
       const stageEl = $("pm-draft-preview");
-      if (p.draft) {
-        stageEl.innerHTML = `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) =>
-          `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`
-        ).join("");
-      } else {
-        stageEl.innerHTML = `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
-      }
+      stageEl.innerHTML = p.draft
+        ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("")
+        : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
 
-      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `
-        <div class="list-item">
-          <div><strong>#${idx + 1}</strong> ${esc(c.text)}</div>
-          <span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span>
-        </div>
-      `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات من العميل بعد.</p>`;
-
-      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `
-        <div class="list-item">
-          <div>
-            <a href="${esc(f.url)}" target="_blank" style="font-weight:600;color:var(--text);">${esc(f.name)}</a>
-            <span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span>
-          </div>
-          <button class="btn btn-sm" onclick="removeVault(${i})">حذف</button>
-        </div>
-      `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
-
+      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات من العميل بعد.</p>`;
+      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><a href="${esc(f.url)}" target="_blank" style="font-weight:600;color:var(--text);">${esc(f.name)}</a><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><button class="btn btn-sm" onclick="removeVault(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
       fillClientMsg("draft");
     }
 
     async function saveActiveProject() {
-      const p = getActiveProject();
-      if (!p) return;
+      const p = getActiveProject(); if (!p) return;
       await Store.saveProject(p);
       renderProjectDetails();
       renderBoard();
     }
 
     window.toggleTask = async (i) => { const p = getActiveProject(); p.tasks[i].done = !p.tasks[i].done; await saveActiveProject(); };
-    window.removeTask = async (i) => { const p = getActiveProject(); p.tasks.splice(i, 1); await saveActiveProject(); };
-    window.removeColor = async (i) => { const p = getActiveProject(); p.colors.splice(i, 1); await saveActiveProject(); };
-    window.removeFont = async (i) => { const p = getActiveProject(); p.fonts.splice(i, 1); await saveActiveProject(); };
-    window.removeLink = async (i) => { const p = getActiveProject(); p.links.splice(i, 1); await saveActiveProject(); };
-    window.removeVault = async (i) => { const p = getActiveProject(); p.vault.splice(i, 1); await saveActiveProject(); };
+    window.removeTask = async (i) => { getActiveProject().tasks.splice(i, 1); await saveActiveProject(); };
+    window.removeColor = async (i) => { getActiveProject().colors.splice(i, 1); await saveActiveProject(); };
+    window.removeFont = async (i) => { getActiveProject().fonts.splice(i, 1); await saveActiveProject(); };
+    window.removeLink = async (i) => { getActiveProject().links.splice(i, 1); await saveActiveProject(); };
+    window.removeVault = async (i) => { getActiveProject().vault.splice(i, 1); await saveActiveProject(); };
     window.copyText = (txt) => { navigator.clipboard.writeText(txt); toast("تم النسخ: " + txt); };
 
     $("pm-stage").addEventListener("change", async (e) => { getActiveProject().stage = e.target.value; await saveActiveProject(); });
     $("pm-rev-plus").addEventListener("click", async () => { const p = getActiveProject(); p.revisionsUsed = (p.revisionsUsed || 0) + 1; await saveActiveProject(); });
     $("pm-rev-minus").addEventListener("click", async () => { const p = getActiveProject(); p.revisionsUsed = Math.max(0, (p.revisionsUsed || 0) - 1); await saveActiveProject(); });
-
-    $("pm-task-add").addEventListener("click", async () => {
-      const v = $("pm-task-input").value.trim(); if (!v) return;
-      getActiveProject().tasks.push({ text: v, done: false });
-      $("pm-task-input").value = "";
-      await saveActiveProject();
-    });
-    $("pm-color-add").addEventListener("click", async () => {
-      getActiveProject().colors.push($("pm-color-picker").value.toUpperCase());
-      await saveActiveProject();
-    });
-    $("pm-font-add").addEventListener("click", async () => {
-      const v = $("pm-font-input").value.trim(); if (!v) return;
-      getActiveProject().fonts.push(v); $("pm-font-input").value = "";
-      await saveActiveProject();
-    });
-    $("pm-link-add").addEventListener("click", async () => {
-      const v = $("pm-link-input").value.trim(); if (!v) return;
-      getActiveProject().links.push(v); $("pm-link-input").value = "";
-      await saveActiveProject();
-    });
-    $("pm-draft-file").addEventListener("change", async (e) => {
-      const f = e.target.files[0]; if (!f) return;
-      getActiveProject().draft = await compressImage(f, 1100);
-      await saveActiveProject();
-      toast("تم رفع المسودة");
-    });
-    $("pm-file-add").addEventListener("click", async () => {
-      const name = $("pm-file-name").value.trim(), url = $("pm-file-url").value.trim(), type = $("pm-file-type").value;
-      if (!name || !url) return;
-      getActiveProject().vault.push({ name, url, type });
-      $("pm-file-name").value = ""; $("pm-file-url").value = "";
-      await saveActiveProject();
-    });
-
-    $("pm-copy-link").addEventListener("click", () => {
-      const url = `${location.origin}${location.pathname}#client=${state.activeProjectId}`;
-      navigator.clipboard.writeText(url);
-      toast("تم نسخ رابط متابعة العميل");
-    });
-
-    $("pm-delete").addEventListener("click", async () => {
-      if (!confirm("متأكدة من حذف هذا المشروع؟")) return;
-      await Store.deleteProject(state.activeProjectId);
-      state.projects = state.projects.filter(p => p.id !== state.activeProjectId);
-      $("project-modal").classList.add("hidden");
-      renderBoard();
-      toast("تم حذف المشروع");
-    });
+    $("pm-task-add").addEventListener("click", async () => { const v = $("pm-task-input").value.trim(); if (!v) return; getActiveProject().tasks.push({ text: v, done: false }); $("pm-task-input").value = ""; await saveActiveProject(); });
+    $("pm-color-add").addEventListener("click", async () => { getActiveProject().colors.push($("pm-color-picker").value.toUpperCase()); await saveActiveProject(); });
+    $("pm-font-add").addEventListener("click", async () => { const v = $("pm-font-input").value.trim(); if (!v) return; getActiveProject().fonts.push(v); $("pm-font-input").value = ""; await saveActiveProject(); });
+    $("pm-link-add").addEventListener("click", async () => { const v = $("pm-link-input").value.trim(); if (!v) return; getActiveProject().links.push(v); $("pm-link-input").value = ""; await saveActiveProject(); });
+    $("pm-draft-file").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; getActiveProject().draft = await compressImage(f, 1100); await saveActiveProject(); toast("تم رفع المسودة"); });
+    $("pm-file-add").addEventListener("click", async () => { const name = $("pm-file-name").value.trim(), url = $("pm-file-url").value.trim(), type = $("pm-file-type").value; if (!name || !url) return; getActiveProject().vault.push({ name, url, type }); $("pm-file-name").value = ""; $("pm-file-url").value = ""; await saveActiveProject(); });
+    $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط متابعة العميل"); });
+    $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await Store.deleteProject(state.activeProjectId); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); toast("تم حذف المشروع"); });
 
     document.querySelectorAll("[data-pm-tab]").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1570,9 +1103,7 @@
         ["overview", "mood", "drafts", "vault", "messages"].forEach(x => $("pm-tab-" + x).classList.toggle("hidden", x !== t));
       });
     });
-    document.querySelectorAll("[data-close-modal]").forEach(btn => {
-      btn.addEventListener("click", () => $(btn.dataset.closeModal).classList.add("hidden"));
-    });
+    document.querySelectorAll("[data-close-modal]").forEach(btn => btn.addEventListener("click", () => $(btn.dataset.closeModal).classList.add("hidden")));
 
     function fillClientMsg(type) {
       const p = getActiveProject(); if (!p) return;
@@ -1587,213 +1118,127 @@
     document.querySelectorAll("[data-msg-tpl]").forEach(b => b.addEventListener("click", () => fillClientMsg(b.dataset.msgTpl)));
     $("pm-msg-copy").addEventListener("click", () => { navigator.clipboard.writeText($("pm-msg-box").value); toast("تم نسخ الرسالة"); });
 
-    /****************************************************************
-     * 8. حاسبة التسعير السريعة
-     ****************************************************************/
     function updatePricingCalc() {
       const service = $("calc-service").value || "خدمة تصميم";
-      const base = Number($("calc-base").value || 0);
-      const revs = Number($("calc-revs").value || 3);
-      const hours = Number($("calc-hours").value || 0);
-      const rate = Number($("calc-rate").value || 0);
-      const rush = $("calc-rush").checked;
-      const duration = $("calc-duration").value || "5 أيام عمل";
-
+      const base = Number($("calc-base").value || 0), revs = Number($("calc-revs").value || 3);
+      const hours = Number($("calc-hours").value || 0), rate = Number($("calc-rate").value || 0);
+      const rush = $("calc-rush").checked, duration = $("calc-duration").value || "5 أيام عمل";
       let total = base + (hours * rate);
       if (rush) total = Math.round(total * 1.25);
-
       $("calc-total").textContent = total.toLocaleString("en-US") + " ر.س";
-      $("calc-output").value =
-`عرض سعر — ${state.user?.name || "استوديو التصميم"}
-————————————
-الخدمة: ${service}
-مدة التنفيذ: ${duration}
-التعديلات المشمولة: ${revs} تعديلات${rush ? "\nملاحظة: يشمل أولوية التسليم المستعجل" : ""}
-
-التكلفة الإجمالية: ${total.toLocaleString("en-US")} ريال سعودي
-
-يسعدني البدء فور تأكيدك.`;
+      $("calc-output").value = `عرض سعر — ${state.user?.name || "استوديو التصميم"}\n————————————\nالخدمة: ${service}\nمدة التنفيذ: ${duration}\nالتعديلات المشمولة: ${revs} تعديلات${rush ? "\nملاحظة: يشمل أولوية التسليم المستعجل" : ""}\n\nالتكلفة الإجمالية: ${total.toLocaleString("en-US")} ريال سعودي\n\nيسعدني البدء فور تأكيدك.`;
     }
-    ["calc-service","calc-base","calc-revs","calc-hours","calc-rate","calc-rush","calc-duration"].forEach(id => {
-      $(id).addEventListener("input", updatePricingCalc);
-      $(id).addEventListener("change", updatePricingCalc);
-    });
+    ["calc-service","calc-base","calc-revs","calc-hours","calc-rate","calc-rush","calc-duration"].forEach(id => { $(id).addEventListener("input", updatePricingCalc); $(id).addEventListener("change", updatePricingCalc); });
     $("copy-quote-btn").addEventListener("click", () => { navigator.clipboard.writeText($("calc-output").value); toast("تم نسخ عرض السعر"); });
 
-    /****************************************************************
-     * 9. مؤقت التركيز الإبداعي
-     ****************************************************************/
     let timerSec = 25 * 60, timerRunning = false, timerInt = null;
     let todaySessions = Number(localStorage.getItem("studio_sessions_" + new Date().toDateString()) || 0);
     $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions;
-
-    function renderTimer() {
-      const m = String(Math.floor(timerSec / 60)).padStart(2, "0");
-      const s = String(timerSec % 60).padStart(2, "0");
-      $("timer-display").textContent = `${m}:${s}`;
-    }
+    function renderTimer() { $("timer-display").textContent = `${String(Math.floor(timerSec / 60)).padStart(2, "0")}:${String(timerSec % 60).padStart(2, "0")}`; }
     $("timer-mode-25").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 25 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
     $("timer-mode-50").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 50 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
     $("timer-reset").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 25 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
     $("timer-toggle").addEventListener("click", () => {
-      if (timerRunning) {
-        clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "استكمال";
-      } else {
+      if (timerRunning) { clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "استكمال"; }
+      else {
         timerRunning = true; $("timer-toggle").textContent = "إيقاف";
         timerInt = setInterval(() => {
-          timerSec--;
-          renderTimer();
+          timerSec--; renderTimer();
           if (timerSec <= 0) {
             clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "ابدأ";
-            todaySessions++;
-            localStorage.setItem("studio_sessions_" + new Date().toDateString(), todaySessions);
-            $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions;
-            toast("انتهت جلسة التركيز بنجاح");
+            todaySessions++; localStorage.setItem("studio_sessions_" + new Date().toDateString(), todaySessions);
+            $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions; toast("انتهت جلسة التركيز بنجاح");
           }
         }, 1000);
       }
     });
 
-    /****************************************************************
-     * 10. لوحة الإدارة (خاصة بـ lm6p12@gmail.com)
-     ****************************************************************/
     async function renderAdminPanel() {
       const users = await Store.getAllUsers();
       $("admin-users-tbody").innerHTML = users.map(u => `
         <tr>
           <td><strong>${esc(u.name)}</strong><div style="font-size:0.78rem;color:var(--text-muted);">${esc(u.email)}</div></td>
           <td><span class="badge ${u.status === "active" ? "badge-success" : ""}">${u.status === "active" ? "مفعّل" : "بانتظار التفعيل"}</span></td>
-          <td>
-            ${u.email.toLowerCase() === ADMIN_EMAIL ? `<span style="font-size:0.78rem;color:var(--text-muted);">الإدارة</span>` :
-              `<button class="btn btn-sm" onclick="toggleUserStatus('${u.uid}', '${u.status}')">${u.status === "active" ? "إيقاف" : "تفعيل"}</button>`}
-          </td>
-        </tr>
-      `).join("");
+          <td>${u.email.toLowerCase() === ADMIN_EMAIL ? `<span style="font-size:0.78rem;color:var(--text-muted);">الإدارة</span>` : `<button class="btn btn-sm" onclick="toggleUserStatus('${u.uid}', '${u.status}')">${u.status === "active" ? "إيقاف" : "تفعيل"}</button>`}</td>
+        </tr>`).join("");
 
       const codes = await Store.getCodes();
       $("admin-codes-list").innerHTML = codes.map(c => `
         <div class="list-item">
-          <div>
-            <strong style="letter-spacing:0.5px;">${esc(c.code)}</strong>
-            <span class="badge" style="margin-right:8px;">${c.used ? "مستخدم" : "متاح"}</span>
-          </div>
-          <div class="row">
-            <button class="btn btn-sm" onclick="copyText('${esc(c.code)}')">نسخ</button>
-            ${!c.used ? `<button class="btn btn-danger btn-sm" onclick="removeCode('${esc(c.code)}')">حذف</button>` : ""}
-          </div>
-        </div>
-      `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد أكواد بعد.</p>`;
+          <div><strong style="letter-spacing:0.5px;">${esc(c.code)}</strong><span class="badge" style="margin-right:8px;">${c.used ? "مستخدم" : "متاح"}</span></div>
+          <div class="row"><button class="btn btn-sm" onclick="copyText('${esc(c.code)}')">نسخ</button>${!c.used ? `<button class="btn btn-danger btn-sm" onclick="removeCode('${esc(c.code)}')">حذف</button>` : ""}</div>
+        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد أكواد بعد.</p>`;
     }
 
-    window.toggleUserStatus = async (userUid, cur) => {
-      await Store.saveUser(userUid, { status: cur === "active" ? "pending" : "active" });
-      renderAdminPanel();
-      toast("تم تحديث حالة الحساب");
-    };
-    window.removeCode = async (codeStr) => {
-      await Store.deleteCode(codeStr);
-      renderAdminPanel();
-    };
+    window.toggleUserStatus = async (userUid, cur) => { await Store.saveUser(userUid, { status: cur === "active" ? "pending" : "active" }); renderAdminPanel(); toast("تم تحديث حالة الحساب"); };
+    window.removeCode = async (codeStr) => { await Store.deleteCode(codeStr); renderAdminPanel(); };
     $("gen-code-btn").addEventListener("click", async () => {
       const custom = $("custom-code-input").value.trim().toUpperCase();
-      const rand = "STUDIO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
-      const code = custom || rand;
+      const code = custom || ("STUDIO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-" + Math.random().toString(36).slice(2, 6).toUpperCase());
       await Store.addCode({ code, used: false, createdAt: new Date().toISOString() });
-      $("custom-code-input").value = "";
-      renderAdminPanel();
-      toast("تم إنشاء الكود: " + code);
+      $("custom-code-input").value = ""; renderAdminPanel(); toast("تم إنشاء الكود: " + code);
     });
 
-    /****************************************************************
-     * 11. بوابة العميل الخاصة (#client=PROJECT_ID)
-     ****************************************************************/
     async function loadClientPortal(pid) {
-      showView("client-view");
-      const proj = await Store.getProjectById(pid);
-      if (!proj) {
-        $("client-project-title").textContent = "عذراً، رابط المشروع غير موجود.";
-        return;
-      }
+      try {
+        const proj = await Store.getProjectById(pid);
+        showView("client-view");
+        if (!proj) { $("client-project-title").textContent = "عذراً، رابط المشروع غير موجود."; return; }
+        const brand = proj.brand || { name: "استوديو التصميم", color: "#1D1D1F", logo: "" };
+        applyBrandColor(brand.color);
+        $("client-studio-name").textContent = brand.name;
+        $("client-logo").innerHTML = brand.logo ? `<img src="${brand.logo}" alt="logo"/>` : esc(brand.name.charAt(0));
+        $("client-project-title").textContent = proj.title;
+        $("client-project-meta").textContent = `العميل: ${proj.client}${proj.due ? " — موعد التسليم المتوقع: " + proj.due : ""}`;
+        $("client-rev-badge").textContent = proj.approved ? "تم الاعتماد النهائي" : `التعديل ${proj.revisionsUsed || 0} من ${proj.maxRevisions || 3}`;
 
-      const brand = proj.brand || { name: "استوديو التصميم", color: "#1D1D1F", logo: "" };
-      applyBrandColor(brand.color);
-      $("client-studio-name").textContent = brand.name;
-      $("client-logo").innerHTML = brand.logo ? `<img src="${brand.logo}" alt="logo"/>` : esc(brand.name.charAt(0));
-      $("client-project-title").textContent = proj.title;
-      $("client-project-meta").textContent = `العميل: ${proj.client}${proj.due ? " — موعد التسليم المتوقع: " + proj.due : ""}`;
-      $("client-rev-badge").textContent = proj.approved ? "تم الاعتماد النهائي" : `التعديل ${proj.revisionsUsed || 0} من ${proj.maxRevisions || 3}`;
+        const stageIdx = STAGES.findIndex(s => s.id === proj.stage);
+        $("client-stepper").innerHTML = STAGES.map((s, i) => `<div class="step-item ${i < stageIdx ? "done" : ""} ${i === stageIdx ? "current" : ""}">${s.label}</div>`).join("");
 
-      const stageIdx = STAGES.findIndex(s => s.id === proj.stage);
-      $("client-stepper").innerHTML = STAGES.map((s, i) => `
-        <div class="step-item ${i < stageIdx ? "done" : ""} ${i === stageIdx ? "current" : ""}">${s.label}</div>
-      `).join("");
+        const stageEl = $("client-draft-stage");
+        if (proj.draft) {
+          stageEl.innerHTML = `<img src="${proj.draft}" alt="مسودة التصميم"/>` + (proj.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("");
+          stageEl.onclick = async (e) => {
+            if (proj.approved) return toast("تم اعتماد التصميم وإغلاق التعديلات.");
+            const rect = stageEl.getBoundingClientRect();
+            const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+            const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+            const note = prompt("اكتب ملاحظتك على هذه النقطة:");
+            if (!note || !note.trim()) return;
+            proj.comments = proj.comments || [];
+            proj.comments.push({ x, y, text: note.trim(), date: new Date().toLocaleDateString("ar-SA") });
+            await Store.saveProject(proj);
+            loadClientPortal(pid); toast("تمت إضافة ملاحظتك");
+          };
+        }
 
-      const stageEl = $("client-draft-stage");
-      if (proj.draft) {
-        stageEl.innerHTML = `<img src="${proj.draft}" alt="مسودة التصميم"/>` + (proj.comments || []).filter(c => c.x != null).map((c, idx) =>
-          `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`
-        ).join("");
-        stageEl.onclick = async (e) => {
-          if (proj.approved) return toast("تم اعتماد التصميم وإغلاق التعديلات.");
-          const rect = stageEl.getBoundingClientRect();
-          const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
-          const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
-          const note = prompt("اكتب ملاحظتك على هذه النقطة:");
-          if (!note || !note.trim()) return;
+        $("client-comments-list").innerHTML = (proj.comments || []).map((c, i) => `<div class="list-item"><div><strong>#${i + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("");
+        $("client-send-comment").onclick = async () => {
+          if (proj.approved) return toast("تم اعتماد التصميم مسبقاً.");
+          const txt = $("client-general-comment").value.trim(); if (!txt) return;
           proj.comments = proj.comments || [];
-          proj.comments.push({ x, y, text: note.trim(), date: new Date().toLocaleDateString("ar-SA") });
-          await Store.saveProject(proj);
-          loadClientPortal(pid);
-          toast("تمت إضافة ملاحظتك");
+          proj.comments.push({ text: txt, date: new Date().toLocaleDateString("ar-SA") });
+          $("client-general-comment").value = "";
+          await Store.saveProject(proj); loadClientPortal(pid);
         };
-      }
 
-      $("client-comments-list").innerHTML = (proj.comments || []).map((c, i) => `
-        <div class="list-item">
-          <div><strong>#${i + 1}</strong> ${esc(c.text)}</div>
-          <span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span>
-        </div>
-      `).join("");
+        const refs = (proj.vault || []).filter(f => f.type !== "final");
+        const finals = (proj.vault || []).filter(f => f.type === "final");
+        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${esc(f.url)}" target="_blank" class="btn btn-sm">فتح</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
 
-      $("client-send-comment").onclick = async () => {
-        if (proj.approved) return toast("تم اعتماد التصميم مسبقاً.");
-        const txt = $("client-general-comment").value.trim();
-        if (!txt) return;
-        proj.comments = proj.comments || [];
-        proj.comments.push({ text: txt, date: new Date().toLocaleDateString("ar-SA") });
-        $("client-general-comment").value = "";
-        await Store.saveProject(proj);
-        loadClientPortal(pid);
-      };
-
-      const refs = (proj.vault || []).filter(f => f.type !== "final");
-      const finals = (proj.vault || []).filter(f => f.type === "final");
-
-      $("client-vault-list").innerHTML = refs.map(f => `
-        <div class="list-item">
-          <span>${esc(f.name)}</span>
-          <a href="${esc(f.url)}" target="_blank" class="btn btn-sm">فتح</a>
-        </div>
-      `).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
-
-      if (proj.approved) {
-        $("client-approve-btn").textContent = "تم اعتماد التصميم";
-        $("client-approve-btn").disabled = true;
-        $("client-final-box").innerHTML = finals.map(f => `
-          <div class="list-item">
-            <strong>${esc(f.name)}</strong>
-            <a href="${esc(f.url)}" target="_blank" class="btn btn-primary btn-sm">تحميل</a>
-          </div>
-        `).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
-      } else {
-        $("client-approve-btn").onclick = async () => {
-          if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return;
-          proj.approved = true;
-          proj.stage = "done";
-          await Store.saveProject(proj);
-          loadClientPortal(pid);
-          toast("تم اعتماد التصميم وفتح الملفات النهائية");
-        };
+        if (proj.approved) {
+          $("client-approve-btn").textContent = "تم اعتماد التصميم";
+          $("client-approve-btn").disabled = true;
+          $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${esc(f.url)}" target="_blank" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
+        } else {
+          $("client-approve-btn").onclick = async () => {
+            if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return;
+            proj.approved = true; proj.stage = "done";
+            await Store.saveProject(proj); loadClientPortal(pid); toast("تم اعتماد التصميم وفتح الملفات النهائية");
+          };
+        }
+      } catch (err) {
+        showFatalError("تعذر فتح رابط المشروع", err);
       }
     }
 
