@@ -601,7 +601,7 @@
         <div class="kanban" id="kanban-board"></div>
       </section>
 
-      <!-- SECTION: PRICING CALCULATOR (NEW TOOL) -->
+      <!-- SECTION: PRICING CALCULATOR -->
       <section id="section-pricing" class="hidden">
         <div class="grid-2">
           <div class="card">
@@ -927,7 +927,7 @@
         <div id="pm-vault-list" style="margin-top:12px;"></div>
       </div>
 
-      <!-- TAB: CLIENT MESSAGES (NEW TOOL) -->
+      <!-- TAB: CLIENT MESSAGES -->
       <div id="pm-tab-messages" class="hidden">
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">اختر نوع الرسالة وانسخها جاهزة للعميل مع رابط المتابعة الخاص به.</p>
         <div class="row" style="margin-bottom:12px;">
@@ -943,15 +943,16 @@
 
   <script>
     /****************************************************************
-     * 1. إعدادات فايربيس (الصقي بيانات مشروعك هنا للربط السحابي)
+     * 1. إعدادات فايربيس (مدمجة وجاهزة)
      ****************************************************************/
     const FIREBASE_CONFIG = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDgeJPH3a7sw_G0Ha9F-Htt8Ux2dFCqdh4",
+      authDomain: "stoudio.firebaseapp.com",
+      projectId: "stoudio",
+      storageBucket: "stoudio.firebasestorage.app",
+      messagingSenderId: "209422533816",
+      appId: "1:209422533816:web:8f5f52a47452691e18a04d",
+      measurementId: "G-WDVTRFX24S"
     };
 
     const ADMIN_EMAIL = "lm6p12@gmail.com";
@@ -1015,7 +1016,7 @@
     }
 
     /****************************************************************
-     * 2. طبقة البيانات الموحدة (Firebase أو LocalStorage تلقائياً)
+     * 2. طبقة البيانات الموحدة (Firebase)
      ****************************************************************/
     const LocalDB = {
       get: (k, def) => JSON.parse(localStorage.getItem("studio_" + k) || JSON.stringify(def)),
@@ -1309,7 +1310,6 @@
       const file = $("brand-logo-file").files[0];
       if (file) state.user.logo = await compressImage(file, 300);
       await Store.saveUser(state.user.uid, state.user);
-      // تحديث هوية المشاريع للعملاء
       for (const p of state.projects) {
         p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo };
         await Store.saveProject(p);
@@ -1438,7 +1438,6 @@
       if (!p) return;
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
 
-      // Tasks
       $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `
         <div class="list-item">
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1; ${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}">
@@ -1449,7 +1448,6 @@
         </div>
       `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
 
-      // Moodboard
       $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `
         <div class="swatch" onclick="copyText('${c}')">
           <span class="swatch-dot" style="background:${c}"></span>
@@ -1466,7 +1464,6 @@
         <div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>
       `).join("");
 
-      // Draft & Comments
       const stageEl = $("pm-draft-preview");
       if (p.draft) {
         stageEl.innerHTML = `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) =>
@@ -1483,7 +1480,6 @@
         </div>
       `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات من العميل بعد.</p>`;
 
-      // Vault
       $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `
         <div class="list-item">
           <div>
@@ -1494,7 +1490,6 @@
         </div>
       `).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
 
-      // Default client message
       fillClientMsg("draft");
     }
 
@@ -1567,7 +1562,6 @@
       toast("تم حذف المشروع");
     });
 
-    // Modal Tabs & Close
     document.querySelectorAll("[data-pm-tab]").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll("[data-pm-tab]").forEach(b => b.classList.remove("active"));
@@ -1580,7 +1574,6 @@
       btn.addEventListener("click", () => $(btn.dataset.closeModal).classList.add("hidden"));
     });
 
-    // Client Message Templates
     function fillClientMsg(type) {
       const p = getActiveProject(); if (!p) return;
       const link = `${location.origin}${location.pathname}#client=${p.id}`;
@@ -1730,13 +1723,11 @@
       $("client-project-meta").textContent = `العميل: ${proj.client}${proj.due ? " — موعد التسليم المتوقع: " + proj.due : ""}`;
       $("client-rev-badge").textContent = proj.approved ? "تم الاعتماد النهائي" : `التعديل ${proj.revisionsUsed || 0} من ${proj.maxRevisions || 3}`;
 
-      // Stepper
       const stageIdx = STAGES.findIndex(s => s.id === proj.stage);
       $("client-stepper").innerHTML = STAGES.map((s, i) => `
         <div class="step-item ${i < stageIdx ? "done" : ""} ${i === stageIdx ? "current" : ""}">${s.label}</div>
       `).join("");
 
-      // Draft + Pins
       const stageEl = $("client-draft-stage");
       if (proj.draft) {
         stageEl.innerHTML = `<img src="${proj.draft}" alt="مسودة التصميم"/>` + (proj.comments || []).filter(c => c.x != null).map((c, idx) =>
@@ -1775,7 +1766,6 @@
         loadClientPortal(pid);
       };
 
-      // Vault
       const refs = (proj.vault || []).filter(f => f.type !== "final");
       const finals = (proj.vault || []).filter(f => f.type === "final");
 
