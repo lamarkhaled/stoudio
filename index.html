@@ -3,245 +3,261 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استوديو المصمم | مساحة عمل إبداعية مجانية</title>
+  <title>استوديو المصمم | من أكاديمية لمار الحربي</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <style>
     :root {
-      --accent: #1D1D1F;
-      --accent-soft: rgba(29, 29, 31, 0.08);
-      --bg: #F6F6F3;
+      --accent: #000000;
+      --bg: #FFFFFF;
       --surface: #FFFFFF;
-      --surface-2: #EFEFEB;
-      --border: rgba(0, 0, 0, 0.08);
-      --text: #1D1D1F;
-      --text-muted: #6E6E73;
-      --invert-bg: #161618;
-      --invert-text: #F5F5F7;
-      --invert-muted: #A1A1A6;
+      --surface-2: #F3F3F3;
+      --border: #E5E5E5;
+      --border-strong: #000000;
+      --text: #000000;
+      --text-muted: #555555;
+      --invert-bg: #000000;
+      --invert-text: #FFFFFF;
+      --invert-muted: #BDBDBD;
       --danger: #D93025;
       --danger-soft: rgba(217, 48, 37, 0.08);
       --success: #1E8E3E;
-      --radius: 18px;
-      --radius-sm: 11px;
-      --shadow: 0 2px 14px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.14);
-      --glass: rgba(255, 255, 255, 0.84);
+      --dot-color: #CFCFCF;
+      --radius: 24px;
+      --radius-lg: 32px;
+      --radius-sm: 14px;
     }
 
     [data-theme="dark"] {
-      --bg: #0B0B0D;
-      --surface: #151518;
-      --surface-2: #1E1E22;
-      --border: rgba(255, 255, 255, 0.09);
-      --text: #F5F5F7;
-      --text-muted: #98989D;
-      --invert-bg: #F5F5F7;
-      --invert-text: #1D1D1F;
-      --invert-muted: #515154;
-      --accent-soft: rgba(255, 255, 255, 0.1);
+      --accent: #FFFFFF;
+      --bg: #0A0A0A;
+      --surface: #121212;
+      --surface-2: #1C1C1C;
+      --border: #2A2A2A;
+      --border-strong: #FFFFFF;
+      --text: #FFFFFF;
+      --text-muted: #A3A3A3;
+      --invert-bg: #FFFFFF;
+      --invert-text: #000000;
+      --invert-muted: #555555;
+      --dot-color: #2E2E2E;
       --danger-soft: rgba(217, 48, 37, 0.16);
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.38);
-      --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.68);
-      --glass: rgba(21, 21, 24, 0.84);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    ::selection { background: var(--text); color: var(--bg); }
     body {
       font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.7;
       min-height: 100vh;
-      transition: background 0.25s ease, color 0.25s ease;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     button, input, select, textarea { font-family: inherit; color: inherit; }
-    a { text-decoration: none; }
+    a { text-decoration: none; color: inherit; }
     .hidden { display: none !important; }
 
+    /* Academy Signature Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 18px; border-radius: 999px; border: 1px solid var(--border);
-      background: var(--surface); color: var(--text); font-size: 0.88rem; font-weight: 500;
-      cursor: pointer; transition: all 0.18s ease;
+      padding: 10px 20px; border-radius: 999px; border: 2px solid var(--border-strong);
+      background: var(--surface); color: var(--text); font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: all 0.16s ease;
     }
-    .btn:hover:not(:disabled) { transform: translateY(-1px); background: var(--surface-2); }
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-    .btn-primary { background: var(--accent); color: #FFFFFF; border-color: transparent; }
-    .btn-primary:hover:not(:disabled) { opacity: 0.9; background: var(--accent); }
-    .btn-invert { background: var(--invert-text); color: var(--invert-bg); border-color: transparent; font-weight: 600; }
-    .btn-invert:hover { opacity: 0.9; background: var(--invert-text); }
-    .btn-outline-invert { background: transparent; color: var(--invert-text); border-color: rgba(150,150,155,0.35); }
-    .btn-outline-invert:hover { background: rgba(150,150,155,0.14); }
-    .btn-danger { color: var(--danger); border-color: rgba(217, 48, 37, 0.25); }
-    .btn-sm { padding: 6px 14px; font-size: 0.82rem; }
-    .btn-icon { width: 38px; height: 38px; padding: 0; border-radius: 50%; }
+    .btn:hover:not(:disabled) { background: var(--invert-bg); color: var(--invert-text); transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn-primary:hover:not(:disabled) { background: var(--bg); color: var(--accent); }
+    .btn-invert { background: var(--invert-text); color: var(--invert-bg); border-color: var(--invert-text); }
+    .btn-invert:hover { background: transparent; color: var(--invert-text); }
+    .btn-ghost-invert { background: transparent; color: var(--invert-text); border-color: var(--invert-text); }
+    .btn-ghost-invert:hover { background: var(--invert-text); color: var(--invert-bg); }
+    .btn-soft { background: var(--surface-2); border-color: transparent; color: var(--text); }
+    .btn-soft:hover { border-color: var(--border-strong); background: var(--surface); color: var(--text); }
+    .btn-danger { color: var(--danger); border-color: var(--danger); }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+    .btn-sm { padding: 7px 15px; font-size: 0.82rem; border-width: 1.5px; }
+    .btn-icon { width: 40px; height: 40px; padding: 0; border-radius: 50%; }
 
+    .lm-pill {
+      display: inline-block; background: var(--invert-bg); color: var(--invert-text);
+      font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 999px;
+    }
+
+    /* Inputs */
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-    .field label { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); }
+    .field label { font-size: 0.82rem; font-weight: 700; color: var(--text); }
     .input, select.input, textarea.input {
-      width: 100%; padding: 11px 14px; border-radius: var(--radius-sm);
-      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      width: 100%; padding: 11px 15px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
       font-size: 0.91rem; outline: none; transition: border-color 0.18s;
     }
-    .input:focus { border-color: var(--accent); }
+    .input:focus { border-color: var(--border-strong); }
 
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
-    .center-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
-    .auth-box { width: 100%; max-width: 440px; padding: 34px 30px; }
-    .brand-mark {
-      width: 46px; height: 46px; border-radius: 13px; background: var(--accent); color: #fff;
-      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
-      font-weight: 700; font-size: 1.1rem; overflow: hidden;
+    .card {
+      background: var(--surface); border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius); padding: 24px;
     }
-    .auth-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+
+    /* Auth Screen with Dot Grid Vibe */
+    .center-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+      background: var(--surface-2) radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+      background-size: 22px 22px;
+    }
+    .auth-box { width: 100%; max-width: 440px; padding: 34px 30px; border-radius: var(--radius-lg); }
+    .brand-logo-img { width: 54px; height: 54px; object-fit: contain; border-radius: 14px; margin-bottom: 14px; display: block; }
+    .auth-title { font-size: 1.55rem; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
     .auth-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
-    .alert { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.86rem; margin-bottom: 16px; background: var(--surface-2); border: 1px solid var(--border); }
-    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: var(--danger-soft); }
-    .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
+    .alert { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.86rem; font-weight: 600; margin-bottom: 16px; background: var(--surface-2); border: 1.5px solid var(--border); }
+    .alert-error { color: var(--danger); border-color: var(--danger); background: var(--danger-soft); }
+    .alert-success { color: var(--success); border-color: var(--success); }
 
-    /* Daily Greeting Card */
-    .greeting-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 20px 24px; margin-bottom: 16px; display: flex; align-items: center;
-      justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: var(--shadow);
-    }
-    .greeting-title { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-    .greeting-quote { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* High-Impact Editorial Academy Spotlight */
-    .academy-spotlight {
-      background: var(--invert-bg);
-      color: var(--invert-text);
-      border-radius: 20px;
-      padding: 24px 28px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      overflow: hidden;
-    }
-    .academy-spotlight-tag {
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 999px;
-      background: rgba(150, 150, 155, 0.2);
-      color: var(--invert-text);
-      display: inline-block;
-      margin-bottom: 8px;
-    }
-    .academy-spotlight h3 { font-size: 1.22rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
-    .academy-spotlight p { font-size: 0.88rem; color: var(--invert-muted); max-width: 600px; }
-
-    /* Social Bar */
-    .social-bar { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-    .social-pill {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
-      border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
-      color: var(--text-muted); font-size: 0.78rem; font-weight: 500; transition: all 0.18s;
-    }
-    .social-pill:hover { color: var(--text); border-color: var(--text); transform: translateY(-1px); }
-    .social-pill svg { width: 15px; height: 15px; }
-
-    .studio-footer {
-      margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-      font-size: 0.84rem; color: var(--text-muted);
-    }
-
-    /* Academy Details Modal */
-    .course-hero { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
-    .audience-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
-    .audience-pill { font-size: 0.8rem; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-    .feature-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 14px 0 20px; }
-    .feature-list li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.86rem; display: flex; align-items: flex-start; gap: 8px; }
-
-    .client-info-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 18px; }
-
+    /* Top Header */
     .topbar {
-      position: sticky; top: 0; z-index: 40; background: var(--glass);
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      position: sticky; top: 0; z-index: 40; background: var(--bg);
       border-bottom: 1px solid var(--border); padding: 12px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
     .topbar-brand { display: flex; align-items: center; gap: 12px; }
     .topbar-logo {
-      width: 36px; height: 36px; border-radius: 10px; background: var(--accent); color: #fff;
+      width: 38px; height: 38px; border-radius: 12px; background: var(--accent); color: var(--bg);
       display: flex; align-items: center; justify-content: center; font-weight: 700; overflow: hidden; flex-shrink: 0;
     }
     .topbar-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .nav-pills { display: flex; align-items: center; gap: 6px; background: var(--surface-2); padding: 4px; border-radius: 999px; border: 1px solid var(--border); flex-wrap: wrap; }
-    .nav-pill { padding: 7px 15px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted); font-size: 0.86rem; font-weight: 500; cursor: pointer; transition: all 0.18s; }
-    .nav-pill.active { background: var(--surface); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav-pills { display: flex; align-items: center; gap: 6px; background: var(--surface-2); padding: 5px; border-radius: 999px; flex-wrap: wrap; }
+    .nav-pill { padding: 7px 16px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted); font-size: 0.86rem; font-weight: 700; cursor: pointer; transition: all 0.16s; }
+    .nav-pill.active { background: var(--invert-bg); color: var(--invert-text); }
 
-    .container { max-width: 1380px; margin: 0 auto; padding: 26px 24px 100px; }
+    .container { max-width: 1380px; margin: 0 auto; padding: 24px 24px 100px; }
+
+    /* Daily Greeting (Dot-grid Editorial Card) */
+    .greeting-card {
+      background: var(--surface-2) radial-gradient(var(--dot-color) 1.3px, transparent 1.3px);
+      background-size: 20px 20px;
+      border-radius: var(--radius); padding: 22px 26px; margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .greeting-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .greeting-quote { font-size: 0.92rem; color: var(--text-muted); }
+
+    /* Marquee Strip (Academy Signature) */
+    .lm-marquee { background: var(--invert-bg); color: var(--invert-text); overflow: hidden; direction: ltr; border-radius: 999px; padding: 12px 0; margin-bottom: 20px; }
+    .lm-track { display: flex; width: max-content; animation: lm-scroll 30s linear infinite; }
+    .lm-track span { font-size: 0.95rem; font-weight: 700; padding: 0 20px; white-space: nowrap; direction: rtl; }
+    @keyframes lm-scroll { to { transform: translateX(-50%); } }
+
+    /* Academy Spotlight Banner */
+    .academy-spotlight {
+      background: var(--invert-bg); color: var(--invert-text);
+      border-radius: var(--radius-lg); padding: 28px 30px; margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .academy-spotlight h3 { font-size: 1.35rem; font-weight: 700; margin: 8px 0 6px; line-height: 1.35; }
+    .academy-spotlight p { font-size: 0.9rem; color: var(--invert-muted); max-width: 620px; }
+
+    /* Social Tiles (Academy Signature) */
+    .lm-tiles { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .lm-tile {
+      width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--border-strong); transition: 0.18s;
+    }
+    .lm-tile.dark, .lm-tile.light:hover { background: var(--invert-bg); color: var(--invert-text); }
+    .lm-tile.light, .lm-tile.dark:hover { background: var(--surface); color: var(--text); }
+    .lm-tile:hover { transform: translateY(-3px); }
+    .lm-tile svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* Stats */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
-    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
-    .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
-    .stat-value { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; }
+    .stat-card { background: var(--surface-2); border-radius: var(--radius); padding: 20px 22px; text-align: center; }
+    .stat-value { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
+    .stat-label { font-size: 0.84rem; color: var(--text-muted); font-weight: 600; }
 
+    /* Kanban */
     .board-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
     .board-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .search-input { width: 230px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); font-size: 0.85rem; outline: none; }
-    .search-input:focus { border-color: var(--accent); }
+    .search-input { width: 230px; padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--border-strong); background: var(--surface); font-size: 0.85rem; outline: none; }
 
     .kanban { display: grid; grid-template-columns: repeat(5, minmax(245px, 1fr)); gap: 14px; overflow-x: auto; padding-bottom: 12px; }
-    .kanban-col { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px; }
-    .kanban-col.drag-over { border-color: var(--accent); background: var(--accent-soft); }
-    .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px; font-size: 0.88rem; font-weight: 600; }
-    .col-count { font-size: 0.76rem; padding: 2px 9px; border-radius: 999px; background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
-    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; cursor: pointer; transition: transform 0.16s, box-shadow 0.16s; box-shadow: var(--shadow); }
-    .project-card.is-overdue { border-color: rgba(217, 48, 37, 0.45); }
-    .project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
-    .project-thumb { width: 100%; height: 115px; border-radius: 9px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
-    .project-title { font-size: 0.94rem; font-weight: 600; margin-bottom: 4px; }
+    .kanban-col { background: var(--surface-2); border-radius: var(--radius); padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px; border: 1.5px solid transparent; }
+    .kanban-col.drag-over { border-color: var(--border-strong); }
+    .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px 8px; font-size: 0.9rem; font-weight: 700; }
+    .col-count { font-size: 0.76rem; padding: 2px 10px; border-radius: 999px; background: var(--invert-bg); color: var(--invert-text); font-weight: 700; }
+    .project-card {
+      background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px;
+      padding: 14px; cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+    }
+    .project-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+    .project-card.is-overdue { border-color: var(--danger); }
+    .project-thumb { width: 100%; height: 115px; border-radius: 12px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
+    .project-title { font-size: 0.96rem; font-weight: 700; margin-bottom: 4px; }
     .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 8px; gap: 6px; flex-wrap: wrap; }
-    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 500; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
-    .badge-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); background: rgba(30, 142, 62, 0.08); }
-    .badge-danger { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: var(--danger-soft); }
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: var(--surface-2); color: var(--text); }
+    .badge-success { background: rgba(30, 142, 62, 0.12); color: var(--success); }
+    .badge-danger { background: var(--danger-soft); color: var(--danger); }
 
-    .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.48); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .modal { width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-lg); }
-    .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border); gap: 12px; }
-    .tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 18px; overflow-x: auto; }
-    .tab-btn { padding: 9px 14px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 0.88rem; font-weight: 500; cursor: pointer; white-space: nowrap; }
-    .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
+    /* Academy Modal Sections (Matching lamar.sayan.pro) */
+    .lm-feat-grid, .lm-aud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0; }
+    .lm-feat { display: flex; align-items: flex-start; gap: 12px; padding: 18px; background: var(--surface-2); border: 1.5px solid transparent; border-radius: 20px; }
+    .lm-check { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--invert-bg); color: var(--invert-text); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-top: 2px; }
+    .lm-outcomes { padding: 20px; border: 1.5px solid var(--border-strong); border-radius: 20px; margin: 16px 0; }
+    .lm-out-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .lm-out-tag { padding: 6px 14px; background: var(--surface-2); border-radius: 999px; font-size: 0.84rem; font-weight: 700; }
+    .lm-aud-card { border-radius: 22px; padding: 20px; }
+    .lm-aud-card.yes { background: var(--surface); border: 2px solid var(--border-strong); }
+    .lm-aud-card.no { background: var(--surface-2); border: 1.5px solid var(--border); }
+    .lm-aud-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 12px; font-size: 0.88rem; }
+    .lm-aud-card li { display: flex; gap: 8px; align-items: flex-start; }
+    .lm-faq-item { border: 1.5px solid var(--border); border-radius: 18px; margin-bottom: 10px; overflow: hidden; }
+    .lm-faq-item[open] { border-color: var(--border-strong); }
+    .lm-faq-item summary { list-style: none; cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 0.92rem; display: flex; justify-content: space-between; align-items: center; }
+    .lm-faq-item p { padding: 0 18px 16px; font-size: 0.86rem; color: var(--text-muted); }
 
+    /* Modal */
+    .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 18px; }
+    .modal { width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 2px solid var(--border-strong); border-radius: 28px; padding: 26px; }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1.5px solid var(--border); gap: 12px; }
+    .tabs { display: flex; gap: 6px; background: var(--surface-2); padding: 5px; border-radius: 999px; margin-bottom: 18px; overflow-x: auto; }
+    .tab-btn { padding: 7px 14px; background: none; border: none; border-radius: 999px; color: var(--text-muted); font-size: 0.84rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .tab-btn.active { background: var(--invert-bg); color: var(--invert-text); }
+
+    .client-info-box { background: var(--surface-2); border-radius: 18px; padding: 16px; margin-bottom: 18px; }
     .swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-    .swatch { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; font-size: 0.82rem; }
-    .swatch-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
-    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-2); margin-bottom: 8px; font-size: 0.88rem; }
+    .swatch { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface-2); cursor: pointer; font-size: 0.82rem; font-weight: 600; }
+    .swatch-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
+    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--surface-2); margin-bottom: 8px; font-size: 0.88rem; }
 
-    .draft-stage { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
+    .draft-stage { position: relative; border-radius: 18px; overflow: hidden; border: 1.5px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
     .draft-stage img { width: 100%; display: block; max-height: 520px; object-fit: contain; background: #111; }
-    .pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); cursor: pointer; }
+    .pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; cursor: pointer; }
 
-    .timer-pill { position: fixed; bottom: 20px; left: 20px; z-index: 50; background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-lg); }
-    .timer-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1rem; min-width: 54px; text-align: center; }
+    .timer-pill { position: fixed; bottom: 20px; left: 20px; z-index: 50; background: var(--surface); border: 2px solid var(--border-strong); border-radius: 999px; padding: 7px 14px; display: flex; align-items: center; gap: 10px; }
+    .timer-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.98rem; min-width: 52px; text-align: center; }
 
     .stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 22px 0; }
-    .step-item { text-align: center; padding: 10px 6px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); font-size: 0.8rem; color: var(--text-muted); }
-    .step-item.done { border-color: var(--accent); color: var(--text); font-weight: 600; background: var(--accent-soft); }
-    .step-item.current { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+    .step-item { text-align: center; padding: 10px 6px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--surface); font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+    .step-item.done { border-color: var(--border-strong); color: var(--text); }
+    .step-item.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    .studio-footer {
+      margin-top: 48px; padding: 24px 28px; background: var(--surface-2); border-radius: 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
 
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
     th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); }
-    th { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
+    th { color: var(--text-muted); font-weight: 700; font-size: 0.82rem; }
 
-    .toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 999px; font-size: 0.86rem; font-weight: 500; box-shadow: var(--shadow-lg); }
+    .toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--invert-bg); color: var(--invert-text); padding: 10px 22px; border-radius: 999px; font-size: 0.86rem; font-weight: 700; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
@@ -260,20 +276,14 @@
   <section id="auth-view" class="center-screen">
     <div style="width:100%; max-width:440px;">
       <div class="card auth-box">
-        <div class="brand-mark">س</div>
+        <img src="https://api.sayan.pro/static/branding/ff2498d1-709f-4f4a-a88f-92140c137c8e.png" alt="لمار الحربي" class="brand-logo-img" />
         <h1 class="auth-title" id="auth-heading">استوديو المصمم الرقمي</h1>
-        <p class="auth-sub" id="auth-subheading">مساحة مجانية لإدارة مشاريعك ومشاركة رابط المتابعة مع عملائك باحترافية.</p>
+        <p class="auth-sub" id="auth-subheading">مساحة عمل مجانية لإدارة مشاريعك وعملائك بأسلوب المحترفين، مقدّمة من أكاديمية لمار الحربي.</p>
         <div id="auth-msg" class="alert hidden"></div>
         <form id="auth-form">
           <div id="register-fields" class="hidden">
-            <div class="field">
-              <label>اسم المصمم أو الاستوديو</label>
-              <input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" />
-            </div>
-            <div class="field">
-              <label>رقم الجوال (واتساب)</label>
-              <input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" />
-            </div>
+            <div class="field"><label>اسم المصمم أو الاستوديو</label><input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" /></div>
+            <div class="field"><label>رقم الجوال (واتساب)</label><input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" /></div>
             <div class="field">
               <label>مجال التصميم</label>
               <select id="auth-specialty" class="input">
@@ -285,14 +295,8 @@
               </select>
             </div>
           </div>
-          <div class="field">
-            <label>البريد الإلكتروني</label>
-            <input type="email" id="auth-email" class="input" placeholder="name@example.com" required />
-          </div>
-          <div class="field">
-            <label>كلمة المرور (6 خانات على الأقل)</label>
-            <input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required />
-          </div>
+          <div class="field"><label>البريد الإلكتروني</label><input type="email" id="auth-email" class="input" placeholder="name@example.com" required /></div>
+          <div class="field"><label>كلمة المرور (6 خانات على الأقل)</label><input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required /></div>
           <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">دخول</button>
         </form>
         <div style="text-align:center; margin-top:14px;">
@@ -300,15 +304,15 @@
         </div>
         <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
           <span id="auth-toggle-text">ما عندك حساب؟</span>
-          <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
+          <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:700;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
         </div>
       </div>
 
       <div style="text-align:center; margin-top:18px;">
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
-          أداة مجانية مقدّمة من <button type="button" class="open-academy-trigger" id="auth-academy-name" style="background:none;border:none;color:var(--text);font-weight:600;text-decoration:underline;cursor:pointer;">الأكاديمية</button>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">
+          تصفّح دورات <button type="button" class="open-academy-trigger" style="background:none;border:none;color:var(--text);font-weight:700;text-decoration:underline;cursor:pointer;">أكاديمية لمار الحربي</button>
         </p>
-        <div class="social-bar" id="auth-social-bar"></div>
+        <div class="lm-tiles" id="auth-social-bar"></div>
       </div>
     </div>
   </section>
@@ -331,11 +335,11 @@
       </nav>
 
       <div class="row">
-        <button type="button" class="btn btn-primary btn-sm open-academy-trigger" id="header-academy-btn">الأكاديمية والدورة</button>
-        <button class="btn btn-icon" id="theme-toggle-btn" title="تبديل المظهر">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <button type="button" class="btn btn-primary btn-sm open-academy-trigger">الأكاديمية والدورة</button>
+        <button class="btn btn-icon btn-soft" id="theme-toggle-btn" title="تبديل المظهر">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <button class="btn btn-sm" id="logout-btn">خروج</button>
+        <button class="btn btn-sm btn-soft" id="logout-btn">خروج</button>
       </div>
     </header>
 
@@ -346,7 +350,7 @@
           <div class="greeting-title" id="daily-greeting-title">صباح الخير</div>
           <div class="greeting-quote" id="daily-greeting-quote"></div>
         </div>
-        <span class="badge" id="daily-date-badge"></span>
+        <span class="lm-pill" id="daily-date-badge"></span>
       </div>
 
       <!-- OVERDUE PROJECTS ALERT -->
@@ -355,15 +359,20 @@
       <!-- ACADEMY SPOTLIGHT PROMO -->
       <div id="academy-banner" class="academy-spotlight">
         <div>
-          <span class="academy-spotlight-tag" id="banner-tag">دورة عملية متكاملة</span>
-          <h3 id="banner-title"></h3>
-          <p id="banner-desc"></p>
+          <span class="lm-pill" style="background:rgba(150,150,155,0.22); color:var(--invert-text);">أكاديمية لمار الحربي • منذ 2019</span>
+          <h3>تعلّم كيف تسعّر شغلك، توقّع عقودك، وتدير عملاءك بأسلوب المحترفين</h3>
+          <p>دورات عملية في التصميم والعمل الحر مبنية على خبرة حقيقية في السوق منذ 2019 — خطوات تطبيقية واضحة، قوالب جاهزة، ومتابعة مباشرة بعيداً عن التنظير.</p>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-invert btn-sm open-academy-trigger">تفاصيل الدورة</button>
-          <a id="banner-direct-link" href="#" target="_blank" class="btn btn-outline-invert btn-sm">سجّل الآن</a>
-          <button id="banner-close" class="btn btn-outline-invert btn-sm" style="padding:6px 11px;" title="إخفاء">×</button>
+          <button type="button" class="btn btn-invert btn-sm open-academy-trigger">تفاصيل الدورة والمحاور</button>
+          <a href="https://lamar.sayan.pro/courses" target="_blank" rel="noopener" class="btn btn-ghost-invert btn-sm">استعرض الدورات</a>
+          <button id="banner-close" class="btn btn-ghost-invert btn-sm" style="padding:6px 12px;" title="إخفاء">×</button>
         </div>
+      </div>
+
+      <!-- SIGNATURE MARQUEE -->
+      <div class="lm-marquee" aria-hidden="true">
+        <div class="lm-track" id="lm-marquee-track"></div>
       </div>
 
       <div id="db-warning-banner" class="alert alert-error hidden"></div>
@@ -371,24 +380,21 @@
       <!-- BOARD -->
       <section id="section-board">
         <div class="stats-grid">
-          <div class="stat-card"><div class="stat-label">مشاريع قيد العمل</div><div class="stat-value" id="stat-active">0</div></div>
-          <div class="stat-card"><div class="stat-label">بانتظار رد العميل</div><div class="stat-value" id="stat-review">0</div></div>
-          <div class="stat-card"><div class="stat-label">مشاريع مكتملة</div><div class="stat-value" id="stat-done">0</div></div>
-          <div class="stat-card"><div class="stat-label">إجمالي قيمة المشاريع</div><div class="stat-value" id="stat-revenue">0 ر.س</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-active">0</div><div class="stat-label">مشاريع قيد العمل</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-review">0</div><div class="stat-label">بانتظار رد العميل</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-done">0</div><div class="stat-label">مشاريع مكتملة</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-revenue">0 ر.س</div><div class="stat-label">إجمالي قيمة المشاريع</div></div>
         </div>
 
         <div class="board-header">
           <div>
-            <h2 style="font-size:1.25rem; font-weight:700;">لوحة المشاريع المرئية</h2>
+            <h2 style="font-size:1.35rem; font-weight:700;">لوحة المشاريع المرئية</h2>
             <p style="font-size:0.86rem; color:var(--text-muted);">اسحب البطاقات بين المراحل أو اضغط على أي مشروع لفتح مساحته الكاملة.</p>
           </div>
           <div class="board-controls">
             <input type="search" id="board-search" class="search-input" placeholder="ابحث باسم المشروع أو العميل..." />
-            <button type="button" id="filter-overdue-btn" class="btn btn-sm">المتأخرة فقط</button>
-            <button class="btn btn-primary" id="new-project-btn">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-              مشروع جديد
-            </button>
+            <button type="button" id="filter-overdue-btn" class="btn btn-sm btn-soft">المتأخرة فقط</button>
+            <button class="btn btn-primary btn-sm" id="new-project-btn">+ مشروع جديد</button>
           </div>
         </div>
 
@@ -398,14 +404,14 @@
       <!-- BRANDING -->
       <section id="section-brand" class="hidden">
         <div class="card" style="max-width:600px;">
-          <h2 style="font-size:1.15rem; margin-bottom:6px;">تخصيص هوية الاستوديو</h2>
+          <h2 style="font-size:1.2rem; margin-bottom:6px;">تخصيص هوية الاستوديو</h2>
           <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">تظهر هذه الهوية تلقائياً للعميل عند فتح رابط المتابعة الخاص به.</p>
           <div class="field"><label>اسم الاستوديو أو المصمم</label><input type="text" id="brand-name-input" class="input" /></div>
           <div class="field">
             <label>اللون الأساسي للهوية</label>
             <div class="row">
               <input type="color" id="brand-color-input" style="width:52px;height:40px;border:none;background:none;cursor:pointer;" />
-              <span id="brand-color-hex" style="font-size:0.88rem; color:var(--text-muted);">#1D1D1F</span>
+              <span id="brand-color-hex" style="font-size:0.88rem; color:var(--text-muted);">#000000</span>
             </div>
           </div>
           <div class="field"><label>شعار الاستوديو (يُضغط تلقائياً)</label><input type="file" id="brand-logo-file" class="input" accept="image/*" /></div>
@@ -418,7 +424,7 @@
         <div class="card">
           <div class="board-header" style="margin-bottom:16px;">
             <div>
-              <h2 style="font-size:1.15rem;">قاعدة بيانات المصممين المسجلين</h2>
+              <h2 style="font-size:1.2rem;">قاعدة بيانات المصممين المسجلين</h2>
               <p style="font-size:0.85rem; color:var(--text-muted);">إجمالي المسجلين: <strong id="admin-total-users">0</strong></p>
             </div>
             <button class="btn btn-primary btn-sm" id="export-csv-btn">تصدير البيانات (Excel / CSV)</button>
@@ -426,13 +432,7 @@
           <div class="table-wrap">
             <table>
               <thead>
-                <tr>
-                  <th>الاسم / الاستوديو</th>
-                  <th>البريد الإلكتروني</th>
-                  <th>رقم الواتساب</th>
-                  <th>التخصص</th>
-                  <th>تاريخ التسجيل</th>
-                </tr>
+                <tr><th>الاسم / الاستوديو</th><th>البريد الإلكتروني</th><th>رقم الواتساب</th><th>التخصص</th><th>تاريخ التسجيل</th></tr>
               </thead>
               <tbody id="admin-users-tbody"></tbody>
             </table>
@@ -440,22 +440,23 @@
         </div>
       </section>
 
-      <!-- STUDIO FOOTER WITH SOCIAL ACCOUNTS -->
+      <!-- FOOTER WITH FOLLOW SECTION -->
       <footer class="studio-footer">
         <div>
-          مُطوّر بواسطة <button type="button" class="open-academy-trigger" id="footer-academy-name" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">الأكاديمية</button>
+          <strong style="font-size:1.05rem; display:block;">تابعني في أكاديمية لمار الحربي</strong>
+          <span style="font-size:0.85rem; color:var(--text-muted);">نصايح وتحديثات الدورات في حساباتي، أو كلمني على طول.</span>
         </div>
-        <div class="social-bar" id="footer-social-bar"></div>
+        <div class="lm-tiles" id="footer-social-bar"></div>
       </footer>
     </main>
 
     <div class="timer-pill">
-      <button class="btn btn-sm" id="timer-mode-25" style="padding:4px 10px;">25د</button>
-      <button class="btn btn-sm" id="timer-mode-50" style="padding:4px 10px;">50د</button>
+      <button class="btn btn-sm btn-soft" id="timer-mode-25" style="padding:4px 10px;">25د</button>
+      <button class="btn btn-sm btn-soft" id="timer-mode-50" style="padding:4px 10px;">50د</button>
       <span class="timer-time" id="timer-display">25:00</span>
       <button class="btn btn-primary btn-sm" id="timer-toggle">ابدأ</button>
-      <button class="btn btn-sm" id="timer-reset" style="padding:4px 10px;">إعادة</button>
-      <span style="font-size:0.78rem; color:var(--text-muted);" id="timer-sessions">إنجاز اليوم: 0</span>
+      <button class="btn btn-sm btn-soft" id="timer-reset" style="padding:4px 10px;">إعادة</button>
+      <span style="font-size:0.78rem; color:var(--text-muted); font-weight:600;" id="timer-sessions">إنجاز اليوم: 0</span>
     </div>
   </div>
 
@@ -469,13 +470,13 @@
           <div style="font-size:0.78rem; color:var(--text-muted);">بوابة متابعة المشروع</div>
         </div>
       </div>
-      <span class="badge" id="client-rev-badge">التعديل 0 من 3</span>
+      <span class="lm-pill" id="client-rev-badge">التعديل 0 من 3</span>
     </header>
 
     <main class="container" style="max-width:1020px;">
       <div class="row" style="justify-content:space-between; margin-bottom:8px;">
         <div>
-          <h1 style="font-size:1.55rem; font-weight:700;" id="client-project-title">اسم المشروع</h1>
+          <h1 style="font-size:1.6rem; font-weight:700;" id="client-project-title">اسم المشروع</h1>
           <p style="font-size:0.88rem; color:var(--text-muted);" id="client-project-meta"></p>
         </div>
         <button class="btn btn-primary" id="client-approve-btn">اعتماد التصميم النهائي</button>
@@ -486,7 +487,7 @@
       <div class="grid-2" style="align-items:start;">
         <div class="card">
           <div class="row" style="justify-content:space-between; margin-bottom:12px;">
-            <h3 style="font-size:1.02rem;">معرض المسودات والتعديلات</h3>
+            <h3 style="font-size:1.05rem;">معرض المسودات والتعديلات</h3>
             <span style="font-size:0.78rem; color:var(--text-muted);">اضغط على أي مكان في التصميم لإضافة ملاحظة</span>
           </div>
           <div id="client-draft-stage" class="draft-stage" style="min-height:240px; display:flex; align-items:center; justify-content:center;">
@@ -502,9 +503,9 @@
         </div>
 
         <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card"><h3 style="font-size:1.02rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3><div id="client-vault-list"></div></div>
+          <div class="card"><h3 style="font-size:1.05rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3><div id="client-vault-list"></div></div>
           <div class="card">
-            <h3 style="font-size:1.02rem; margin-bottom:8px;">الملفات النهائية</h3>
+            <h3 style="font-size:1.05rem; margin-bottom:8px;">الملفات النهائية</h3>
             <div id="client-final-box" style="font-size:0.88rem; color:var(--text-muted);">تُفتح الملفات النهائية تلقائياً فور ضغطك على زر «اعتماد التصميم النهائي».</div>
           </div>
         </div>
@@ -512,40 +513,48 @@
     </main>
   </div>
 
-  <!-- MODAL: ACADEMY & COURSE LANDING -->
+  <!-- MODAL: ACADEMY & COURSE FULL DETAILS (FROM lamar.sayan.pro) -->
   <div id="academy-modal" class="modal-backdrop hidden">
-    <div class="modal" style="max-width:720px;">
+    <div class="modal" style="max-width:820px;">
       <div class="modal-head">
-        <div>
-          <span class="badge" id="am-academy-name" style="margin-bottom:4px;">الأكاديمية</span>
-          <h3 id="am-course-title" style="font-size:1.3rem;">عنوان الدورة</h3>
-        </div>
-        <button class="btn btn-sm" data-close-modal="academy-modal">إغلاق</button>
-      </div>
-
-      <div class="course-hero">
-        <p id="am-course-desc" style="font-size:0.94rem; color:var(--text); margin-bottom:16px;"></p>
-
-        <div style="font-size:0.84rem; font-weight:600; color:var(--text-muted);">لمن هذه الدورة؟</div>
-        <div class="audience-pills" id="am-audience"></div>
-
-        <div style="font-size:0.84rem; font-weight:600; color:var(--text-muted);">وش راح تطلع فيه من الدورة؟</div>
-        <ul class="feature-list" id="am-course-features"></ul>
-
-        <div class="row" style="justify-content:space-between; padding:12px 0; border-top:1px solid var(--border); margin-bottom:14px;">
-          <span class="badge badge-success" id="am-course-price" style="font-size:0.9rem; padding:6px 14px;">السعر</span>
-          <span style="font-size:0.82rem; color:var(--text-muted);" id="am-course-meta"></span>
-        </div>
-
         <div class="row">
-          <a id="am-register-btn" href="#" target="_blank" class="btn btn-primary" style="flex:1;">التسجيل في الدورة الآن</a>
-          <a id="am-whatsapp-btn" href="#" target="_blank" class="btn">استفسار عبر الواتساب</a>
+          <img src="https://api.sayan.pro/static/branding/ff2498d1-709f-4f4a-a88f-92140c137c8e.png" alt="لمار" style="width:42px;height:42px;object-fit:contain;border-radius:10px;" />
+          <div>
+            <span class="lm-pill">أكاديمية لمار الحربي</span>
+            <h3 style="font-size:1.25rem; margin-top:4px;">وش بتطلع منه من دورة التصميم والعمل الحر؟</h3>
+          </div>
         </div>
+        <button class="btn btn-sm btn-soft" data-close-modal="academy-modal">إغلاق</button>
       </div>
 
-      <div style="margin-top:20px; text-align:center;">
-        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">تابعني على حساباتي لمحتوى يومي في التصميم والعمل الحر:</p>
-        <div class="social-bar" id="modal-social-bar"></div>
+      <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:14px;">
+        دورات عملية في التصميم والعمل الحر، مبنية على خبرة حقيقية في السوق منذ 2019. نختصر لك الطريق بخطوات تطبيقية واضحة بعيداً عن التنظير.
+      </p>
+
+      <!-- Features -->
+      <div class="lm-feat-grid" id="am-feats"></div>
+
+      <!-- Outcomes -->
+      <div class="lm-outcomes">
+        <strong style="font-size:1rem;">حقيبة قوالب جاهزة للنسخ واللصق:</strong>
+        <div class="lm-out-list" id="am-outcomes"></div>
+      </div>
+
+      <!-- Audience -->
+      <div class="lm-aud-grid" id="am-audience"></div>
+
+      <!-- FAQ -->
+      <h4 style="font-size:1.05rem; margin:20px 0 12px;">أسئلة ممكن تدور في بالك</h4>
+      <div id="am-faq"></div>
+
+      <!-- CTA -->
+      <div style="background:var(--invert-bg); color:var(--invert-text); border-radius:24px; padding:24px; text-align:center; margin-top:20px;">
+        <h4 style="font-size:1.25rem; margin-bottom:6px;">ابدأ رحلتك اليوم</h4>
+        <p style="font-size:0.88rem; color:var(--invert-muted); margin-bottom:16px;">اختر دورتك الأولى، أو كلمني وأساعدك تختار.</p>
+        <div class="row" style="justify-content:center;">
+          <a href="https://lamar.sayan.pro/courses" target="_blank" rel="noopener" class="btn btn-invert">تصفّح الدورات في الأكاديمية</a>
+          <a href="https://wa.me/966549748594?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%84%D9%85%D8%A7%D8%B1%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AF%D9%88%D8%B1%D8%A7%D8%AA%D9%83" target="_blank" rel="noopener" class="btn btn-ghost-invert">كلمني واتساب</a>
+        </div>
       </div>
     </div>
   </div>
@@ -555,7 +564,7 @@
     <div class="modal" style="max-width:520px;">
       <div class="modal-head">
         <h3 style="font-size:1.1rem;">إنشاء مشروع جديد</h3>
-        <button class="btn btn-sm" data-close-modal="new-project-modal">إغلاق</button>
+        <button class="btn btn-sm btn-soft" data-close-modal="new-project-modal">إغلاق</button>
       </div>
       <form id="new-project-form">
         <div class="field"><label>اسم المشروع</label><input type="text" id="np-title" class="input" placeholder="مثال: هوية متجر عود" required /></div>
@@ -585,7 +594,7 @@
         <div class="row">
           <button class="btn btn-primary btn-sm" id="pm-copy-link">نسخ رابط العميل</button>
           <button class="btn btn-danger btn-sm" id="pm-delete">حذف</button>
-          <button class="btn btn-sm" data-close-modal="project-modal">إغلاق</button>
+          <button class="btn btn-sm btn-soft" data-close-modal="project-modal">إغلاق</button>
         </div>
       </div>
 
@@ -618,9 +627,9 @@
           <div class="field">
             <label>عدد التعديلات المستخدمة</label>
             <div class="row">
-              <button class="btn btn-sm" id="pm-rev-minus">-</button>
-              <span id="pm-rev-text" style="font-weight:600;">0 / 3</span>
-              <button class="btn btn-sm" id="pm-rev-plus">+</button>
+              <button class="btn btn-sm btn-soft" id="pm-rev-minus">-</button>
+              <span id="pm-rev-text" style="font-weight:700;">0 / 3</span>
+              <button class="btn btn-sm btn-soft" id="pm-rev-plus">+</button>
             </div>
           </div>
         </div>
@@ -638,7 +647,7 @@
         <div class="field">
           <label>أكواد الألوان (اضغط على اللون لنسخ الكود)</label>
           <div class="row">
-            <input type="color" id="pm-color-picker" value="#1D1D1F" style="width:46px;height:38px;border:none;background:none;" />
+            <input type="color" id="pm-color-picker" value="#000000" style="width:46px;height:38px;border:none;background:none;" />
             <button class="btn btn-sm" id="pm-color-add">إضافة لون</button>
           </div>
           <div id="pm-colors-list" class="swatch-grid"></div>
@@ -691,9 +700,9 @@
       <div id="pm-tab-messages" class="hidden">
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">اختر نوع الرسالة وانسخها جاهزة للعميل مع رابط المتابعة الخاص به.</p>
         <div class="row" style="margin-bottom:12px;">
-          <button class="btn btn-sm" data-msg-tpl="draft">إرسال مسودة جديدة</button>
-          <button class="btn btn-sm" data-msg-tpl="remind">تذكير لطيف بالرد</button>
-          <button class="btn btn-sm" data-msg-tpl="final">تسليم الملفات النهائية</button>
+          <button class="btn btn-sm btn-soft" data-msg-tpl="draft">إرسال مسودة جديدة</button>
+          <button class="btn btn-sm btn-soft" data-msg-tpl="remind">تذكير لطيف بالرد</button>
+          <button class="btn btn-sm btn-soft" data-msg-tpl="final">تسليم الملفات النهائية</button>
         </div>
         <textarea id="pm-msg-box" class="input" rows="6"></textarea>
         <button class="btn btn-primary" id="pm-msg-copy" style="margin-top:10px;">نسخ الرسالة</button>
@@ -702,42 +711,38 @@
   </div>
 
   <script>
-    /****************************************************************
-     * 1. حساباتك الاجتماعية (عدّلي الروابط هنا فقط - أي رابط فاضي يختفي تلقائياً)
-     ****************************************************************/
-    const SOCIAL_LINKS = [
-      { name: "إنستغرام", url: "https://instagram.com/your_username", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>` },
-      { name: "إكس", url: "https://x.com/your_username", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M20 4L4 20"/></svg>` },
-      { name: "تيك توك", url: "https://tiktok.com/@your_username", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>` },
-      { name: "واتساب", url: "https://wa.me/966500000000", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>` }
-    ];
-
-    /****************************************************************
-     * 2. بيانات الأكاديمية والدورة (عدّليها من هنا فقط)
-     ****************************************************************/
-    const ACADEMY_CONFIG = {
-      name: "أكاديمية لمار للتصميم",
-      tag: "دورة عملية متكاملة للمصممين",
-      bannerTitle: "صمّم بذكاء، سعّر بثقة، وابنِ دخل ثابت من شغلك الحر",
-      bannerDesc: "إذا عجبك ترتيب هذا الاستوديو، في دورتنا نأخذك خطوة بخطوة لبناء معرض أعمال قوي وجذب عملاء يدفعون القيمة الحقيقية لشغلك.",
-      courseTitle: "دورة احتراف التصميم والعمل الحر",
-      courseDesc: "دورة تطبيقية مباشرة بدون حشو نظري — تركّز على كيف تحوّل مهاراتك في التصميم إلى عمل حر مربح ومستقر، من أول تواصل مع العميل حتى تسليم المشروع وبناء سمعة تخلي العملاء يطلبونك بالاسم.",
-      audience: ["المصممون المبتدئون", "المستقلون في سلة والهويات", "اللي يبغون يرفعون أسعارهم بثقة", "الباحثون عن نظام عمل مرتب"],
-      coursePrice: "السعر: 299 ريال (وصول مدى الحياة)",
-      courseMeta: "مسجّلة بالكامل • تحديثات مجانية",
-      registerUrl: "https://sayan.pro",
-      whatsappUrl: "https://wa.me/966500000000",
+    const ACADEMY = {
+      words: ["تصميم", "عمل حر", "تسعير", "عقود", "تسويق", "عملاء"],
       features: [
-        "تطبيق عملي خطوة بخطوة على مشاريع حقيقية من السوق السعودي",
-        "طريقة تسعير خدماتك بوضوح بدون ما تبخس تعبك",
-        "قوالب جاهزة للعقود، البريف، وعروض الأسعار الاحترافية",
-        "كيف تبني معرض أعمال يجذب العميل الصح ويزيد مبيعاتك"
+        ["تأسيس رسمي ومالي صح", "وثيقة العمل الحر، حساب تجاري، روابط دفع، وواتساب أعمال مرتب كبزنس رسمي."],
+        ["بورتفوليو يقنع العميل", "تبني معرض أعمال احترافي يقنع أصحاب المتاجر حتى لو ما عندك عملاء سابقين."],
+        ["تسعير ذكي وعقد يحميك", "باقات تسعير واضحة، ردود جاهزة لمكاسرة الأسعار، وعقد يوقف التعديلات المفتوحة."],
+        ["خطة تسويق وبوابة عميل", "جلب عملاءك الأوائل بدون إلحاح + بوابة خاصة لعميلك في Notion يتابع فيها شغله."]
+      ],
+      outcomes: ["البريف", "عقد عمل حر", "عرض سعر", "حاسبة التسعير", "بنك ردود الواتساب", "قالب Notion", "كراسات تطبيق"],
+      yes: [
+        "تعرف أساسيات التصميم بس ما تعرف كيف تجيب عملاء.",
+        "تتعب مع العملاء اللي يكاسرونك في السعر أو يطلبون تعديلات مفتوحة.",
+        "ودّك تشتغل كبزنس رسمي منظم بعقود وباقات واضحة.",
+        "جاهز تطبّق معنا عملياً وتسلّم واجباتك الأسبوعية."
+      ],
+      no: [
+        "تبحث عن دورة تعلّمك برامج التصميم من الصفر (مثل فوتوشوب أو إليستريتور).",
+        "تبي تشتري الدورة وتتفرج على الفيديوهات بدون ما تطبّق.",
+        "تدور على نتائج سريعة بدون التزام بالواجبات والتطبيق."
+      ],
+      faq: [
+        ["هل الدروس بث مباشر ولا مسجلة؟", "الدروس مسجلة بالكامل وتنزل لك تدريجياً كل أسبوع لمدة 4 أسابيع، عشان تتابعها في الوقت اللي يناسبك بدون ارتباط بمواعيد بث."],
+        ["هل أحتاج يكون عندي عملاء سابقين عشان أشترك؟", "لا أبداً، داخل الدورة بننشئ براند من الصفر سوا ونبني بورتفوليو احترافي يقنع العميل حتى لو ما اشتغلت مع أحد من قبل."],
+        ["كيف تكون المتابعة وتصحيح الواجبات؟", "بمجرد اشتراكك تدخل قروب خاص بالدفعة، أجاوب فيه على أسئلتك يومياً، ومع كل أسبوع تسلّم واجبك وأصححه لك بنفسي."],
+        ["هل القوالب الجاهزة مشمولة مع السعر؟", "إيه نعم، حقيبة القوالب كاملة تجيك جاهزة للنسخ واللصق بدون أي رسوم إضافية."]
+      ],
+      socials: [
+        { name: "إكس", handle: "@lamars_studio", url: "https://x.com/lamars_studio", path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" },
+        { name: "واتساب", handle: "+966 54 974 8594", url: "https://wa.me/966549748594?text=" + encodeURIComponent("مرحبا لمار، أبي أستفسر عن دوراتك"), path: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.424 0 12.062c0 2.123.542 4.197 1.578 6.037L0 24l6.105-1.604a11.803 11.803 0 005.937 1.598h.005c6.637 0 12.048-5.422 12.052-12.06a11.841 11.841 0 00-3.577-8.528" }
       ]
     };
 
-    /****************************************************************
-     * 3. عبارات إيجابية متجددة يومياً
-     ****************************************************************/
     const DAILY_QUOTES = [
       "كل مشروع تنجزه اليوم هو خطوة تقرّبك من الاستوديو الذي تحلم به.",
       "البساطة في التصميم ليست نقصاً، بل هي قمة الاحترافية والوضوح.",
@@ -746,14 +751,9 @@
       "ذوقك وتفاصيلك الصغيرة هي ما يميز شغلك عن الجميع.",
       "اليوم فرصة جديدة لصناعة عمل تفخر بوضعه في معرض أعمالك.",
       "تنظيم وقتك ومشاريعك يمنحك مساحة أكبر للإبداع الحقيقي.",
-      "ثقتك بقيمة عملك هي أول ما يقنع العميل بالاستثمار معك.",
-      "أنجز خطوة صغيرة متقنة الآن، ولا تنتظر الكمال لتبدأ.",
-      "كل تفصيلة تعتني بها اليوم تبني سمعتك المهنية غداً."
+      "ثقتك بقيمة عملك هي أول ما يقنع العميل بالاستثمار معك."
     ];
 
-    /****************************************************************
-     * 4. إعدادات Firebase الخاصة بمشروعك
-     ****************************************************************/
     const FIREBASE_CONFIG = {
       apiKey: "AIzaSyDgeJPH3a7sw_G0Ha9F-Htt8Ux2dFCqdh4",
       authDomain: "stoudio.firebaseapp.com",
@@ -779,45 +779,51 @@
     db.settings({ experimentalForceLongPolling: true });
 
     let state = { user: null, projects: [], allUsers: [], activeProjectId: null, isRegister: false, regMeta: null, search: "", onlyOverdue: false };
-
     const $ = (id) => document.getElementById(id);
     const esc = (s = "") => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
     const uid = () => "p_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-    const toast = (msg) => {
-      const el = $("toast");
-      el.textContent = msg;
-      el.classList.remove("hidden");
-      clearTimeout(window._t);
-      window._t = setTimeout(() => el.classList.add("hidden"), 3200);
-    };
+    const toast = (msg) => { const el = $("toast"); el.textContent = msg; el.classList.remove("hidden"); clearTimeout(window._t); window._t = setTimeout(() => el.classList.add("hidden"), 3200); };
 
     function formatWaLink(phone) {
       const digits = String(phone || "").replace(/\D/g, "");
       if (!digits) return "";
-      const intl = digits.startsWith("05") ? "966" + digits.slice(1) : digits;
-      return "https://wa.me/" + intl;
+      return "https://wa.me/" + (digits.startsWith("05") ? "966" + digits.slice(1) : digits);
     }
 
-    function renderSocialBars() {
-      const html = SOCIAL_LINKS.filter(s => s.url).map(s => `
-        <a href="${esc(s.url)}" target="_blank" class="social-pill" rel="noopener">
-          ${s.icon}<span>${esc(s.name)}</span>
-        </a>
-      `).join("");
-      ["auth-social-bar", "footer-social-bar", "modal-social-bar"].forEach(id => {
-        if ($(id)) $(id).innerHTML = html;
-      });
+    function initAcademyUI() {
+      // Marquee
+      let trackHtml = "";
+      for (let i = 0; i < 4; i++) ACADEMY.words.forEach(w => trackHtml += `<span>${w} ✦</span>`);
+      $("lm-marquee-track").innerHTML = trackHtml;
+
+      // Social Tiles
+      const tilesHtml = ACADEMY.socials.map((s, i) => `
+        <a href="${s.url}" target="_blank" rel="noopener" class="lm-tile ${i % 2 === 0 ? "dark" : "light"}" title="${s.name} - ${s.handle}" aria-label="${s.name}">
+          <svg viewBox="0 0 24 24"><path d="${s.path}"/></svg>
+        </a>`).join("");
+      $("auth-social-bar").innerHTML = tilesHtml;
+      $("footer-social-bar").innerHTML = tilesHtml;
+
+      // Modal Content
+      $("am-feats").innerHTML = ACADEMY.features.map(f => `<div class="lm-feat"><span class="lm-check">✓</span><div><strong style="display:block;margin-bottom:4px;">${f[0]}</strong><p style="font-size:0.85rem;color:var(--text-muted);">${f[1]}</p></div></div>`).join("");
+      $("am-outcomes").innerHTML = ACADEMY.outcomes.map(o => `<span class="lm-out-tag">✦ ${o}</span>`).join("");
+      $("am-audience").innerHTML = `
+        <div class="lm-aud-card yes"><strong>مناسبة لك إذا...</strong><ul>${ACADEMY.yes.map(x => `<li><span>✓</span><span>${x}</span></li>`).join("")}</ul></div>
+        <div class="lm-aud-card no"><strong>مو مناسبة لك إذا...</strong><ul>${ACADEMY.no.map(x => `<li><span>✕</span><span>${x}</span></li>`).join("")}</ul></div>`;
+      $("am-faq").innerHTML = ACADEMY.faq.map((q, i) => `<details class="lm-faq-item" ${i === 0 ? "open" : ""}><summary>${q[0]}<span>+</span></summary><p>${q[1]}</p></details>`).join("");
+
+      if (sessionStorage.getItem("hide_academy_banner") === "1") $("academy-banner").classList.add("hidden");
+      document.querySelectorAll(".open-academy-trigger").forEach(btn => btn.addEventListener("click", () => $("academy-modal").classList.remove("hidden")));
     }
+
+    $("banner-close").addEventListener("click", () => { $("academy-banner").classList.add("hidden"); sessionStorage.setItem("hide_academy_banner", "1"); });
 
     function renderDailyGreeting(userName) {
       const now = new Date();
-      const hour = now.getHours();
-      const greet = hour < 12 ? "صباح الخير" : (hour < 18 ? "طاب يومك" : "مساء الخير");
+      const greet = now.getHours() < 12 ? "صباح الخير" : (now.getHours() < 18 ? "طاب يومك" : "مساء الخير");
       const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-      const quote = DAILY_QUOTES[dayOfYear % DAILY_QUOTES.length];
-
       $("daily-greeting-title").textContent = `${greet}، ${userName || "مبدع"}`;
-      $("daily-greeting-quote").textContent = quote;
+      $("daily-greeting-quote").textContent = DAILY_QUOTES[dayOfYear % DAILY_QUOTES.length];
       $("daily-date-badge").textContent = now.toLocaleDateString("ar-SA", { weekday: "long", day: "numeric", month: "long" });
     }
 
@@ -831,72 +837,13 @@
       const overdueList = state.projects.filter(isOverdue);
       const banner = $("overdue-alert-banner");
       if (overdueList.length > 0) {
-        const names = overdueList.map(p => `«${p.title}»`).join("، ");
-        banner.textContent = `تنبيه تأخير: لديك ${overdueList.length} مشاريع تجاوزت موعد التسليم (${names}).`;
+        banner.textContent = `تنبيه تأخير: لديك ${overdueList.length} مشاريع تجاوزت موعد التسليم (${overdueList.map(p => `«${p.title}»`).join("، ")}).`;
         banner.classList.remove("hidden");
-
-        const notifKey = "overdue_notified_" + new Date().toDateString();
-        if ("Notification" in window && !localStorage.getItem(notifKey)) {
-          if (Notification.permission === "granted") {
-            new Notification("تنبيه موعد تسليم", { body: banner.textContent });
-            localStorage.setItem(notifKey, "1");
-          } else if (Notification.permission !== "denied") {
-            Notification.requestPermission();
-          }
-        }
-      } else {
-        banner.classList.add("hidden");
-      }
+      } else banner.classList.add("hidden");
     }
 
-    function initAcademyUI() {
-      $("auth-academy-name").textContent = ACADEMY_CONFIG.name;
-      $("footer-academy-name").textContent = ACADEMY_CONFIG.name;
-      $("banner-tag").textContent = ACADEMY_CONFIG.tag;
-      $("banner-title").textContent = ACADEMY_CONFIG.bannerTitle;
-      $("banner-desc").textContent = ACADEMY_CONFIG.bannerDesc;
-      $("banner-direct-link").href = ACADEMY_CONFIG.registerUrl;
-
-      $("am-academy-name").textContent = ACADEMY_CONFIG.name;
-      $("am-course-title").textContent = ACADEMY_CONFIG.courseTitle;
-      $("am-course-desc").textContent = ACADEMY_CONFIG.courseDesc;
-      $("am-audience").innerHTML = ACADEMY_CONFIG.audience.map(a => `<span class="audience-pill">${esc(a)}</span>`).join("");
-      $("am-course-price").textContent = ACADEMY_CONFIG.coursePrice;
-      $("am-course-meta").textContent = ACADEMY_CONFIG.courseMeta;
-      $("am-register-btn").href = ACADEMY_CONFIG.registerUrl;
-      $("am-whatsapp-btn").href = ACADEMY_CONFIG.whatsappUrl;
-      $("am-course-features").innerHTML = ACADEMY_CONFIG.features.map(f => `<li><span>✓</span><span>${esc(f)}</span></li>`).join("");
-
-      if (sessionStorage.getItem("hide_academy_banner") === "1") {
-        $("academy-banner").classList.add("hidden");
-      }
-
-      document.querySelectorAll(".open-academy-trigger").forEach(btn => {
-        btn.addEventListener("click", () => $("academy-modal").classList.remove("hidden"));
-      });
-    }
-
-    $("banner-close").addEventListener("click", () => {
-      $("academy-banner").classList.add("hidden");
-      sessionStorage.setItem("hide_academy_banner", "1");
-    });
-
-    function showView(name) {
-      ["auth-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
-      $(name).classList.remove("hidden");
-    }
-
-    function translateAuthError(err) {
-      const code = err?.code || "";
-      if (code === "auth/email-already-in-use") return "هذا البريد مسجّل مسبقاً، اضغط تسجيل الدخول.";
-      if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
-      if (code === "auth/weak-password") return "كلمة المرور يجب أن تكون 6 خانات على الأقل.";
-      if (code === "auth/invalid-email") return "صيغة البريد الإلكتروني غير صحيحة.";
-      return err?.message || "حدث خطأ، حاول مرة أخرى.";
-    }
-
-    function applyBrandColor(hex) { document.documentElement.style.setProperty("--accent", hex || "#1D1D1F"); }
-
+    function showView(name) { ["auth-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden")); $(name).classList.remove("hidden"); }
+    function applyBrandColor(hex) { document.documentElement.style.setProperty("--accent", hex || "#000000"); }
     function compressImage(file, maxW = 1000) {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -904,8 +851,7 @@
           const img = new Image();
           img.onload = () => {
             const scale = Math.min(1, maxW / img.width);
-            const c = document.createElement("canvas");
-            c.width = img.width * scale; c.height = img.height * scale;
+            const c = document.createElement("canvas"); c.width = img.width * scale; c.height = img.height * scale;
             c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
             resolve(c.toDataURL("image/jpeg", 0.72));
           };
@@ -914,57 +860,30 @@
         reader.readAsDataURL(file);
       });
     }
-
-    function readFileAsDataURL(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
+    function readFileAsDataURL(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); }); }
 
     async function init() {
       document.documentElement.setAttribute("data-theme", localStorage.getItem("studio_theme") || "light");
       initAcademyUI();
-      renderSocialBars();
-
-      if (location.hash.startsWith("#client=")) {
-        await loadClientPortal(location.hash.replace("#client=", "").trim());
-        return;
-      }
-
-      auth.onAuthStateChanged(async (fbUser) => {
-        if (!fbUser) { showView("auth-view"); return; }
-        await enterStudio(fbUser);
-      });
+      if (location.hash.startsWith("#client=")) { await loadClientPortal(location.hash.replace("#client=", "").trim()); return; }
+      auth.onAuthStateChanged(async (fbUser) => { if (!fbUser) showView("auth-view"); else await enterStudio(fbUser); });
     }
 
     async function enterStudio(fbUser) {
       const isAdmin = fbUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-      let profile = {
-        uid: fbUser.uid, email: fbUser.email,
-        name: state.regMeta?.name || fbUser.displayName || "استوديو التصميم",
-        phone: state.regMeta?.phone || "", specialty: state.regMeta?.specialty || "",
-        color: "#1D1D1F", logo: "", createdAt: new Date().toISOString()
-      };
-
+      let profile = { uid: fbUser.uid, email: fbUser.email, name: state.regMeta?.name || fbUser.displayName || "استوديو التصميم", phone: state.regMeta?.phone || "", specialty: state.regMeta?.specialty || "", color: "#000000", logo: "", createdAt: new Date().toISOString() };
       state.user = profile;
       showView("app-view");
       $("user-email-display").textContent = fbUser.email;
       $("nav-admin").classList.toggle("hidden", !isAdmin);
-      renderStudioBrand();
-      renderDailyGreeting(profile.name);
+      renderStudioBrand(); renderDailyGreeting(profile.name);
 
       try {
         const snap = await db.collection("users").doc(fbUser.uid).get();
         if (snap.exists) profile = { ...profile, ...snap.data() };
         else await db.collection("users").doc(fbUser.uid).set(profile);
-        state.user = profile;
-        state.regMeta = null;
-        renderStudioBrand();
-        renderDailyGreeting(profile.name);
-
+        state.user = profile; state.regMeta = null;
+        renderStudioBrand(); renderDailyGreeting(profile.name);
         const pSnap = await db.collection("projects").where("ownerUid", "==", fbUser.uid).get();
         state.projects = pSnap.docs.map(d => ({ id: d.id, ...d.data() }));
         $("db-warning-banner").classList.add("hidden");
@@ -973,18 +892,10 @@
         $("db-warning-banner").classList.remove("hidden");
         state.projects = [];
       }
-
-      renderBoard();
-      checkOverdueAlerts();
+      renderBoard(); checkOverdueAlerts();
     }
 
-    function setAuthMsg(text, isSuccess = false) {
-      const el = $("auth-msg");
-      el.textContent = text;
-      el.className = "alert " + (isSuccess ? "alert-success" : "alert-error");
-      el.classList.remove("hidden");
-    }
-
+    function setAuthMsg(text, ok = false) { const el = $("auth-msg"); el.textContent = text; el.className = "alert " + (ok ? "alert-success" : "alert-error"); el.classList.remove("hidden"); }
     $("auth-mode-toggle").addEventListener("click", () => {
       state.isRegister = !state.isRegister;
       $("register-fields").classList.toggle("hidden", !state.isRegister);
@@ -997,152 +908,85 @@
 
     $("auth-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = $("auth-email").value.trim().toLowerCase();
-      const pass = $("auth-pass").value;
-      const btn = $("auth-submit-btn");
-      $("auth-msg").classList.add("hidden");
-      btn.disabled = true;
-      btn.textContent = state.isRegister ? "جاري إنشاء الحساب..." : "جاري الدخول...";
-
+      const email = $("auth-email").value.trim().toLowerCase(), pass = $("auth-pass").value, btn = $("auth-submit-btn");
+      $("auth-msg").classList.add("hidden"); btn.disabled = true; btn.textContent = state.isRegister ? "جاري إنشاء الحساب..." : "جاري الدخول...";
       try {
         if (state.isRegister) {
           const name = $("auth-name").value.trim() || "استوديو التصميم";
-          const phone = $("auth-phone").value.trim();
-          const specialty = $("auth-specialty").value;
-          state.regMeta = { name, phone, specialty };
+          state.regMeta = { name, phone: $("auth-phone").value.trim(), specialty: $("auth-specialty").value };
           const cred = await auth.createUserWithEmailAndPassword(email, pass);
           await cred.user.updateProfile({ displayName: name });
-          toast("تم إنشاء حسابك بنجاح، أهلاً بك!");
+          toast("تم إنشاء حسابك بنجاح!");
         } else {
           await auth.signInWithEmailAndPassword(email, pass);
-          toast("تم تسجيل الدخول بنجاح");
+          toast("تم تسجيل الدخول");
         }
       } catch (err) {
-        setAuthMsg(translateAuthError(err), false);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = state.isRegister ? "إنشاء الحساب والدخول" : "دخول";
-      }
+        setAuthMsg(err.code === "auth/email-already-in-use" ? "هذا البريد مسجّل مسبقاً." : "البريد الإلكتروني أو كلمة المرور غير صحيحة.", false);
+      } finally { btn.disabled = false; btn.textContent = state.isRegister ? "إنشاء الحساب والدخول" : "دخول"; }
     });
 
     $("forgot-pass-btn").addEventListener("click", async () => {
       const email = $("auth-email").value.trim();
-      if (!email) return setAuthMsg("اكتب بريدك الإلكتروني أولاً ثم اضغط نسيت كلمة المرور.", false);
-      try {
-        await auth.sendPasswordResetEmail(email);
-        setAuthMsg("تم إرسال رابط استعادة كلمة المرور لبريدك.", true);
-      } catch (err) {
-        setAuthMsg(translateAuthError(err), false);
-      }
+      if (!email) return setAuthMsg("اكتب بريدك الإلكتروني أولاً.", false);
+      try { await auth.sendPasswordResetEmail(email); setAuthMsg("تم إرسال رابط استعادة كلمة المرور لبريدك.", true); } catch (err) { setAuthMsg(err.message, false); }
     });
 
     $("logout-btn").addEventListener("click", async () => { await auth.signOut(); state.user = null; showView("auth-view"); });
-
-    document.querySelectorAll(".nav-pill").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const target = btn.dataset.section;
-        ["board", "brand", "admin"].forEach(s => $("section-" + s).classList.toggle("hidden", s !== target));
-        if (target === "admin") renderAdminPanel();
-      });
-    });
+    document.querySelectorAll(".nav-pill").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active")); btn.classList.add("active");
+      const target = btn.dataset.section;
+      ["board", "brand", "admin"].forEach(s => $("section-" + s).classList.toggle("hidden", s !== target));
+      if (target === "admin") renderAdminPanel();
+    }));
 
     $("theme-toggle-btn").addEventListener("click", () => {
       const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("studio_theme", next);
+      document.documentElement.setAttribute("data-theme", next); localStorage.setItem("studio_theme", next);
     });
 
     function renderStudioBrand() {
-      const u = state.user;
-      applyBrandColor(u.color);
+      const u = state.user; applyBrandColor(u.color);
       $("studio-name-display").textContent = u.name || "استوديو التصميم";
-      $("brand-name-input").value = u.name || "";
-      $("brand-color-input").value = u.color || "#1D1D1F";
-      $("brand-color-hex").textContent = u.color || "#1D1D1F";
+      $("brand-name-input").value = u.name || ""; $("brand-color-input").value = u.color || "#000000"; $("brand-color-hex").textContent = u.color || "#000000";
       $("studio-logo-wrap").innerHTML = u.logo ? `<img src="${u.logo}" alt="logo"/>` : esc((u.name || "س").charAt(0));
     }
-
     $("brand-color-input").addEventListener("input", (e) => { $("brand-color-hex").textContent = e.target.value; applyBrandColor(e.target.value); });
-
     $("save-brand-btn").addEventListener("click", async () => {
-      state.user.name = $("brand-name-input").value.trim() || "استوديو التصميم";
-      state.user.color = $("brand-color-input").value;
-      const file = $("brand-logo-file").files[0];
-      if (file) state.user.logo = await compressImage(file, 300);
+      state.user.name = $("brand-name-input").value.trim() || "استوديو التصميم"; state.user.color = $("brand-color-input").value;
+      const file = $("brand-logo-file").files[0]; if (file) state.user.logo = await compressImage(file, 300);
       await db.collection("users").doc(state.user.uid).set(state.user, { merge: true });
-      for (const p of state.projects) {
-        p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo };
-        await db.collection("projects").doc(p.id).set(p, { merge: true });
-      }
-      renderStudioBrand();
-      renderDailyGreeting(state.user.name);
-      toast("تم حفظ هوية الاستوديو");
+      for (const p of state.projects) { p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo }; await db.collection("projects").doc(p.id).set(p, { merge: true }); }
+      renderStudioBrand(); renderDailyGreeting(state.user.name); toast("تم حفظ هوية الاستوديو");
     });
 
-    // Search & Filter
     $("board-search").addEventListener("input", (e) => { state.search = e.target.value.trim().toLowerCase(); renderBoard(); });
-    $("filter-overdue-btn").addEventListener("click", () => {
-      state.onlyOverdue = !state.onlyOverdue;
-      $("filter-overdue-btn").classList.toggle("btn-danger", state.onlyOverdue);
-      renderBoard();
-    });
+    $("filter-overdue-btn").addEventListener("click", () => { state.onlyOverdue = !state.onlyOverdue; $("filter-overdue-btn").classList.toggle("btn-danger", state.onlyOverdue); renderBoard(); });
 
-    // Kanban
     function renderBoard() {
-      const board = $("kanban-board");
-      board.innerHTML = "";
+      const board = $("kanban-board"); board.innerHTML = "";
       let active = 0, review = 0, done = 0, revenue = 0;
-      state.projects.forEach(p => {
-        revenue += Number(p.price || 0);
-        if (p.stage === "done") done++; else if (p.stage === "review") review++; else active++;
-      });
-      $("stat-active").textContent = active;
-      $("stat-review").textContent = review;
-      $("stat-done").textContent = done;
-      $("stat-revenue").textContent = revenue.toLocaleString("en-US") + " ر.س";
+      state.projects.forEach(p => { revenue += Number(p.price || 0); if (p.stage === "done") done++; else if (p.stage === "review") review++; else active++; });
+      $("stat-active").textContent = active; $("stat-review").textContent = review; $("stat-done").textContent = done; $("stat-revenue").textContent = revenue.toLocaleString("en-US") + " ر.س";
 
-      const filtered = state.projects.filter(p => {
-        const matchSearch = !state.search || (p.title || "").toLowerCase().includes(state.search) || (p.client || "").toLowerCase().includes(state.search);
-        const matchOverdue = !state.onlyOverdue || isOverdue(p);
-        return matchSearch && matchOverdue;
-      });
-
+      const filtered = state.projects.filter(p => (!state.search || (p.title || "").toLowerCase().includes(state.search) || (p.client || "").toLowerCase().includes(state.search)) && (!state.onlyOverdue || isOverdue(p)));
       STAGES.forEach(st => {
         const items = filtered.filter(p => p.stage === st.id);
-        const col = document.createElement("div");
-        col.className = "kanban-col";
+        const col = document.createElement("div"); col.className = "kanban-col";
         col.innerHTML = `<div class="col-head"><span>${st.label}</span><span class="col-count">${items.length}</span></div>`;
-
         col.addEventListener("dragover", (e) => { e.preventDefault(); col.classList.add("drag-over"); });
         col.addEventListener("dragleave", () => col.classList.remove("drag-over"));
         col.addEventListener("drop", async (e) => {
           e.preventDefault(); col.classList.remove("drag-over");
-          const pid = e.dataTransfer.getData("text/plain");
-          const proj = state.projects.find(p => p.id === pid);
-          if (proj && proj.stage !== st.id) {
-            proj.stage = st.id;
-            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
-            renderBoard(); checkOverdueAlerts();
-          }
+          const proj = state.projects.find(p => p.id === e.dataTransfer.getData("text/plain"));
+          if (proj && proj.stage !== st.id) { proj.stage = st.id; await db.collection("projects").doc(proj.id).set(proj, { merge: true }); renderBoard(); checkOverdueAlerts(); }
         });
-
         items.forEach(p => {
           const overdue = isOverdue(p);
-          const card = document.createElement("div");
-          card.className = "project-card" + (overdue ? " is-overdue" : "");
-          card.draggable = true;
+          const card = document.createElement("div"); card.className = "project-card" + (overdue ? " is-overdue" : ""); card.draggable = true;
           card.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", p.id));
           card.addEventListener("click", () => openProjectModal(p.id));
-          card.innerHTML = `
-            ${p.draft ? `<img class="project-thumb" src="${p.draft}" alt="مسودة"/>` : ""}
-            <div class="project-title">${esc(p.title)}</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div>
-            <div class="project-meta">
-              <span>${p.due || "بدون تاريخ"}</span>
-              ${overdue ? `<span class="badge badge-danger">متأخر</span>` : `<span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>`}
-            </div>`;
+          card.innerHTML = `${p.draft ? `<img class="project-thumb" src="${p.draft}" alt="مسودة"/>` : ""}<div class="project-title">${esc(p.title)}</div><div style="font-size:0.8rem;color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div><div class="project-meta"><span>${p.due || "بدون تاريخ"}</span>${overdue ? `<span class="badge badge-danger">متأخر</span>` : `<span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>`}</div>`;
           col.appendChild(card);
         });
         board.appendChild(col);
@@ -1152,94 +996,38 @@
     $("new-project-btn").addEventListener("click", () => $("new-project-modal").classList.remove("hidden"));
     $("new-project-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const proj = {
-        id: uid(), ownerUid: state.user.uid,
-        title: $("np-title").value.trim(),
-        client: $("np-client").value.trim(),
-        clientPhone: $("np-client-phone").value.trim(),
-        clientEmail: $("np-client-email").value.trim(),
-        price: Number($("np-price").value || 0),
-        due: $("np-due").value,
-        maxRevisions: Number($("np-max-rev").value || 3),
-        revisionsUsed: 0, stage: "pending", approved: false,
-        tasks: [], colors: [], fonts: [], links: [], draft: "", comments: [], vault: [],
-        brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
-      };
-      await db.collection("projects").doc(proj.id).set(proj);
-      state.projects.unshift(proj);
-      $("new-project-form").reset(); $("new-project-modal").classList.add("hidden");
-      renderBoard(); checkOverdueAlerts(); toast("تمت إضافة المشروع");
+      const proj = { id: uid(), ownerUid: state.user.uid, title: $("np-title").value.trim(), client: $("np-client").value.trim(), clientPhone: $("np-client-phone").value.trim(), clientEmail: $("np-client-email").value.trim(), price: Number($("np-price").value || 0), due: $("np-due").value, maxRevisions: Number($("np-max-rev").value || 3), revisionsUsed: 0, stage: "pending", approved: false, tasks: [], colors: [], fonts: [], links: [], draft: "", comments: [], vault: [], brand: { name: state.user.name, color: state.user.color, logo: state.user.logo } };
+      await db.collection("projects").doc(proj.id).set(proj); state.projects.unshift(proj);
+      $("new-project-form").reset(); $("new-project-modal").classList.add("hidden"); renderBoard(); checkOverdueAlerts(); toast("تمت إضافة المشروع");
     });
 
     function getActiveProject() { return state.projects.find(p => p.id === state.activeProjectId); }
     function openProjectModal(id) {
-      state.activeProjectId = id;
-      const p = getActiveProject(); if (!p) return;
-      $("pm-title").textContent = p.title;
-      $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
+      state.activeProjectId = id; const p = getActiveProject(); if (!p) return;
+      $("pm-title").textContent = p.title; $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
       $("pm-stage").innerHTML = STAGES.map(s => `<option value="${s.id}" ${s.id === p.stage ? "selected" : ""}>${s.label}</option>`).join("");
-      renderProjectDetails();
-      $("project-modal").classList.remove("hidden");
+      renderProjectDetails(); $("project-modal").classList.remove("hidden");
     }
 
     function renderProjectDetails() {
       const p = getActiveProject(); if (!p) return;
-      $("pm-c-name").value = p.client || "";
-      $("pm-c-phone").value = p.clientPhone || "";
-      $("pm-c-email").value = p.clientEmail || "";
-
+      $("pm-c-name").value = p.client || ""; $("pm-c-phone").value = p.clientPhone || ""; $("pm-c-email").value = p.clientEmail || "";
       const waUrl = formatWaLink(p.clientPhone);
-      if (waUrl) { $("pm-wa-quick").href = waUrl; $("pm-wa-quick").classList.remove("hidden"); }
-      else { $("pm-wa-quick").classList.add("hidden"); }
+      if (waUrl) { $("pm-wa-quick").href = waUrl; $("pm-wa-quick").classList.remove("hidden"); } else $("pm-wa-quick").classList.add("hidden");
 
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
-      $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `
-        <div class="list-item">
-          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1; ${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}">
-            <input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" /> ${esc(t.text)}
-          </label>
-          <button class="btn btn-sm" onclick="removeTask(${i})">حذف</button>
-        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
-
+      $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `<div class="list-item"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1;${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}"><input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" /> ${esc(t.text)}</label><button class="btn btn-sm btn-soft" onclick="removeTask(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
       $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `<div class="swatch" onclick="copyText('${c}')"><span class="swatch-dot" style="background:${c}"></span><span>${c}</span><span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span></div>`).join("");
-      $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm" onclick="removeFont(${i})">حذف</button></div>`).join("");
-      $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>`).join("");
-
-      const stageEl = $("pm-draft-preview");
-      stageEl.innerHTML = p.draft
-        ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("")
-        : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
-
+      $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm btn-soft" onclick="removeFont(${i})">حذف</button></div>`).join("");
+      $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank">${esc(l)}</a><button class="btn btn-sm btn-soft" onclick="removeLink(${i})">حذف</button></div>`).join("");
+      $("pm-draft-preview").innerHTML = p.draft ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("") : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
       $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات بعد.</p>`;
-
-      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `
-        <div class="list-item">
-          <div>
-            <strong>${esc(f.name)}</strong>
-            <span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span>
-          </div>
-          <div class="row">
-            <a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm">تحميل</a>
-            <button class="btn btn-danger btn-sm" onclick="removeVault(${i})">حذف</button>
-          </div>
-        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
+      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><strong>${esc(f.name)}</strong><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><div class="row"><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a><button class="btn btn-danger btn-sm" onclick="removeVault(${i})">حذف</button></div></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
       fillClientMsg("draft");
     }
 
-    async function saveActiveProject() {
-      const p = getActiveProject(); if (!p) return;
-      await db.collection("projects").doc(p.id).set(p, { merge: true });
-      renderProjectDetails(); renderBoard(); checkOverdueAlerts();
-    }
-
-    $("pm-save-client").addEventListener("click", async () => {
-      const p = getActiveProject(); if (!p) return;
-      p.client = $("pm-c-name").value.trim() || p.client;
-      p.clientPhone = $("pm-c-phone").value.trim();
-      p.clientEmail = $("pm-c-email").value.trim();
-      $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
-      await saveActiveProject(); toast("تم حفظ بيانات العميل");
-    });
+    async function saveActiveProject() { const p = getActiveProject(); if (!p) return; await db.collection("projects").doc(p.id).set(p, { merge: true }); renderProjectDetails(); renderBoard(); checkOverdueAlerts(); }
+    $("pm-save-client").addEventListener("click", async () => { const p = getActiveProject(); if (!p) return; p.client = $("pm-c-name").value.trim() || p.client; p.clientPhone = $("pm-c-phone").value.trim(); p.clientEmail = $("pm-c-email").value.trim(); $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`; await saveActiveProject(); toast("تم حفظ بيانات العميل"); });
 
     window.toggleTask = async (i) => { const p = getActiveProject(); p.tasks[i].done = !p.tasks[i].done; await saveActiveProject(); };
     window.removeTask = async (i) => { getActiveProject().tasks.splice(i, 1); await saveActiveProject(); };
@@ -1257,54 +1045,32 @@
     $("pm-font-add").addEventListener("click", async () => { const v = $("pm-font-input").value.trim(); if (!v) return; getActiveProject().fonts.push(v); $("pm-font-input").value = ""; await saveActiveProject(); });
     $("pm-link-add").addEventListener("click", async () => { const v = $("pm-link-input").value.trim(); if (!v) return; getActiveProject().links.push(v); $("pm-link-input").value = ""; await saveActiveProject(); });
     $("pm-draft-file").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; getActiveProject().draft = await compressImage(f, 1100); await saveActiveProject(); toast("تم رفع المسودة"); });
-
     $("pm-file-add").addEventListener("click", async () => {
-      const fileInput = $("pm-file-upload");
-      const file = fileInput.files[0];
+      const fileInput = $("pm-file-upload"), file = fileInput.files[0];
       if (!file) return toast("اختر ملفاً من جهازك أولاً");
-
-      let dataUrl = "";
-      if (file.type.startsWith("image/")) {
-        dataUrl = await compressImage(file, 1200);
-      } else {
-        if (file.size > 700 * 1024) return toast("حجم الملف أكبر من 700 كيلوبايت، يرجى تصغيره أو ضغطه.");
-        dataUrl = await readFileAsDataURL(file);
-      }
-
-      const name = $("pm-file-name").value.trim() || file.name;
-      const type = $("pm-file-type").value;
-      getActiveProject().vault.push({ name, fileName: file.name, data: dataUrl, type });
-      $("pm-file-name").value = ""; fileInput.value = "";
-      await saveActiveProject(); toast("تم رفع الملف بنجاح");
+      let dataUrl = file.type.startsWith("image/") ? await compressImage(file, 1200) : (file.size <= 700 * 1024 ? await readFileAsDataURL(file) : null);
+      if (!dataUrl) return toast("حجم الملف أكبر من 700 كيلوبايت، يرجى تصغيره.");
+      getActiveProject().vault.push({ name: $("pm-file-name").value.trim() || file.name, fileName: file.name, data: dataUrl, type: $("pm-file-type").value });
+      $("pm-file-name").value = ""; fileInput.value = ""; await saveActiveProject(); toast("تم رفع الملف بنجاح");
     });
-
     $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط متابعة العميل"); });
     $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await db.collection("projects").doc(state.activeProjectId).delete(); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); checkOverdueAlerts(); toast("تم حذف المشروع"); });
 
-    document.querySelectorAll("[data-pm-tab]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("[data-pm-tab]").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const t = btn.dataset.pmTab;
-        ["overview", "mood", "drafts", "vault", "messages"].forEach(x => $("pm-tab-" + x).classList.toggle("hidden", x !== t));
-      });
-    });
+    document.querySelectorAll("[data-pm-tab]").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll("[data-pm-tab]").forEach(b => b.classList.remove("active")); btn.classList.add("active");
+      ["overview", "mood", "drafts", "vault", "messages"].forEach(x => $("pm-tab-" + x).classList.toggle("hidden", x !== btn.dataset.pmTab));
+    }));
     document.querySelectorAll("[data-close-modal]").forEach(btn => btn.addEventListener("click", () => $(btn.dataset.closeModal).classList.add("hidden")));
 
     function fillClientMsg(type) {
       const p = getActiveProject(); if (!p) return;
       const link = `${location.origin}${location.pathname}#client=${p.id}`;
-      const templates = {
-        draft: `أهلاً ${p.client}،\nجهّزت لك المسودة الجديدة لمشروع «${p.title}».\nتقدر تستعرضها وتترك ملاحظاتك مباشرة على التصميم:\n${link}`,
-        remind: `مرحباً ${p.client}،\nتذكير لطيف بمراجعة مسودة مشروع «${p.title}»:\n${link}`,
-        final: `أهلاً ${p.client}،\nالملفات النهائية لمشروع «${p.title}» جاهزة للتحميل:\n${link}`
-      };
-      $("pm-msg-box").value = templates[type];
+      const t = { draft: `أهلاً ${p.client}،\nجهّزت لك المسودة الجديدة لمشروع «${p.title}»:\n${link}`, remind: `مرحباً ${p.client}،\nتذكير لطيف بمراجعة مسودة مشروع «${p.title}»:\n${link}`, final: `أهلاً ${p.client}،\nالملفات النهائية لمشروع «${p.title}» جاهزة للتحميل:\n${link}` };
+      $("pm-msg-box").value = t[type];
     }
     document.querySelectorAll("[data-msg-tpl]").forEach(b => b.addEventListener("click", () => fillClientMsg(b.dataset.msgTpl)));
     $("pm-msg-copy").addEventListener("click", () => { navigator.clipboard.writeText($("pm-msg-box").value); toast("تم نسخ الرسالة"); });
 
-    // Focus Timer
     let timerSec = 25 * 60, timerRunning = false, timerInt = null;
     let todaySessions = Number(localStorage.getItem("studio_sessions_" + new Date().toDateString()) || 0);
     $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions;
@@ -1316,54 +1082,32 @@
       if (timerRunning) { clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "استكمال"; }
       else {
         timerRunning = true; $("timer-toggle").textContent = "إيقاف";
-        timerInt = setInterval(() => {
-          timerSec--; renderTimer();
-          if (timerSec <= 0) {
-            clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "ابدأ";
-            todaySessions++; localStorage.setItem("studio_sessions_" + new Date().toDateString(), todaySessions);
-            $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions; toast("انتهت جلسة التركيز بنجاح");
-          }
-        }, 1000);
+        timerInt = setInterval(() => { timerSec--; renderTimer(); if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "ابدأ"; todaySessions++; localStorage.setItem("studio_sessions_" + new Date().toDateString(), todaySessions); $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions; toast("انتهت جلسة التركيز بنجاح"); } }, 1000);
       }
     });
 
-    // Admin Data Collection Table & CSV Export
     async function renderAdminPanel() {
       try {
         const snap = await db.collection("users").get();
         state.allUsers = snap.docs.map(d => d.data());
         $("admin-total-users").textContent = state.allUsers.length;
-        $("admin-users-tbody").innerHTML = state.allUsers.map(u => `
-          <tr>
-            <td><strong>${esc(u.name || "-")}</strong></td>
-            <td>${esc(u.email || "-")}</td>
-            <td dir="ltr" style="text-align:right;">${esc(u.phone || "-")}</td>
-            <td>${esc(u.specialty || "-")}</td>
-            <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString("ar-SA") : "-"}</td>
-          </tr>`).join("");
-      } catch (err) {
-        toast("تأكدي من نشر قواعد Firestore لقراءة بيانات المسجلين");
-      }
+        $("admin-users-tbody").innerHTML = state.allUsers.map(u => `<tr><td><strong>${esc(u.name || "-")}</strong></td><td>${esc(u.email || "-")}</td><td dir="ltr" style="text-align:right;">${esc(u.phone || "-")}</td><td>${esc(u.specialty || "-")}</td><td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString("ar-SA") : "-"}</td></tr>`).join("");
+      } catch (err) { toast("تأكدي من نشر قواعد Firestore"); }
     }
-
     $("export-csv-btn").addEventListener("click", () => {
       if (!state.allUsers.length) return toast("لا توجد بيانات للتصدير");
       const rows = [["الاسم", "البريد الإلكتروني", "رقم الواتساب", "التخصص", "تاريخ التسجيل"]];
       state.allUsers.forEach(u => rows.push([u.name || "", u.email || "", u.phone || "", u.specialty || "", u.createdAt || ""]));
-      const csv = "\uFEFF" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob); a.download = "studio-users.csv"; a.click();
+      const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\uFEFF" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n")], { type: "text/csv;charset=utf-8;" })); a.download = "studio-users.csv"; a.click();
     });
 
-    // Client Portal
     async function loadClientPortal(pid) {
       showView("client-view");
       try {
         const snap = await db.collection("projects").doc(pid).get();
         if (!snap.exists) { $("client-project-title").textContent = "عذراً، رابط المشروع غير موجود."; return; }
         const proj = { id: snap.id, ...snap.data() };
-        const brand = proj.brand || { name: "استوديو التصميم", color: "#1D1D1F", logo: "" };
+        const brand = proj.brand || { name: "استوديو التصميم", color: "#000000", logo: "" };
         applyBrandColor(brand.color);
         $("client-studio-name").textContent = brand.name;
         $("client-logo").innerHTML = brand.logo ? `<img src="${brand.logo}" alt="logo"/>` : esc(brand.name.charAt(0));
@@ -1380,14 +1124,10 @@
           stageEl.onclick = async (e) => {
             if (proj.approved) return toast("تم اعتماد التصميم وإغلاق التعديلات.");
             const rect = stageEl.getBoundingClientRect();
-            const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
-            const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
-            const note = prompt("اكتب ملاحظتك على هذه النقطة:");
-            if (!note || !note.trim()) return;
+            const note = prompt("اكتب ملاحظتك على هذه النقطة:"); if (!note || !note.trim()) return;
             proj.comments = proj.comments || [];
-            proj.comments.push({ x, y, text: note.trim(), date: new Date().toLocaleDateString("ar-SA") });
-            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
-            loadClientPortal(pid); toast("تمت إضافة ملاحظتك");
+            proj.comments.push({ x: Math.round(((e.clientX - rect.left) / rect.width) * 100), y: Math.round(((e.clientY - rect.top) / rect.height) * 100), text: note.trim(), date: new Date().toLocaleDateString("ar-SA") });
+            await db.collection("projects").doc(proj.id).set(proj, { merge: true }); loadClientPortal(pid); toast("تمت إضافة ملاحظتك");
           };
         }
 
@@ -1395,32 +1135,20 @@
         $("client-send-comment").onclick = async () => {
           if (proj.approved) return toast("تم اعتماد التصميم مسبقاً.");
           const txt = $("client-general-comment").value.trim(); if (!txt) return;
-          proj.comments = proj.comments || [];
-          proj.comments.push({ text: txt, date: new Date().toLocaleDateString("ar-SA") });
-          $("client-general-comment").value = "";
-          await db.collection("projects").doc(proj.id).set(proj, { merge: true });
-          loadClientPortal(pid);
+          proj.comments = proj.comments || []; proj.comments.push({ text: txt, date: new Date().toLocaleDateString("ar-SA") });
+          $("client-general-comment").value = ""; await db.collection("projects").doc(proj.id).set(proj, { merge: true }); loadClientPortal(pid);
         };
 
-        const refs = (proj.vault || []).filter(f => f.type !== "final");
-        const finals = (proj.vault || []).filter(f => f.type === "final");
-        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
+        const refs = (proj.vault || []).filter(f => f.type !== "final"), finals = (proj.vault || []).filter(f => f.type === "final");
+        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
 
         if (proj.approved) {
-          $("client-approve-btn").textContent = "تم اعتماد التصميم";
-          $("client-approve-btn").disabled = true;
+          $("client-approve-btn").textContent = "تم اعتماد التصميم"; $("client-approve-btn").disabled = true;
           $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
         } else {
-          $("client-approve-btn").onclick = async () => {
-            if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return;
-            proj.approved = true; proj.stage = "done";
-            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
-            loadClientPortal(pid); toast("تم اعتماد التصميم وفتح الملفات النهائية");
-          };
+          $("client-approve-btn").onclick = async () => { if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return; proj.approved = true; proj.stage = "done"; await db.collection("projects").doc(proj.id).set(proj, { merge: true }); loadClientPortal(pid); toast("تم اعتماد التصميم"); };
         }
-      } catch (err) {
-        $("client-project-title").textContent = "تعذر تحميل المشروع: " + err.message;
-      }
+      } catch (err) { $("client-project-title").textContent = "تعذر تحميل المشروع: " + err.message; }
     }
 
     init();
