@@ -55,6 +55,7 @@
     }
 
     button, input, select, textarea { font-family: inherit; color: inherit; }
+    a { text-decoration: none; }
     .hidden { display: none !important; }
 
     .btn {
@@ -93,6 +94,38 @@
     .alert { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; margin-bottom: 14px; background: var(--surface-2); border: 1px solid var(--border); }
     .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: rgba(217, 48, 37, 0.06); }
     .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
+
+    /* Academy Promo Banner (Minimalist Apple Style) */
+    .academy-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+    .academy-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--text);
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .academy-credit {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .academy-credit a { color: var(--text); font-weight: 600; text-decoration: underline; }
 
     .topbar {
       position: sticky; top: 0; z-index: 40; background: var(--glass);
@@ -173,50 +206,55 @@
 
   <div id="toast" class="toast hidden"></div>
 
-  <!-- 1. AUTH VIEW (تظهر افتراضياً بدون شاشة بيضاء) -->
+  <!-- 1. AUTH VIEW -->
   <section id="auth-view" class="center-screen">
-    <div class="card auth-box">
-      <div class="brand-mark">س</div>
-      <h1 class="auth-title" id="auth-heading">استوديو المصمم الرقمي</h1>
-      <p class="auth-sub" id="auth-subheading">مساحة مجانية لإدارة مشاريعك ومشاركة رابط المتابعة مع عملائك باحترافية.</p>
-      <div id="auth-msg" class="alert hidden"></div>
-      <form id="auth-form">
-        <div id="register-fields" class="hidden">
-          <div class="field">
-            <label>اسم المصمم أو الاستوديو</label>
-            <input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" />
+    <div style="width:100%; max-width:440px;">
+      <div class="card auth-box">
+        <div class="brand-mark">س</div>
+        <h1 class="auth-title" id="auth-heading">استوديو المصمم الرقمي</h1>
+        <p class="auth-sub" id="auth-subheading">مساحة مجانية لإدارة مشاريعك ومشاركة رابط المتابعة مع عملائك باحترافية.</p>
+        <div id="auth-msg" class="alert hidden"></div>
+        <form id="auth-form">
+          <div id="register-fields" class="hidden">
+            <div class="field">
+              <label>اسم المصمم أو الاستوديو</label>
+              <input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" />
+            </div>
+            <div class="field">
+              <label>رقم الجوال (واتساب)</label>
+              <input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" />
+            </div>
+            <div class="field">
+              <label>مجال التصميم</label>
+              <select id="auth-specialty" class="input">
+                <option value="هوية بصرية وشعارات">هوية بصرية وشعارات</option>
+                <option value="تصميم سوشيال ميديا">تصميم سوشيال ميديا</option>
+                <option value="تصميم مواقع ومتاجر">تصميم مواقع ومتاجر</option>
+                <option value="موشن جرافيك">موشن جرافيك</option>
+                <option value="أخرى">أخرى</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>رقم الجوال (واتساب)</label>
-            <input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" />
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="auth-email" class="input" placeholder="name@example.com" required />
           </div>
           <div class="field">
-            <label>مجال التصميم</label>
-            <select id="auth-specialty" class="input">
-              <option value="هوية بصرية وشعارات">هوية بصرية وشعارات</option>
-              <option value="تصميم سوشيال ميديا">تصميم سوشيال ميديا</option>
-              <option value="تصميم مواقع ومتاجر">تصميم مواقع ومتاجر</option>
-              <option value="موشن جرافيك">موشن جرافيك</option>
-              <option value="أخرى">أخرى</option>
-            </select>
+            <label>كلمة المرور (6 خانات على الأقل)</label>
+            <input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required />
           </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">دخول</button>
+        </form>
+        <div style="text-align:center; margin-top:14px;">
+          <button type="button" id="forgot-pass-btn" style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;">نسيت كلمة المرور؟</button>
         </div>
-        <div class="field">
-          <label>البريد الإلكتروني</label>
-          <input type="email" id="auth-email" class="input" placeholder="name@example.com" required />
+        <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
+          <span id="auth-toggle-text">ما عندك حساب؟</span>
+          <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
         </div>
-        <div class="field">
-          <label>كلمة المرور (6 خانات على الأقل)</label>
-          <input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required />
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">دخول</button>
-      </form>
-      <div style="text-align:center; margin-top:14px;">
-        <button type="button" id="forgot-pass-btn" style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;">نسيت كلمة المرور؟</button>
       </div>
-      <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
-        <span id="auth-toggle-text">ما عندك حساب؟</span>
-        <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
+      <div class="academy-credit">
+        أداة مجانية مقدّمة للمصممين من <a id="auth-academy-link" href="#" target="_blank">أكاديميتنا</a>
       </div>
     </div>
   </section>
@@ -240,6 +278,7 @@
       </nav>
 
       <div class="row">
+        <a id="header-academy-btn" href="#" target="_blank" class="btn btn-sm">الأكاديمية</a>
         <button class="btn btn-icon" id="theme-toggle-btn" title="تبديل المظهر">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -248,6 +287,19 @@
     </header>
 
     <main class="container">
+      <!-- ACADEMY PROMO BANNER -->
+      <div id="academy-banner" class="academy-banner">
+        <div>
+          <span class="academy-tag" id="banner-tag">طوّر مهاراتك ودخلك</span>
+          <div style="font-weight:600; font-size:0.95rem;" id="banner-title">تبغى ترفع أسعارك وتجيب عملاء أكثر في التصميم؟</div>
+          <div style="font-size:0.83rem; color:var(--text-muted);" id="banner-desc">تصفح دوراتنا وقوالبنا الاحترافية المصممة خصيصاً للمصممين المستقلين.</div>
+        </div>
+        <div class="row">
+          <a id="banner-cta" href="#" target="_blank" class="btn btn-primary btn-sm">استكشف الأكاديمية</a>
+          <button id="banner-close" class="btn btn-sm" style="padding:6px 10px;" title="إخفاء">×</button>
+        </div>
+      </div>
+
       <div id="db-warning-banner" class="alert alert-error hidden"></div>
 
       <!-- BOARD -->
@@ -547,6 +599,21 @@
   </div>
 
   <script>
+    /****************************************************************
+     * 1. إعدادات الترويج لأكاديميتك (عدّلي الاسم والرابط هنا فقط)
+     ****************************************************************/
+    const ACADEMY_CONFIG = {
+      name: "أكاديمية لمار للتصميم",
+      url: "https://sayan.pro", // ضعي رابط أكاديميتك في سيان هنا
+      tag: "طوّر مهاراتك ودخلك",
+      title: "تبغى ترفع أسعارك وتجيب عملاء أكثر في التصميم؟",
+      desc: "تصفح دوراتنا العملية ومنتجاتنا الرقمية المصممة خصيصاً للمصممين المستقلين.",
+      cta: "استكشف الأكاديمية"
+    };
+
+    /****************************************************************
+     * 2. إعدادات Firebase الخاصة بمشروعك
+     ****************************************************************/
     const FIREBASE_CONFIG = {
       apiKey: "AIzaSyDgeJPH3a7sw_G0Ha9F-Htt8Ux2dFCqdh4",
       authDomain: "stoudio.firebaseapp.com",
@@ -582,6 +649,26 @@
       clearTimeout(window._t);
       window._t = setTimeout(() => el.classList.add("hidden"), 3000);
     };
+
+    function applyAcademyPromo() {
+      $("auth-academy-link").textContent = ACADEMY_CONFIG.name;
+      $("auth-academy-link").href = ACADEMY_CONFIG.url;
+      $("header-academy-btn").textContent = ACADEMY_CONFIG.name;
+      $("header-academy-btn").href = ACADEMY_CONFIG.url;
+      $("banner-tag").textContent = ACADEMY_CONFIG.tag;
+      $("banner-title").textContent = ACADEMY_CONFIG.title;
+      $("banner-desc").textContent = ACADEMY_CONFIG.desc;
+      $("banner-cta").textContent = ACADEMY_CONFIG.cta;
+      $("banner-cta").href = ACADEMY_CONFIG.url;
+      if (sessionStorage.getItem("hide_academy_banner") === "1") {
+        $("academy-banner").classList.add("hidden");
+      }
+    }
+
+    $("banner-close").addEventListener("click", () => {
+      $("academy-banner").classList.add("hidden");
+      sessionStorage.setItem("hide_academy_banner", "1");
+    });
 
     function showView(name) {
       ["auth-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
@@ -619,6 +706,7 @@
 
     async function init() {
       document.documentElement.setAttribute("data-theme", localStorage.getItem("studio_theme") || "light");
+      applyAcademyPromo();
 
       if (location.hash.startsWith("#client=")) {
         await loadClientPortal(location.hash.replace("#client=", "").trim());
@@ -647,7 +735,6 @@
         createdAt: new Date().toISOString()
       };
 
-      // فتح الواجهة فوراً بدون تعليق
       state.user = profile;
       showView("app-view");
       $("user-email-display").textContent = fbUser.email;
