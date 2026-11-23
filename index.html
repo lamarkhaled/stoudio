@@ -22,6 +22,7 @@
       --text: #1D1D1F;
       --text-muted: #6E6E73;
       --danger: #D93025;
+      --danger-soft: rgba(217, 48, 37, 0.08);
       --success: #1E8E3E;
       --radius: 16px;
       --radius-sm: 10px;
@@ -38,6 +39,7 @@
       --text: #F5F5F7;
       --text-muted: #98989D;
       --accent-soft: rgba(255, 255, 255, 0.1);
+      --danger-soft: rgba(217, 48, 37, 0.16);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.65);
       --glass: rgba(22, 22, 25, 0.82);
@@ -91,14 +93,23 @@
     }
     .auth-title { font-size: 1.42rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
     .auth-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
-    .alert { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; margin-bottom: 14px; background: var(--surface-2); border: 1px solid var(--border); }
-    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: rgba(217, 48, 37, 0.06); }
+    .alert { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.86rem; margin-bottom: 16px; background: var(--surface-2); border: 1px solid var(--border); }
+    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: var(--danger-soft); }
     .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
+
+    /* Daily Greeting Card */
+    .greeting-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 24px; margin-bottom: 18px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: var(--shadow);
+    }
+    .greeting-title { font-size: 1.18rem; font-weight: 700; margin-bottom: 4px; }
+    .greeting-quote { font-size: 0.9rem; color: var(--text-muted); }
 
     /* Academy Promo Banner */
     .academy-banner {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 16px 20px; margin-bottom: 22px; display: flex; align-items: center;
+      padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center;
       justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: var(--shadow);
     }
     .academy-tag {
@@ -108,18 +119,12 @@
     .academy-credit { text-align: center; margin-top: 18px; font-size: 0.8rem; color: var(--text-muted); }
     .academy-credit button { background: none; border: none; color: var(--text); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
-    /* Academy Details & Reviews Modal */
-    .course-hero { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; }
+    /* Academy Details Modal */
+    .course-hero { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .feature-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 14px 0 18px; }
     .feature-list li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.86rem; display: flex; align-items: center; gap: 8px; }
-    .review-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
-    .review-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-size: 0.84rem; }
 
-    /* Client Info Box inside Project Modal */
-    .client-info-box {
-      background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px; margin-bottom: 18px;
-    }
+    .client-info-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 18px; }
 
     .topbar {
       position: sticky; top: 0; z-index: 40; background: var(--glass);
@@ -150,12 +155,14 @@
     .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px; font-size: 0.88rem; font-weight: 600; }
     .col-count { font-size: 0.76rem; padding: 2px 9px; border-radius: 999px; background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
     .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 13px; cursor: pointer; transition: transform 0.16s; box-shadow: var(--shadow); }
+    .project-card.is-overdue { border-color: rgba(217, 48, 37, 0.45); }
     .project-card:hover { transform: translateY(-2px); }
     .project-thumb { width: 100%; height: 115px; border-radius: 9px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
     .project-title { font-size: 0.94rem; font-weight: 600; margin-bottom: 4px; }
-    .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 8px; }
+    .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 8px; gap: 6px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 500; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); background: rgba(30, 142, 62, 0.08); }
+    .badge-danger { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: var(--danger-soft); }
 
     .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; }
     .modal { width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-lg); }
@@ -280,15 +287,27 @@
     </header>
 
     <main class="container">
+      <!-- DAILY MORNING GREETING & POSITIVE QUOTE -->
+      <div class="greeting-card">
+        <div>
+          <div class="greeting-title" id="daily-greeting-title">صباح الخير</div>
+          <div class="greeting-quote" id="daily-greeting-quote"></div>
+        </div>
+        <span class="badge" id="daily-date-badge"></span>
+      </div>
+
+      <!-- OVERDUE PROJECTS ALERT -->
+      <div id="overdue-alert-banner" class="alert alert-error hidden"></div>
+
       <!-- ACADEMY PROMO BANNER -->
       <div id="academy-banner" class="academy-banner">
         <div>
-          <span class="academy-tag" id="banner-tag">طوّر مهاراتك ودخلك</span>
+          <span class="academy-tag" id="banner-tag">دورة عملية متكاملة</span>
           <div style="font-weight:600; font-size:0.98rem;" id="banner-title"></div>
           <div style="font-size:0.84rem; color:var(--text-muted);" id="banner-desc"></div>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-primary btn-sm open-academy-trigger" id="banner-cta">تفاصيل الدورة وآراء العملاء</button>
+          <button type="button" class="btn btn-primary btn-sm open-academy-trigger" id="banner-cta">عرض تفاصيل الدورة</button>
           <button id="banner-close" class="btn btn-sm" style="padding:6px 10px;" title="إخفاء">×</button>
         </div>
       </div>
@@ -427,9 +446,9 @@
     </main>
   </div>
 
-  <!-- MODAL: ACADEMY, COURSE DETAILS & CUSTOMER REVIEWS -->
+  <!-- MODAL: ACADEMY & COURSE DETAILS (CLEAN, NO FAKE REVIEWS) -->
   <div id="academy-modal" class="modal-backdrop hidden">
-    <div class="modal" style="max-width:760px;">
+    <div class="modal" style="max-width:680px;">
       <div class="modal-head">
         <div>
           <span class="academy-tag" id="am-academy-name">الأكاديمية</span>
@@ -450,34 +469,10 @@
           <a id="am-whatsapp-btn" href="#" target="_blank" class="btn">تواصل عبر الواتساب</a>
         </div>
       </div>
-
-      <!-- CUSTOMER REVIEWS / REPLIES SECTION -->
-      <div style="margin-top:24px;">
-        <h4 style="font-size:1.05rem; margin-bottom:12px;">آراء وردود العملاء والمتدربين</h4>
-        <div id="am-reviews-list" style="margin-bottom:18px;"></div>
-
-        <div class="card" style="background:var(--surface-2); box-shadow:none;">
-          <h5 style="font-size:0.92rem; margin-bottom:10px;">شاركنا رأيك أو استفسارك</h5>
-          <form id="am-review-form">
-            <div class="grid-2" style="gap:10px;">
-              <div class="field" style="margin-bottom:10px;">
-                <input type="text" id="rev-name" class="input" placeholder="الاسم" required />
-              </div>
-              <div class="field" style="margin-bottom:10px;">
-                <input type="text" id="rev-role" class="input" placeholder="التخصص (اختياري، مثال: مصممة هوية)" />
-              </div>
-            </div>
-            <div class="field" style="margin-bottom:10px;">
-              <textarea id="rev-text" class="input" rows="3" placeholder="اكتب رأيك في الأكاديمية أو الدورة أو استفسارك هنا..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">إرسال الرد</button>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- MODAL: NEW PROJECT (WITH FULL CLIENT DETAILS) -->
+  <!-- MODAL: NEW PROJECT -->
   <div id="new-project-modal" class="modal-backdrop hidden">
     <div class="modal" style="max-width:520px;">
       <div class="modal-head">
@@ -525,7 +520,6 @@
       </div>
 
       <div id="pm-tab-overview">
-        <!-- FULL CLIENT DETAILS CARD -->
         <div class="client-info-box">
           <div class="row" style="justify-content:space-between; margin-bottom:10px;">
             <strong style="font-size:0.9rem;">بيانات العميل</strong>
@@ -598,17 +592,20 @@
         <div id="pm-comments-list"></div>
       </div>
 
+      <!-- VAULT: DIRECT FILE UPLOAD FROM DEVICE -->
       <div id="pm-tab-vault" class="hidden">
         <div class="field">
-          <label>إضافة ملف (عقد، بريف، فاتورة، أو ملف نهائي)</label>
+          <label>رفع ملف مباشرة من جهازك (عقد PDF، صورة، بريف، أو ملف نهائي — بحد أقصى 700KB)</label>
           <div class="row">
-            <input type="text" id="pm-file-name" class="input" placeholder="اسم الملف" style="flex:1;" />
-            <input type="url" id="pm-file-url" class="input" placeholder="رابط الملف (Drive / Dropbox)" style="flex:1;" />
+            <input type="text" id="pm-file-name" class="input" placeholder="اسم الملف (اختياري)" style="flex:1;" />
             <select id="pm-file-type" class="input" style="width:auto;">
               <option value="ref">مرجعي / عقد</option>
               <option value="final">ملف نهائي (يُفتح بعد الاعتماد)</option>
             </select>
-            <button class="btn btn-primary btn-sm" id="pm-file-add">إضافة</button>
+          </div>
+          <div class="row" style="margin-top:8px;">
+            <input type="file" id="pm-file-upload" class="input" style="flex:1;" />
+            <button class="btn btn-primary btn-sm" id="pm-file-add">رفع وحفظ الملف</button>
           </div>
         </div>
         <div id="pm-vault-list" style="margin-top:12px;"></div>
@@ -635,7 +632,7 @@
       name: "أكاديمية لمار للتصميم",
       tag: "دورة عملية متكاملة",
       bannerTitle: "تبغى تحترف التصميم وتبني دخل ثابت من شغلك الحر؟",
-      bannerDesc: "اطّلع على تفاصيل دورتنا الكاملة، المحاور، وآراء المتدربين السابقين.",
+      bannerDesc: "اطّلع على تفاصيل دورتنا الكاملة والمحاور التدريبية.",
       courseTitle: "دورة احتراف التصميم والعمل الحر للمصممين",
       courseDesc: "دورة تطبيقية شاملة تأخذك من الأساسيات وحتى بناء معرض أعمال قوي، تسعير خدماتك بثقة، وجذب عملاء يدفعون القيمة الحقيقية لشغلك.",
       coursePrice: "السعر: 299 ريال (وصول مدى الحياة)",
@@ -647,15 +644,27 @@
         "قوالب جاهزة للعقود وعروض الأسعار",
         "استراتيجيات تسعير الخدمات وجذب العملاء",
         "دعم فني ومجتمع خاص للمتدربين"
-      ],
-      defaultReviews: [
-        { name: "سارة العتيبي", role: "مصممة هوية بصرية", text: "الدورة فرقت معي جداً في طريقة تسعير مشاريعي وترتيب التعامل مع العملاء، تستاهل كل ريال.", date: "قبل أسبوع" },
-        { name: "نورة القحطاني", role: "مصممة متاجر", text: "الشرح واضح ومباشر بدون حشو، وأول مشروع سويته بعد الدورة غطى تكلفتها أضعاف.", date: "قبل أسبوعين" }
       ]
     };
 
     /****************************************************************
-     * 2. إعدادات Firebase الخاصة بمشروعك
+     * 2. عبارات إيجابية متجددة يومياً
+     ****************************************************************/
+    const DAILY_QUOTES = [
+      "كل مشروع تنجزه اليوم هو خطوة تقرّبك من الاستوديو الذي تحلم به.",
+      "البساطة في التصميم ليست نقصاً، بل هي قمة الاحترافية والوضوح.",
+      "ابدأ بأهم مهمة واحدة الآن، والباقي سيأتي بسلاسة.",
+      "الاستمرارية الهادئة تتفوق دائماً على الحماس المؤقت.",
+      "ذوقك وتفاصيلك الصغيرة هي ما يميز شغلك عن الجميع.",
+      "اليوم فرصة جديدة لصناعة عمل تفخر بوضعه في معرض أعمالك.",
+      "تنظيم وقتك ومشاريعك يمنحك مساحة أكبر للإبداع الحقيقي.",
+      "ثقتك بقيمة عملك هي أول ما يقنع العميل بالاستثمار معك.",
+      "أنجز خطوة صغيرة متقنة الآن، ولا تنتظر الكمال لتبدأ.",
+      "كل تفصيلة تعتني بها اليوم تبني سمعتك المهنية غداً."
+    ];
+
+    /****************************************************************
+     * 3. إعدادات Firebase الخاصة بمشروعك
      ****************************************************************/
     const FIREBASE_CONFIG = {
       apiKey: "AIzaSyDgeJPH3a7sw_G0Ha9F-Htt8Ux2dFCqdh4",
@@ -691,7 +700,7 @@
       el.textContent = msg;
       el.classList.remove("hidden");
       clearTimeout(window._t);
-      window._t = setTimeout(() => el.classList.add("hidden"), 3000);
+      window._t = setTimeout(() => el.classList.add("hidden"), 3200);
     };
 
     function formatWaLink(phone) {
@@ -699,6 +708,49 @@
       if (!digits) return "";
       const intl = digits.startsWith("05") ? "966" + digits.slice(1) : digits;
       return "https://wa.me/" + intl;
+    }
+
+    function renderDailyGreeting(userName) {
+      const now = new Date();
+      const hour = now.getHours();
+      const greet = hour < 12 ? "صباح الخير" : (hour < 18 ? "طاب يومك" : "مساء الخير");
+      const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+      const quote = DAILY_QUOTES[dayOfYear % DAILY_QUOTES.length];
+
+      $("daily-greeting-title").textContent = `${greet}، ${userName || "مبدع"}`;
+      $("daily-greeting-quote").textContent = quote;
+      $("daily-date-badge").textContent = now.toLocaleDateString("ar-SA", { weekday: "long", day: "numeric", month: "long" });
+    }
+
+    function isOverdue(proj) {
+      if (!proj.due || proj.stage === "done") return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const dueDate = new Date(proj.due + "T00:00:00");
+      return dueDate < today;
+    }
+
+    function checkOverdueAlerts() {
+      const overdueList = state.projects.filter(isOverdue);
+      const banner = $("overdue-alert-banner");
+      if (overdueList.length > 0) {
+        const names = overdueList.map(p => `«${p.title}»`).join("، ");
+        banner.textContent = `تنبيه تأخير: لديك ${overdueList.length} مشاريع تجاوزت موعد التسليم (${names}).`;
+        banner.classList.remove("hidden");
+
+        // إشعار متصفح خفيف مرة واحدة في اليوم
+        const notifKey = "overdue_notified_" + new Date().toDateString();
+        if ("Notification" in window && !localStorage.getItem(notifKey)) {
+          if (Notification.permission === "granted") {
+            new Notification("تنبيه موعد تسليم", { body: banner.textContent });
+            localStorage.setItem(notifKey, "1");
+          } else if (Notification.permission !== "denied") {
+            Notification.requestPermission();
+          }
+        }
+      } else {
+        banner.classList.add("hidden");
+      }
     }
 
     function initAcademyUI() {
@@ -721,50 +773,9 @@
       }
 
       document.querySelectorAll(".open-academy-trigger").forEach(btn => {
-        btn.addEventListener("click", openAcademyModal);
+        btn.addEventListener("click", () => $("academy-modal").classList.remove("hidden"));
       });
     }
-
-    async function openAcademyModal() {
-      $("academy-modal").classList.remove("hidden");
-      await loadAcademyReviews();
-    }
-
-    async function loadAcademyReviews() {
-      let reviews = [...ACADEMY_CONFIG.defaultReviews];
-      try {
-        const snap = await db.collection("academy_reviews").orderBy("createdAt", "desc").get();
-        reviews = [...snap.docs.map(d => d.data()), ...reviews];
-      } catch (e) {}
-      $("am-reviews-list").innerHTML = reviews.map(r => `
-        <div class="review-card">
-          <div class="review-head">
-            <div><strong>${esc(r.name)}</strong> ${r.role ? `<span style="color:var(--text-muted);">— ${esc(r.role)}</span>` : ""}</div>
-            <span style="font-size:0.75rem; color:var(--text-muted);">${esc(r.date || "")}</span>
-          </div>
-          <p style="font-size:0.88rem;">${esc(r.text)}</p>
-        </div>
-      `).join("");
-    }
-
-    $("am-review-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const review = {
-        name: $("rev-name").value.trim(),
-        role: $("rev-role").value.trim(),
-        text: $("rev-text").value.trim(),
-        date: new Date().toLocaleDateString("ar-SA"),
-        createdAt: Date.now()
-      };
-      try {
-        await db.collection("academy_reviews").add(review);
-        $("am-review-form").reset();
-        toast("شكراً لك، تم نشر ردك بنجاح");
-        await loadAcademyReviews();
-      } catch (err) {
-        toast("تعذر إرسال الرد: تأكدي من نشر قواعد Firestore");
-      }
-    });
 
     $("banner-close").addEventListener("click", () => {
       $("academy-banner").classList.add("hidden");
@@ -805,6 +816,15 @@
       });
     }
 
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
     async function init() {
       document.documentElement.setAttribute("data-theme", localStorage.getItem("studio_theme") || "light");
       initAcademyUI();
@@ -834,6 +854,7 @@
       $("user-email-display").textContent = fbUser.email;
       $("nav-admin").classList.toggle("hidden", !isAdmin);
       renderStudioBrand();
+      renderDailyGreeting(profile.name);
 
       try {
         const snap = await db.collection("users").doc(fbUser.uid).get();
@@ -842,6 +863,7 @@
         state.user = profile;
         state.regMeta = null;
         renderStudioBrand();
+        renderDailyGreeting(profile.name);
 
         const pSnap = await db.collection("projects").where("ownerUid", "==", fbUser.uid).get();
         state.projects = pSnap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -853,6 +875,7 @@
       }
 
       renderBoard();
+      checkOverdueAlerts();
     }
 
     function setAuthMsg(text, isSuccess = false) {
@@ -953,7 +976,9 @@
         p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo };
         await db.collection("projects").doc(p.id).set(p, { merge: true });
       }
-      renderStudioBrand(); toast("تم حفظ هوية الاستوديو");
+      renderStudioBrand();
+      renderDailyGreeting(state.user.name);
+      toast("تم حفظ هوية الاستوديو");
     });
 
     // Kanban
@@ -986,12 +1011,15 @@
             proj.stage = st.id;
             await db.collection("projects").doc(proj.id).set(proj, { merge: true });
             renderBoard();
+            checkOverdueAlerts();
           }
         });
 
         items.forEach(p => {
+          const overdue = isOverdue(p);
           const card = document.createElement("div");
-          card.className = "project-card"; card.draggable = true;
+          card.className = "project-card" + (overdue ? " is-overdue" : "");
+          card.draggable = true;
           card.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", p.id));
           card.addEventListener("click", () => openProjectModal(p.id));
           card.innerHTML = `
@@ -1000,7 +1028,7 @@
             <div style="font-size:0.8rem; color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div>
             <div class="project-meta">
               <span>${p.due || "بدون تاريخ"}</span>
-              <span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>
+              ${overdue ? `<span class="badge badge-danger">متأخر</span>` : `<span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>`}
             </div>`;
           col.appendChild(card);
         });
@@ -1027,7 +1055,7 @@
       await db.collection("projects").doc(proj.id).set(proj);
       state.projects.unshift(proj);
       $("new-project-form").reset(); $("new-project-modal").classList.add("hidden");
-      renderBoard(); toast("تمت إضافة المشروع");
+      renderBoard(); checkOverdueAlerts(); toast("تمت إضافة المشروع");
     });
 
     function getActiveProject() { return state.projects.find(p => p.id === state.activeProjectId); }
@@ -1048,12 +1076,8 @@
       $("pm-c-email").value = p.clientEmail || "";
 
       const waUrl = formatWaLink(p.clientPhone);
-      if (waUrl) {
-        $("pm-wa-quick").href = waUrl;
-        $("pm-wa-quick").classList.remove("hidden");
-      } else {
-        $("pm-wa-quick").classList.add("hidden");
-      }
+      if (waUrl) { $("pm-wa-quick").href = waUrl; $("pm-wa-quick").classList.remove("hidden"); }
+      else { $("pm-wa-quick").classList.add("hidden"); }
 
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
       $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `
@@ -1074,14 +1098,25 @@
         : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
 
       $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات بعد.</p>`;
-      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><a href="${esc(f.url)}" target="_blank" style="font-weight:600;color:var(--text);">${esc(f.name)}</a><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><button class="btn btn-sm" onclick="removeVault(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
+
+      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `
+        <div class="list-item">
+          <div>
+            <strong>${esc(f.name)}</strong>
+            <span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span>
+          </div>
+          <div class="row">
+            <a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm">تحميل</a>
+            <button class="btn btn-danger btn-sm" onclick="removeVault(${i})">حذف</button>
+          </div>
+        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
       fillClientMsg("draft");
     }
 
     async function saveActiveProject() {
       const p = getActiveProject(); if (!p) return;
       await db.collection("projects").doc(p.id).set(p, { merge: true });
-      renderProjectDetails(); renderBoard();
+      renderProjectDetails(); renderBoard(); checkOverdueAlerts();
     }
 
     $("pm-save-client").addEventListener("click", async () => {
@@ -1090,8 +1125,7 @@
       p.clientPhone = $("pm-c-phone").value.trim();
       p.clientEmail = $("pm-c-email").value.trim();
       $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
-      await saveActiveProject();
-      toast("تم حفظ بيانات العميل");
+      await saveActiveProject(); toast("تم حفظ بيانات العميل");
     });
 
     window.toggleTask = async (i) => { const p = getActiveProject(); p.tasks[i].done = !p.tasks[i].done; await saveActiveProject(); };
@@ -1110,9 +1144,34 @@
     $("pm-font-add").addEventListener("click", async () => { const v = $("pm-font-input").value.trim(); if (!v) return; getActiveProject().fonts.push(v); $("pm-font-input").value = ""; await saveActiveProject(); });
     $("pm-link-add").addEventListener("click", async () => { const v = $("pm-link-input").value.trim(); if (!v) return; getActiveProject().links.push(v); $("pm-link-input").value = ""; await saveActiveProject(); });
     $("pm-draft-file").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; getActiveProject().draft = await compressImage(f, 1100); await saveActiveProject(); toast("تم رفع المسودة"); });
-    $("pm-file-add").addEventListener("click", async () => { const name = $("pm-file-name").value.trim(), url = $("pm-file-url").value.trim(), type = $("pm-file-type").value; if (!name || !url) return; getActiveProject().vault.push({ name, url, type }); $("pm-file-name").value = ""; $("pm-file-url").value = ""; await saveActiveProject(); });
+
+    // Direct File Upload to Vault
+    $("pm-file-add").addEventListener("click", async () => {
+      const fileInput = $("pm-file-upload");
+      const file = fileInput.files[0];
+      if (!file) return toast("اختر ملفاً من جهازك أولاً");
+
+      let dataUrl = "";
+      if (file.type.startsWith("image/")) {
+        dataUrl = await compressImage(file, 1200);
+      } else {
+        if (file.size > 700 * 1024) {
+          return toast("حجم الملف أكبر من 700 كيلوبايت، يرجى تصغيره أو ضغطه.");
+        }
+        dataUrl = await readFileAsDataURL(file);
+      }
+
+      const name = $("pm-file-name").value.trim() || file.name;
+      const type = $("pm-file-type").value;
+      getActiveProject().vault.push({ name, fileName: file.name, data: dataUrl, type });
+      $("pm-file-name").value = "";
+      fileInput.value = "";
+      await saveActiveProject();
+      toast("تم رفع الملف بنجاح");
+    });
+
     $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط متابعة العميل"); });
-    $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await db.collection("projects").doc(state.activeProjectId).delete(); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); toast("تم حذف المشروع"); });
+    $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await db.collection("projects").doc(state.activeProjectId).delete(); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); checkOverdueAlerts(); toast("تم حذف المشروع"); });
 
     document.querySelectorAll("[data-pm-tab]").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1237,12 +1296,12 @@
 
         const refs = (proj.vault || []).filter(f => f.type !== "final");
         const finals = (proj.vault || []).filter(f => f.type === "final");
-        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${esc(f.url)}" target="_blank" class="btn btn-sm">فتح</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
+        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
 
         if (proj.approved) {
           $("client-approve-btn").textContent = "تم اعتماد التصميم";
           $("client-approve-btn").disabled = true;
-          $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${esc(f.url)}" target="_blank" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
+          $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
         } else {
           $("client-approve-btn").onclick = async () => {
             if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return;
