@@ -95,37 +95,34 @@
     .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: rgba(217, 48, 37, 0.06); }
     .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
 
-    /* Academy Promo Banner (Minimalist Apple Style) */
+    /* Academy Promo Banner */
     .academy-banner {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 20px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      box-shadow: var(--shadow);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px 20px; margin-bottom: 22px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: var(--shadow);
     }
     .academy-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--text);
-      margin-bottom: 4px;
-      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--text); margin-bottom: 4px; display: inline-block;
     }
-    .academy-credit {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
+    .academy-credit { text-align: center; margin-top: 18px; font-size: 0.8rem; color: var(--text-muted); }
+    .academy-credit button { background: none; border: none; color: var(--text); font-weight: 600; text-decoration: underline; cursor: pointer; }
+
+    /* Academy Details & Reviews Modal */
+    .course-hero {
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; margin-bottom: 18px;
     }
-    .academy-credit a { color: var(--text); font-weight: 600; text-decoration: underline; }
+    .feature-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 14px 0 18px; }
+    .feature-list li {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 10px 14px; font-size: 0.86rem; display: flex; align-items: center; gap: 8px;
+    }
+    .review-card {
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 10px;
+    }
+    .review-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-size: 0.84rem; }
 
     .topbar {
       position: sticky; top: 0; z-index: 40; background: var(--glass);
@@ -254,7 +251,7 @@
         </div>
       </div>
       <div class="academy-credit">
-        أداة مجانية مقدّمة للمصممين من <a id="auth-academy-link" href="#" target="_blank">أكاديميتنا</a>
+        أداة مجانية مقدّمة من <button type="button" class="open-academy-trigger" id="auth-academy-name">الأكاديمية</button>
       </div>
     </div>
   </section>
@@ -278,7 +275,7 @@
       </nav>
 
       <div class="row">
-        <a id="header-academy-btn" href="#" target="_blank" class="btn btn-sm">الأكاديمية</a>
+        <button type="button" class="btn btn-primary btn-sm open-academy-trigger" id="header-academy-btn">الأكاديمية والدورة</button>
         <button class="btn btn-icon" id="theme-toggle-btn" title="تبديل المظهر">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -291,11 +288,11 @@
       <div id="academy-banner" class="academy-banner">
         <div>
           <span class="academy-tag" id="banner-tag">طوّر مهاراتك ودخلك</span>
-          <div style="font-weight:600; font-size:0.95rem;" id="banner-title">تبغى ترفع أسعارك وتجيب عملاء أكثر في التصميم؟</div>
-          <div style="font-size:0.83rem; color:var(--text-muted);" id="banner-desc">تصفح دوراتنا وقوالبنا الاحترافية المصممة خصيصاً للمصممين المستقلين.</div>
+          <div style="font-weight:600; font-size:0.98rem;" id="banner-title"></div>
+          <div style="font-size:0.84rem; color:var(--text-muted);" id="banner-desc"></div>
         </div>
         <div class="row">
-          <a id="banner-cta" href="#" target="_blank" class="btn btn-primary btn-sm">استكشف الأكاديمية</a>
+          <button type="button" class="btn btn-primary btn-sm open-academy-trigger" id="banner-cta">تفاصيل الدورة وآراء العملاء</button>
           <button id="banner-close" class="btn btn-sm" style="padding:6px 10px;" title="إخفاء">×</button>
         </div>
       </div>
@@ -468,6 +465,56 @@
     </main>
   </div>
 
+  <!-- MODAL: ACADEMY, COURSE DETAILS & CUSTOMER REVIEWS -->
+  <div id="academy-modal" class="modal-backdrop hidden">
+    <div class="modal" style="max-width:760px;">
+      <div class="modal-head">
+        <div>
+          <span class="academy-tag" id="am-academy-name">الأكاديمية</span>
+          <h3 id="am-course-title" style="font-size:1.25rem; margin-top:4px;">عنوان الدورة</h3>
+        </div>
+        <button class="btn btn-sm" data-close-modal="academy-modal">إغلاق</button>
+      </div>
+
+      <div class="course-hero">
+        <p id="am-course-desc" style="font-size:0.93rem; color:var(--text); margin-bottom:14px;"></p>
+        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+          <span class="badge badge-success" id="am-course-price" style="font-size:0.88rem; padding:6px 14px;">السعر</span>
+          <span style="font-size:0.82rem; color:var(--text-muted);" id="am-course-meta"></span>
+        </div>
+        <ul class="feature-list" id="am-course-features"></ul>
+        <div class="row">
+          <a id="am-register-btn" href="#" target="_blank" class="btn btn-primary" style="flex:1;">التسجيل في الدورة الآن</a>
+          <a id="am-whatsapp-btn" href="#" target="_blank" class="btn">تواصل عبر الواتساب</a>
+        </div>
+      </div>
+
+      <!-- CUSTOMER REVIEWS / REPLIES SECTION -->
+      <div style="margin-top:24px;">
+        <h4 style="font-size:1.05rem; margin-bottom:12px;">آراء وردود العملاء والمتدربين</h4>
+        <div id="am-reviews-list" style="margin-bottom:18px;"></div>
+
+        <div class="card" style="background:var(--surface-2); box-shadow:none;">
+          <h5 style="font-size:0.92rem; margin-bottom:10px;">شاركنا رأيك أو استفسارك</h5>
+          <form id="am-review-form">
+            <div class="grid-2" style="gap:10px;">
+              <div class="field" style="margin-bottom:10px;">
+                <input type="text" id="rev-name" class="input" placeholder="الاسم" required />
+              </div>
+              <div class="field" style="margin-bottom:10px;">
+                <input type="text" id="rev-role" class="input" placeholder="التخصص (اختياري، مثال: مصممة هوية)" />
+              </div>
+            </div>
+            <div class="field" style="margin-bottom:10px;">
+              <textarea id="rev-text" class="input" rows="3" placeholder="اكتب رأيك في الأكاديمية أو الدورة أو استفسارك هنا..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إرسال الرد</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: NEW PROJECT -->
   <div id="new-project-modal" class="modal-backdrop hidden">
     <div class="modal" style="max-width:480px;">
@@ -600,15 +647,29 @@
 
   <script>
     /****************************************************************
-     * 1. إعدادات الترويج لأكاديميتك (عدّلي الاسم والرابط هنا فقط)
+     * 1. بيانات الأكاديمية والدورة (عدّليها من هنا فقط)
      ****************************************************************/
     const ACADEMY_CONFIG = {
       name: "أكاديمية لمار للتصميم",
-      url: "https://sayan.pro", // ضعي رابط أكاديميتك في سيان هنا
-      tag: "طوّر مهاراتك ودخلك",
-      title: "تبغى ترفع أسعارك وتجيب عملاء أكثر في التصميم؟",
-      desc: "تصفح دوراتنا العملية ومنتجاتنا الرقمية المصممة خصيصاً للمصممين المستقلين.",
-      cta: "استكشف الأكاديمية"
+      tag: "دورة عملية متكاملة",
+      bannerTitle: "تبغى تحترف التصميم وتبني دخل ثابت من شغلك الحر؟",
+      bannerDesc: "اطّلع على تفاصيل دورتنا الكاملة، المحاور، وآراء المتدربين السابقين.",
+      courseTitle: "دورة احتراف التصميم والعمل الحر للمصممين",
+      courseDesc: "دورة تطبيقية شاملة تأخذك من الأساسيات وحتى بناء معرض أعمال قوي، تسعير خدماتك بثقة، وجذب عملاء يدفعون القيمة الحقيقية لشغلك.",
+      coursePrice: "السعر: 299 ريال (وصول مدى الحياة)",
+      courseMeta: "مسجّلة بالكامل + تحديثات مجانية",
+      registerUrl: "https://sayan.pro", // رابط صفحة التسجيل في أكاديميتك
+      whatsappUrl: "https://wa.me/966500000000", // رابط الواتساب الخاص بك
+      features: [
+        "تطبيق عملي خطوة بخطوة على مشاريع حقيقية",
+        "قوالب جاهزة للعقود وعروض الأسعار",
+        "استراتيجيات تسعير الخدمات وجذب العملاء",
+        "دعم فني ومجتمع خاص للمتدربين"
+      ],
+      defaultReviews: [
+        { name: "سارة العتيبي", role: "مصممة هوية بصرية", text: "الدورة فرقت معي جداً في طريقة تسعير مشاريعي وترتيب التعامل مع العملاء، تستاهل كل ريال.", date: "قبل أسبوع" },
+        { name: "نورة القحطاني", role: "مصممة متاجر", text: "الشرح واضح ومباشر بدون حشو، وأول مشروع سويته بعد الدورة غطى تكلفتها أضعاف.", date: "قبل أسبوعين" }
+      ]
     };
 
     /****************************************************************
@@ -636,6 +697,7 @@
     firebase.initializeApp(FIREBASE_CONFIG);
     const auth = firebase.auth();
     const db = firebase.firestore();
+    db.settings({ experimentalForceLongPolling: true });
 
     let state = { user: null, projects: [], allUsers: [], activeProjectId: null, isRegister: false, regMeta: null };
 
@@ -650,20 +712,76 @@
       window._t = setTimeout(() => el.classList.add("hidden"), 3000);
     };
 
-    function applyAcademyPromo() {
-      $("auth-academy-link").textContent = ACADEMY_CONFIG.name;
-      $("auth-academy-link").href = ACADEMY_CONFIG.url;
-      $("header-academy-btn").textContent = ACADEMY_CONFIG.name;
-      $("header-academy-btn").href = ACADEMY_CONFIG.url;
+    /****************************************************************
+     * 3. نافذة الأكاديمية والدورة + ردود العملاء
+     ****************************************************************/
+    function initAcademyUI() {
+      $("auth-academy-name").textContent = ACADEMY_CONFIG.name;
       $("banner-tag").textContent = ACADEMY_CONFIG.tag;
-      $("banner-title").textContent = ACADEMY_CONFIG.title;
-      $("banner-desc").textContent = ACADEMY_CONFIG.desc;
-      $("banner-cta").textContent = ACADEMY_CONFIG.cta;
-      $("banner-cta").href = ACADEMY_CONFIG.url;
+      $("banner-title").textContent = ACADEMY_CONFIG.bannerTitle;
+      $("banner-desc").textContent = ACADEMY_CONFIG.bannerDesc;
+
+      $("am-academy-name").textContent = ACADEMY_CONFIG.name;
+      $("am-course-title").textContent = ACADEMY_CONFIG.courseTitle;
+      $("am-course-desc").textContent = ACADEMY_CONFIG.courseDesc;
+      $("am-course-price").textContent = ACADEMY_CONFIG.coursePrice;
+      $("am-course-meta").textContent = ACADEMY_CONFIG.courseMeta;
+      $("am-register-btn").href = ACADEMY_CONFIG.registerUrl;
+      $("am-whatsapp-btn").href = ACADEMY_CONFIG.whatsappUrl;
+      $("am-course-features").innerHTML = ACADEMY_CONFIG.features.map(f => `<li><span>✓</span><span>${esc(f)}</span></li>`).join("");
+
       if (sessionStorage.getItem("hide_academy_banner") === "1") {
         $("academy-banner").classList.add("hidden");
       }
+
+      document.querySelectorAll(".open-academy-trigger").forEach(btn => {
+        btn.addEventListener("click", openAcademyModal);
+      });
     }
+
+    async function openAcademyModal() {
+      $("academy-modal").classList.remove("hidden");
+      await loadAcademyReviews();
+    }
+
+    async function loadAcademyReviews() {
+      let reviews = [...ACADEMY_CONFIG.defaultReviews];
+      try {
+        const snap = await db.collection("academy_reviews").orderBy("createdAt", "desc").get();
+        const dbReviews = snap.docs.map(d => d.data());
+        reviews = [...dbReviews, ...reviews];
+      } catch (e) {
+        // يعرض الردود الافتراضية في حال لم تُنشأ المجموعة بعد
+      }
+      $("am-reviews-list").innerHTML = reviews.map(r => `
+        <div class="review-card">
+          <div class="review-head">
+            <div><strong>${esc(r.name)}</strong> ${r.role ? `<span style="color:var(--text-muted);">— ${esc(r.role)}</span>` : ""}</div>
+            <span style="font-size:0.75rem; color:var(--text-muted);">${esc(r.date || "")}</span>
+          </div>
+          <p style="font-size:0.88rem;">${esc(r.text)}</p>
+        </div>
+      `).join("");
+    }
+
+    $("am-review-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const review = {
+        name: $("rev-name").value.trim(),
+        role: $("rev-role").value.trim(),
+        text: $("rev-text").value.trim(),
+        date: new Date().toLocaleDateString("ar-SA"),
+        createdAt: Date.now()
+      };
+      try {
+        await db.collection("academy_reviews").add(review);
+        $("am-review-form").reset();
+        toast("شكراً لك، تم نشر ردك بنجاح");
+        await loadAcademyReviews();
+      } catch (err) {
+        toast("تعذر إرسال الرد: تأكدي من صلاحيات Firestore");
+      }
+    });
 
     $("banner-close").addEventListener("click", () => {
       $("academy-banner").classList.add("hidden");
@@ -706,7 +824,7 @@
 
     async function init() {
       document.documentElement.setAttribute("data-theme", localStorage.getItem("studio_theme") || "light");
-      applyAcademyPromo();
+      initAcademyUI();
 
       if (location.hash.startsWith("#client=")) {
         await loadClientPortal(location.hash.replace("#client=", "").trim());
@@ -714,10 +832,7 @@
       }
 
       auth.onAuthStateChanged(async (fbUser) => {
-        if (!fbUser) {
-          showView("auth-view");
-          return;
-        }
+        if (!fbUser) { showView("auth-view"); return; }
         await enterStudio(fbUser);
       });
     }
@@ -725,14 +840,10 @@
     async function enterStudio(fbUser) {
       const isAdmin = fbUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
       let profile = {
-        uid: fbUser.uid,
-        email: fbUser.email,
+        uid: fbUser.uid, email: fbUser.email,
         name: state.regMeta?.name || fbUser.displayName || "استوديو التصميم",
-        phone: state.regMeta?.phone || "",
-        specialty: state.regMeta?.specialty || "",
-        color: "#1D1D1F",
-        logo: "",
-        createdAt: new Date().toISOString()
+        phone: state.regMeta?.phone || "", specialty: state.regMeta?.specialty || "",
+        color: "#1D1D1F", logo: "", createdAt: new Date().toISOString()
       };
 
       state.user = profile;
@@ -743,11 +854,8 @@
 
       try {
         const snap = await db.collection("users").doc(fbUser.uid).get();
-        if (snap.exists) {
-          profile = { ...profile, ...snap.data() };
-        } else {
-          await db.collection("users").doc(fbUser.uid).set(profile);
-        }
+        if (snap.exists) profile = { ...profile, ...snap.data() };
+        else await db.collection("users").doc(fbUser.uid).set(profile);
         state.user = profile;
         state.regMeta = null;
         renderStudioBrand();
@@ -788,7 +896,6 @@
       const pass = $("auth-pass").value;
       const btn = $("auth-submit-btn");
       $("auth-msg").classList.add("hidden");
-
       btn.disabled = true;
       btn.textContent = state.isRegister ? "جاري إنشاء الحساب..." : "جاري الدخول...";
 
@@ -824,11 +931,7 @@
       }
     });
 
-    $("logout-btn").addEventListener("click", async () => {
-      await auth.signOut();
-      state.user = null;
-      showView("auth-view");
-    });
+    $("logout-btn").addEventListener("click", async () => { await auth.signOut(); state.user = null; showView("auth-view"); });
 
     document.querySelectorAll(".nav-pill").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -868,8 +971,7 @@
         p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo };
         await db.collection("projects").doc(p.id).set(p, { merge: true });
       }
-      renderStudioBrand();
-      toast("تم حفظ هوية الاستوديو");
+      renderStudioBrand(); toast("تم حفظ هوية الاستوديو");
     });
 
     // Kanban
@@ -879,9 +981,7 @@
       let active = 0, review = 0, done = 0, revenue = 0;
       state.projects.forEach(p => {
         revenue += Number(p.price || 0);
-        if (p.stage === "done") done++;
-        else if (p.stage === "review") review++;
-        else active++;
+        if (p.stage === "done") done++; else if (p.stage === "review") review++; else active++;
       });
       $("stat-active").textContent = active;
       $("stat-review").textContent = review;
@@ -937,10 +1037,8 @@
       };
       await db.collection("projects").doc(proj.id).set(proj);
       state.projects.unshift(proj);
-      $("new-project-form").reset();
-      $("new-project-modal").classList.add("hidden");
-      renderBoard();
-      toast("تمت إضافة المشروع");
+      $("new-project-form").reset(); $("new-project-modal").classList.add("hidden");
+      renderBoard(); toast("تمت إضافة المشروع");
     });
 
     function getActiveProject() { return state.projects.find(p => p.id === state.activeProjectId); }
@@ -965,8 +1063,7 @@
           <button class="btn btn-sm" onclick="removeTask(${i})">حذف</button>
         </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
 
-      $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `
-        <div class="swatch" onclick="copyText('${c}')"><span class="swatch-dot" style="background:${c}"></span><span>${c}</span><span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span></div>`).join("");
+      $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `<div class="swatch" onclick="copyText('${c}')"><span class="swatch-dot" style="background:${c}"></span><span>${c}</span><span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span></div>`).join("");
       $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm" onclick="removeFont(${i})">حذف</button></div>`).join("");
       $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>`).join("");
 
@@ -1091,9 +1188,7 @@
       const csv = "\uFEFF" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "studio-users.csv";
-      a.click();
+      a.href = URL.createObjectURL(blob); a.download = "studio-users.csv"; a.click();
     });
 
     // Client Portal
