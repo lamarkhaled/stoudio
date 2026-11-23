@@ -109,20 +109,17 @@
     .academy-credit button { background: none; border: none; color: var(--text); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
     /* Academy Details & Reviews Modal */
-    .course-hero {
-      background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 20px; margin-bottom: 18px;
-    }
+    .course-hero { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; }
     .feature-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 14px 0 18px; }
-    .feature-list li {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
-      padding: 10px 14px; font-size: 0.86rem; display: flex; align-items: center; gap: 8px;
-    }
-    .review-card {
-      background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 16px; margin-bottom: 10px;
-    }
+    .feature-list li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.86rem; display: flex; align-items: center; gap: 8px; }
+    .review-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
     .review-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-size: 0.84rem; }
+
+    /* Client Info Box inside Project Modal */
+    .client-info-box {
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px; margin-bottom: 18px;
+    }
 
     .topbar {
       position: sticky; top: 0; z-index: 40; background: var(--glass);
@@ -190,7 +187,7 @@
     th { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
 
     .toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 999px; font-size: 0.86rem; font-weight: 500; box-shadow: var(--shadow-lg); }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     @media (max-width: 720px) {
@@ -269,7 +266,6 @@
 
       <nav class="nav-pills">
         <button class="nav-pill active" data-section="board">لوحة المشاريع</button>
-        <button class="nav-pill" data-section="pricing">حاسبة التسعير</button>
         <button class="nav-pill" data-section="brand">هوية الاستوديو</button>
         <button class="nav-pill hidden" id="nav-admin" data-section="admin">قاعدة بيانات المسجلين</button>
       </nav>
@@ -320,40 +316,6 @@
         </div>
 
         <div class="kanban" id="kanban-board"></div>
-      </section>
-
-      <!-- PRICING CALCULATOR -->
-      <section id="section-pricing" class="hidden">
-        <div class="grid-2">
-          <div class="card">
-            <h2 style="font-size:1.15rem; margin-bottom:6px;">حاسبة التسعير السريعة</h2>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:18px;">احسب سعر مشروعك بدقة وانسخ عرض السعر جاهزاً للعميل.</p>
-            <div class="field"><label>اسم الخدمة / المشروع</label><input type="text" id="calc-service" class="input" value="تصميم هوية بصرية متكاملة" /></div>
-            <div class="grid-2" style="gap:10px;">
-              <div class="field"><label>السعر الأساسي (ر.س)</label><input type="number" id="calc-base" class="input" value="1500" min="0" /></div>
-              <div class="field"><label>عدد التعديلات المشمولة</label><input type="number" id="calc-revs" class="input" value="3" min="1" /></div>
-            </div>
-            <div class="grid-2" style="gap:10px;">
-              <div class="field"><label>ساعات إضافية (اختياري)</label><input type="number" id="calc-hours" class="input" value="0" min="0" /></div>
-              <div class="field"><label>سعر الساعة (ر.س)</label><input type="number" id="calc-rate" class="input" value="120" min="0" /></div>
-            </div>
-            <div class="field">
-              <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text);">
-                <input type="checkbox" id="calc-rush" /> إضافة رسوم تسليم مستعجل (+25%)
-              </label>
-            </div>
-            <div class="field"><label>مدة التنفيذ المتوقعة</label><input type="text" id="calc-duration" class="input" value="5 أيام عمل" /></div>
-          </div>
-
-          <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
-            <div>
-              <div style="font-size:0.84rem; color:var(--text-muted);">الإجمالي المقترح</div>
-              <div style="font-size:2.2rem; font-weight:700; margin:6px 0 18px;" id="calc-total">1,500 ر.س</div>
-              <div class="field"><label>نص عرض السعر الجاهز للواتساب</label><textarea id="calc-output" class="input" rows="8" readonly></textarea></div>
-            </div>
-            <button class="btn btn-primary" id="copy-quote-btn" style="width:100%;">نسخ عرض السعر</button>
-          </div>
-        </div>
       </section>
 
       <!-- BRANDING -->
@@ -515,9 +477,9 @@
     </div>
   </div>
 
-  <!-- MODAL: NEW PROJECT -->
+  <!-- MODAL: NEW PROJECT (WITH FULL CLIENT DETAILS) -->
   <div id="new-project-modal" class="modal-backdrop hidden">
-    <div class="modal" style="max-width:480px;">
+    <div class="modal" style="max-width:520px;">
       <div class="modal-head">
         <h3 style="font-size:1.1rem;">إنشاء مشروع جديد</h3>
         <button class="btn btn-sm" data-close-modal="new-project-modal">إغلاق</button>
@@ -525,7 +487,11 @@
       <form id="new-project-form">
         <div class="field"><label>اسم المشروع</label><input type="text" id="np-title" class="input" placeholder="مثال: هوية متجر عود" required /></div>
         <div class="field"><label>اسم العميل</label><input type="text" id="np-client" class="input" placeholder="اسم العميل أو البراند" required /></div>
-        <div class="grid-2" style="gap:10px;">
+        <div class="grid-2">
+          <div class="field"><label>واتساب العميل</label><input type="tel" id="np-client-phone" class="input" placeholder="05XXXXXXXX" /></div>
+          <div class="field"><label>إيميل العميل</label><input type="email" id="np-client-email" class="input" placeholder="client@example.com" /></div>
+        </div>
+        <div class="grid-2">
           <div class="field"><label>قيمة المشروع (ر.س)</label><input type="number" id="np-price" class="input" value="1000" min="0" /></div>
           <div class="field"><label>تاريخ التسليم</label><input type="date" id="np-due" class="input" /></div>
         </div>
@@ -551,7 +517,7 @@
       </div>
 
       <div class="tabs">
-        <button class="tab-btn active" data-pm-tab="overview">المهام والتفاصيل</button>
+        <button class="tab-btn active" data-pm-tab="overview">المهام وبيانات العميل</button>
         <button class="tab-btn" data-pm-tab="mood">مساحة المزاج</button>
         <button class="tab-btn" data-pm-tab="drafts">المسودات والتعليقات</button>
         <button class="tab-btn" data-pm-tab="vault">خزنة الملفات والعقد</button>
@@ -559,6 +525,22 @@
       </div>
 
       <div id="pm-tab-overview">
+        <!-- FULL CLIENT DETAILS CARD -->
+        <div class="client-info-box">
+          <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+            <strong style="font-size:0.9rem;">بيانات العميل</strong>
+            <div class="row">
+              <a id="pm-wa-quick" href="#" target="_blank" class="btn btn-sm hidden">مراسلة واتساب</a>
+              <button type="button" id="pm-save-client" class="btn btn-primary btn-sm">حفظ بيانات العميل</button>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field" style="margin-bottom:0;"><label>الاسم</label><input type="text" id="pm-c-name" class="input" /></div>
+            <div class="field" style="margin-bottom:0;"><label>الواتساب</label><input type="tel" id="pm-c-phone" class="input" placeholder="05XXXXXXXX" /></div>
+            <div class="field" style="margin-bottom:0;"><label>البريد الإلكتروني</label><input type="email" id="pm-c-email" class="input" placeholder="client@example.com" /></div>
+          </div>
+        </div>
+
         <div class="grid-2" style="margin-bottom:16px;">
           <div class="field"><label>المرحلة الحالية</label><select id="pm-stage" class="input"></select></div>
           <div class="field">
@@ -658,8 +640,8 @@
       courseDesc: "دورة تطبيقية شاملة تأخذك من الأساسيات وحتى بناء معرض أعمال قوي، تسعير خدماتك بثقة، وجذب عملاء يدفعون القيمة الحقيقية لشغلك.",
       coursePrice: "السعر: 299 ريال (وصول مدى الحياة)",
       courseMeta: "مسجّلة بالكامل + تحديثات مجانية",
-      registerUrl: "https://sayan.pro", // رابط صفحة التسجيل في أكاديميتك
-      whatsappUrl: "https://wa.me/966500000000", // رابط الواتساب الخاص بك
+      registerUrl: "https://sayan.pro",
+      whatsappUrl: "https://wa.me/966500000000",
       features: [
         "تطبيق عملي خطوة بخطوة على مشاريع حقيقية",
         "قوالب جاهزة للعقود وعروض الأسعار",
@@ -712,9 +694,13 @@
       window._t = setTimeout(() => el.classList.add("hidden"), 3000);
     };
 
-    /****************************************************************
-     * 3. نافذة الأكاديمية والدورة + ردود العملاء
-     ****************************************************************/
+    function formatWaLink(phone) {
+      const digits = String(phone || "").replace(/\D/g, "");
+      if (!digits) return "";
+      const intl = digits.startsWith("05") ? "966" + digits.slice(1) : digits;
+      return "https://wa.me/" + intl;
+    }
+
     function initAcademyUI() {
       $("auth-academy-name").textContent = ACADEMY_CONFIG.name;
       $("banner-tag").textContent = ACADEMY_CONFIG.tag;
@@ -748,11 +734,8 @@
       let reviews = [...ACADEMY_CONFIG.defaultReviews];
       try {
         const snap = await db.collection("academy_reviews").orderBy("createdAt", "desc").get();
-        const dbReviews = snap.docs.map(d => d.data());
-        reviews = [...dbReviews, ...reviews];
-      } catch (e) {
-        // يعرض الردود الافتراضية في حال لم تُنشأ المجموعة بعد
-      }
+        reviews = [...snap.docs.map(d => d.data()), ...reviews];
+      } catch (e) {}
       $("am-reviews-list").innerHTML = reviews.map(r => `
         <div class="review-card">
           <div class="review-head">
@@ -779,7 +762,7 @@
         toast("شكراً لك، تم نشر ردك بنجاح");
         await loadAcademyReviews();
       } catch (err) {
-        toast("تعذر إرسال الرد: تأكدي من صلاحيات Firestore");
+        toast("تعذر إرسال الرد: تأكدي من نشر قواعد Firestore");
       }
     });
 
@@ -870,7 +853,6 @@
       }
 
       renderBoard();
-      updatePricingCalc();
     }
 
     function setAuthMsg(text, isSuccess = false) {
@@ -938,7 +920,7 @@
         document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         const target = btn.dataset.section;
-        ["board", "pricing", "brand", "admin"].forEach(s => $("section-" + s).classList.toggle("hidden", s !== target));
+        ["board", "brand", "admin"].forEach(s => $("section-" + s).classList.toggle("hidden", s !== target));
         if (target === "admin") renderAdminPanel();
       });
     });
@@ -1015,7 +997,7 @@
           card.innerHTML = `
             ${p.draft ? `<img class="project-thumb" src="${p.draft}" alt="مسودة"/>` : ""}
             <div class="project-title">${esc(p.title)}</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">${esc(p.client)}</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div>
             <div class="project-meta">
               <span>${p.due || "بدون تاريخ"}</span>
               <span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>
@@ -1030,10 +1012,17 @@
     $("new-project-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const proj = {
-        id: uid(), ownerUid: state.user.uid, title: $("np-title").value.trim(), client: $("np-client").value.trim(),
-        price: Number($("np-price").value || 0), due: $("np-due").value, maxRevisions: Number($("np-max-rev").value || 3),
-        revisionsUsed: 0, stage: "pending", approved: false, tasks: [], colors: [], fonts: [], links: [],
-        draft: "", comments: [], vault: [], brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
+        id: uid(), ownerUid: state.user.uid,
+        title: $("np-title").value.trim(),
+        client: $("np-client").value.trim(),
+        clientPhone: $("np-client-phone").value.trim(),
+        clientEmail: $("np-client-email").value.trim(),
+        price: Number($("np-price").value || 0),
+        due: $("np-due").value,
+        maxRevisions: Number($("np-max-rev").value || 3),
+        revisionsUsed: 0, stage: "pending", approved: false,
+        tasks: [], colors: [], fonts: [], links: [], draft: "", comments: [], vault: [],
+        brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
       };
       await db.collection("projects").doc(proj.id).set(proj);
       state.projects.unshift(proj);
@@ -1054,6 +1043,18 @@
 
     function renderProjectDetails() {
       const p = getActiveProject(); if (!p) return;
+      $("pm-c-name").value = p.client || "";
+      $("pm-c-phone").value = p.clientPhone || "";
+      $("pm-c-email").value = p.clientEmail || "";
+
+      const waUrl = formatWaLink(p.clientPhone);
+      if (waUrl) {
+        $("pm-wa-quick").href = waUrl;
+        $("pm-wa-quick").classList.remove("hidden");
+      } else {
+        $("pm-wa-quick").classList.add("hidden");
+      }
+
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
       $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `
         <div class="list-item">
@@ -1082,6 +1083,16 @@
       await db.collection("projects").doc(p.id).set(p, { merge: true });
       renderProjectDetails(); renderBoard();
     }
+
+    $("pm-save-client").addEventListener("click", async () => {
+      const p = getActiveProject(); if (!p) return;
+      p.client = $("pm-c-name").value.trim() || p.client;
+      p.clientPhone = $("pm-c-phone").value.trim();
+      p.clientEmail = $("pm-c-email").value.trim();
+      $("pm-client").textContent = `العميل: ${p.client} — ${Number(p.price || 0).toLocaleString("en-US")} ر.س`;
+      await saveActiveProject();
+      toast("تم حفظ بيانات العميل");
+    });
 
     window.toggleTask = async (i) => { const p = getActiveProject(); p.tasks[i].done = !p.tasks[i].done; await saveActiveProject(); };
     window.removeTask = async (i) => { getActiveProject().tasks.splice(i, 1); await saveActiveProject(); };
@@ -1125,19 +1136,6 @@
     }
     document.querySelectorAll("[data-msg-tpl]").forEach(b => b.addEventListener("click", () => fillClientMsg(b.dataset.msgTpl)));
     $("pm-msg-copy").addEventListener("click", () => { navigator.clipboard.writeText($("pm-msg-box").value); toast("تم نسخ الرسالة"); });
-
-    function updatePricingCalc() {
-      const service = $("calc-service").value || "خدمة تصميم";
-      const base = Number($("calc-base").value || 0), revs = Number($("calc-revs").value || 3);
-      const hours = Number($("calc-hours").value || 0), rate = Number($("calc-rate").value || 0);
-      const rush = $("calc-rush").checked, duration = $("calc-duration").value || "5 أيام عمل";
-      let total = base + (hours * rate);
-      if (rush) total = Math.round(total * 1.25);
-      $("calc-total").textContent = total.toLocaleString("en-US") + " ر.س";
-      $("calc-output").value = `عرض سعر — ${state.user?.name || "استوديو التصميم"}\n————————————\nالخدمة: ${service}\nمدة التنفيذ: ${duration}\nالتعديلات المشمولة: ${revs} تعديلات${rush ? "\nملاحظة: يشمل أولوية التسليم المستعجل" : ""}\n\nالتكلفة الإجمالية: ${total.toLocaleString("en-US")} ريال سعودي\n\nيسعدني البدء فور تأكيدك.`;
-    }
-    ["calc-service","calc-base","calc-revs","calc-hours","calc-rate","calc-rush","calc-duration"].forEach(id => { $(id).addEventListener("input", updatePricingCalc); $(id).addEventListener("change", updatePricingCalc); });
-    $("copy-quote-btn").addEventListener("click", () => { navigator.clipboard.writeText($("calc-output").value); toast("تم نسخ عرض السعر"); });
 
     // Focus Timer
     let timerSec = 25 * 60, timerRunning = false, timerInt = null;
