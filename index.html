@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استوديو المصمم | مساحة عمل إبداعية</title>
+  <title>استوديو المصمم | مساحة عمل إبداعية مجانية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Firebase Compat SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -28,7 +27,7 @@
       --radius-sm: 10px;
       --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
       --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
-      --glass: rgba(255, 255, 255, 0.8);
+      --glass: rgba(255, 255, 255, 0.82);
     }
 
     [data-theme="dark"] {
@@ -41,7 +40,7 @@
       --accent-soft: rgba(255, 255, 255, 0.1);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.65);
-      --glass: rgba(22, 22, 25, 0.8);
+      --glass: rgba(22, 22, 25, 0.82);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,19 +58,10 @@
     .hidden { display: none !important; }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 18px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; transition: all 0.18s ease;
     }
     .btn:hover:not(:disabled) { transform: translateY(-1px); background: var(--surface-2); }
     .btn:disabled { opacity: 0.55; cursor: not-allowed; }
@@ -84,81 +74,40 @@
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
     .field label { font-size: 0.83rem; font-weight: 500; color: var(--text-muted); }
     .input, select.input, textarea.input {
-      width: 100%;
-      padding: 11px 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color 0.18s;
+      width: 100%; padding: 11px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font-size: 0.92rem; outline: none; transition: border-color 0.18s;
     }
     .input:focus { border-color: var(--accent); }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .center-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .auth-box { width: 100%; max-width: 430px; padding: 36px 32px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+    .center-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .auth-box { width: 100%; max-width: 440px; padding: 34px 30px; }
     .brand-mark {
-      width: 46px; height: 46px; border-radius: 13px;
-      background: var(--accent); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px; font-weight: 700; font-size: 1.1rem; overflow: hidden;
+      width: 46px; height: 46px; border-radius: 13px; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+      font-weight: 700; font-size: 1.1rem; overflow: hidden;
     }
-    .brand-mark img { width: 100%; height: 100%; object-fit: cover; }
-    .auth-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
-    .auth-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 22px; }
-    .alert {
-      padding: 10px 14px; border-radius: var(--radius-sm);
-      font-size: 0.85rem; margin-bottom: 14px;
-      background: var(--surface-2); border: 1px solid var(--border);
-    }
+    .auth-title { font-size: 1.42rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .auth-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+    .alert { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; margin-bottom: 14px; background: var(--surface-2); border: 1px solid var(--border); }
     .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.35); background: rgba(217, 48, 37, 0.06); }
     .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.35); background: rgba(30, 142, 62, 0.06); }
 
-    .spinner {
-      width: 34px; height: 34px; border: 3px solid var(--border);
-      border-top-color: var(--accent); border-radius: 50%;
-      animation: spin 0.7s linear infinite; margin: 0 auto 14px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
     .topbar {
-      position: sticky; top: 0; z-index: 40;
-      background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      position: sticky; top: 0; z-index: 40; background: var(--glass);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border); padding: 12px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
     .topbar-brand { display: flex; align-items: center; gap: 12px; }
     .topbar-logo {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: var(--accent); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; overflow: hidden; flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: 10px; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; overflow: hidden; flex-shrink: 0;
     }
     .topbar-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .nav-pills {
-      display: flex; align-items: center; gap: 6px;
-      background: var(--surface-2); padding: 4px; border-radius: 999px;
-      border: 1px solid var(--border); flex-wrap: wrap;
-    }
-    .nav-pill {
-      padding: 7px 15px; border-radius: 999px; border: none; background: transparent;
-      color: var(--text-muted); font-size: 0.86rem; font-weight: 500; cursor: pointer; transition: all 0.18s;
-    }
+    .nav-pills { display: flex; align-items: center; gap: 6px; background: var(--surface-2); padding: 4px; border-radius: 999px; border: 1px solid var(--border); flex-wrap: wrap; }
+    .nav-pill { padding: 7px 15px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted); font-size: 0.86rem; font-weight: 500; cursor: pointer; transition: all 0.18s; }
     .nav-pill.active { background: var(--surface); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
     .container { max-width: 1380px; margin: 0 auto; padding: 26px 24px 100px; }
@@ -169,17 +118,11 @@
 
     .board-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
     .kanban { display: grid; grid-template-columns: repeat(5, minmax(245px, 1fr)); gap: 14px; overflow-x: auto; padding-bottom: 12px; }
-    .kanban-col {
-      background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px;
-    }
+    .kanban-col { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px; }
     .kanban-col.drag-over { border-color: var(--accent); background: var(--accent-soft); }
     .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px; font-size: 0.88rem; font-weight: 600; }
     .col-count { font-size: 0.76rem; padding: 2px 9px; border-radius: 999px; background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
-    .project-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 13px;
-      padding: 13px; cursor: pointer; transition: transform 0.16s; box-shadow: var(--shadow);
-    }
+    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 13px; cursor: pointer; transition: transform 0.16s; box-shadow: var(--shadow); }
     .project-card:hover { transform: translateY(-2px); }
     .project-thumb { width: 100%; height: 115px; border-radius: 9px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
     .project-title { font-size: 0.94rem; font-weight: 600; margin-bottom: 4px; }
@@ -187,14 +130,8 @@
     .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 500; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); background: rgba(30, 142, 62, 0.08); }
 
-    .modal-backdrop {
-      position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
-    .modal {
-      width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-lg);
-    }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal { width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-lg); }
     .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border); gap: 12px; }
     .tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 18px; overflow-x: auto; }
     .tab-btn { padding: 9px 14px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 0.88rem; font-weight: 500; cursor: pointer; white-space: nowrap; }
@@ -207,18 +144,9 @@
 
     .draft-stage { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
     .draft-stage img { width: 100%; display: block; max-height: 520px; object-fit: contain; background: #111; }
-    .pin {
-      position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%;
-      background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); cursor: pointer;
-    }
+    .pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); cursor: pointer; }
 
-    .timer-pill {
-      position: fixed; bottom: 20px; left: 20px; z-index: 50;
-      background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px;
-      display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-lg);
-    }
+    .timer-pill { position: fixed; bottom: 20px; left: 20px; z-index: 50; background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-lg); }
     .timer-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1rem; min-width: 54px; text-align: center; }
 
     .stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 22px 0; }
@@ -231,15 +159,9 @@
     th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); }
     th { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
 
-    .toast {
-      position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120;
-      background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 999px;
-      font-size: 0.86rem; font-weight: 500; box-shadow: var(--shadow-lg);
-    }
-
+    .toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 999px; font-size: 0.86rem; font-weight: 500; box-shadow: var(--shadow-lg); }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .mode-pill { font-size: 0.74rem; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); }
 
     @media (max-width: 720px) {
       .stepper { grid-template-columns: 1fr; }
@@ -251,30 +173,33 @@
 
   <div id="toast" class="toast hidden"></div>
 
-  <!-- 0. LOADING / ERROR VIEW (يمنع الشاشة البيضاء نهائياً) -->
-  <section id="loading-view" class="center-screen">
-    <div class="card auth-box" style="text-align:center;">
-      <div id="loading-spinner" class="spinner"></div>
-      <h2 id="loading-title" style="font-size:1.1rem; margin-bottom:8px;">جاري تحميل الاستوديو...</h2>
-      <p id="loading-error-text" class="alert alert-error hidden" style="text-align:right; direction:ltr; font-size:0.8rem; word-break:break-word;"></p>
-      <div id="loading-actions" class="hidden" style="margin-top:14px;">
-        <button type="button" id="loading-retry-btn" class="btn btn-primary btn-sm">إعادة المحاولة</button>
-        <button type="button" id="loading-logout-btn" class="btn btn-sm">تسجيل الخروج</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1. AUTH VIEW -->
-  <section id="auth-view" class="center-screen hidden">
+  <!-- 1. AUTH VIEW (تظهر افتراضياً بدون شاشة بيضاء) -->
+  <section id="auth-view" class="center-screen">
     <div class="card auth-box">
       <div class="brand-mark">س</div>
-      <h1 class="auth-title" id="auth-heading">تسجيل الدخول للاستوديو</h1>
-      <p class="auth-sub" id="auth-subheading">مساحة عمل إبداعية لإدارة مشاريعك وتجربة عملائك باحترافية.</p>
+      <h1 class="auth-title" id="auth-heading">استوديو المصمم الرقمي</h1>
+      <p class="auth-sub" id="auth-subheading">مساحة مجانية لإدارة مشاريعك ومشاركة رابط المتابعة مع عملائك باحترافية.</p>
       <div id="auth-msg" class="alert hidden"></div>
       <form id="auth-form">
-        <div class="field hidden" id="auth-name-wrap">
-          <label>اسم المصمم / الاستوديو</label>
-          <input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" />
+        <div id="register-fields" class="hidden">
+          <div class="field">
+            <label>اسم المصمم أو الاستوديو</label>
+            <input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" />
+          </div>
+          <div class="field">
+            <label>رقم الجوال (واتساب)</label>
+            <input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" />
+          </div>
+          <div class="field">
+            <label>مجال التصميم</label>
+            <select id="auth-specialty" class="input">
+              <option value="هوية بصرية وشعارات">هوية بصرية وشعارات</option>
+              <option value="تصميم سوشيال ميديا">تصميم سوشيال ميديا</option>
+              <option value="تصميم مواقع ومتاجر">تصميم مواقع ومتاجر</option>
+              <option value="موشن جرافيك">موشن جرافيك</option>
+              <option value="أخرى">أخرى</option>
+            </select>
+          </div>
         </div>
         <div class="field">
           <label>البريد الإلكتروني</label>
@@ -291,37 +216,19 @@
       </div>
       <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
         <span id="auth-toggle-text">ما عندك حساب؟</span>
-        <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب جديد</button>
+        <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:600;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
       </div>
     </div>
   </section>
 
-  <!-- 2. PENDING ACTIVATION VIEW -->
-  <section id="pending-view" class="center-screen hidden">
-    <div class="card auth-box" style="text-align:center;">
-      <div class="brand-mark" style="margin:0 auto 18px;">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      </div>
-      <h2 class="auth-title">تم تسجيل حسابك بنجاح</h2>
-      <p class="auth-sub">حسابك الآن بانتظار التفعيل. أدخل كود التفعيل الذي حصلت عليه عند الشراء لفتح الاستوديو فوراً، أو انتظر موافقة الإدارة.</p>
-      <div id="pending-msg" class="alert hidden"></div>
-      <div class="field" style="text-align:right;">
-        <label>كود التفعيل السريع</label>
-        <input type="text" id="pending-code-input" class="input" placeholder="مثال: STUDIO-A1B2-C3D4" style="text-transform:uppercase; text-align:center; letter-spacing:1px;" />
-      </div>
-      <button type="button" id="activate-code-btn" class="btn btn-primary" style="width:100%; margin-bottom:10px;">تفعيل الحساب الآن</button>
-      <button type="button" id="pending-logout-btn" class="btn" style="width:100%;">تسجيل الخروج</button>
-    </div>
-  </section>
-
-  <!-- 3. MAIN DESIGNER STUDIO APP -->
+  <!-- 2. MAIN DESIGNER STUDIO APP -->
   <div id="app-view" class="hidden">
     <header class="topbar">
       <div class="topbar-brand">
         <div class="topbar-logo" id="studio-logo-wrap">س</div>
         <div>
           <div style="font-weight:700; font-size:0.98rem;" id="studio-name-display">استوديو التصميم</div>
-          <span class="mode-pill" id="sync-mode-badge">متصل بـ Firebase</span>
+          <div style="font-size:0.75rem; color:var(--text-muted);" id="user-email-display"></div>
         </div>
       </div>
 
@@ -329,7 +236,7 @@
         <button class="nav-pill active" data-section="board">لوحة المشاريع</button>
         <button class="nav-pill" data-section="pricing">حاسبة التسعير</button>
         <button class="nav-pill" data-section="brand">هوية الاستوديو</button>
-        <button class="nav-pill hidden" id="nav-admin" data-section="admin">لوحة الإدارة</button>
+        <button class="nav-pill hidden" id="nav-admin" data-section="admin">قاعدة بيانات المسجلين</button>
       </nav>
 
       <div class="row">
@@ -341,6 +248,9 @@
     </header>
 
     <main class="container">
+      <div id="db-warning-banner" class="alert alert-error hidden"></div>
+
+      <!-- BOARD -->
       <section id="section-board">
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-label">مشاريع قيد العمل</div><div class="stat-value" id="stat-active">0</div></div>
@@ -363,6 +273,7 @@
         <div class="kanban" id="kanban-board"></div>
       </section>
 
+      <!-- PRICING CALCULATOR -->
       <section id="section-pricing" class="hidden">
         <div class="grid-2">
           <div class="card">
@@ -396,6 +307,7 @@
         </div>
       </section>
 
+      <!-- BRANDING -->
       <section id="section-brand" class="hidden">
         <div class="card" style="max-width:600px;">
           <h2 style="font-size:1.15rem; margin-bottom:6px;">تخصيص هوية الاستوديو</h2>
@@ -413,25 +325,29 @@
         </div>
       </section>
 
+      <!-- ADMIN: COLLECTED LEADS / USERS -->
       <section id="section-admin" class="hidden">
-        <div class="grid-2" style="margin-bottom:20px;">
-          <div class="card">
-            <h3 style="font-size:1.05rem; margin-bottom:12px;">توليد كود تفعيل جديد</h3>
-            <div class="row">
-              <input type="text" id="custom-code-input" class="input" placeholder="كود مخصص (اختياري)" style="flex:1;" />
-              <button class="btn btn-primary" id="gen-code-btn">إنشاء كود</button>
+        <div class="card">
+          <div class="board-header" style="margin-bottom:16px;">
+            <div>
+              <h2 style="font-size:1.15rem;">قاعدة بيانات المصممين المسجلين</h2>
+              <p style="font-size:0.85rem; color:var(--text-muted);">إجمالي المسجلين: <strong id="admin-total-users">0</strong></p>
             </div>
-            <div id="admin-codes-list" style="margin-top:16px;"></div>
+            <button class="btn btn-primary btn-sm" id="export-csv-btn">تصدير البيانات (Excel / CSV)</button>
           </div>
-
-          <div class="card">
-            <h3 style="font-size:1.05rem; margin-bottom:12px;">المصممون المسجلون</h3>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>الاسم / البريد</th><th>الحالة</th><th>إجراء</th></tr></thead>
-                <tbody id="admin-users-tbody"></tbody>
-              </table>
-            </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>الاسم / الاستوديو</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>رقم الواتساب</th>
+                  <th>التخصص</th>
+                  <th>تاريخ التسجيل</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody"></tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -447,7 +363,7 @@
     </div>
   </div>
 
-  <!-- 4. CLIENT PORTAL VIEW -->
+  <!-- 3. CLIENT PORTAL VIEW -->
   <div id="client-view" class="hidden">
     <header class="topbar">
       <div class="topbar-brand">
@@ -491,7 +407,7 @@
 
         <div style="display:flex; flex-direction:column; gap:16px;">
           <div class="card"><h3 style="font-size:1.02rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3><div id="client-vault-list"></div></div>
-          <div class="card" id="client-final-card">
+          <div class="card">
             <h3 style="font-size:1.02rem; margin-bottom:8px;">الملفات النهائية</h3>
             <div id="client-final-box" style="font-size:0.88rem; color:var(--text-muted);">تُفتح الملفات النهائية تلقائياً فور ضغطك على زر «اعتماد التصميم النهائي».</div>
           </div>
@@ -654,7 +570,7 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    let state = { user: null, projects: [], activeProjectId: null, isRegister: false, pendingName: "" };
+    let state = { user: null, projects: [], allUsers: [], activeProjectId: null, isRegister: false, regMeta: null };
 
     const $ = (id) => document.getElementById(id);
     const esc = (s = "") => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
@@ -668,32 +584,20 @@
     };
 
     function showView(name) {
-      ["loading-view", "auth-view", "pending-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
+      ["auth-view", "app-view", "client-view"].forEach(v => $(v).classList.add("hidden"));
       $(name).classList.remove("hidden");
-    }
-
-    function showFatalError(title, err) {
-      showView("loading-view");
-      $("loading-spinner").classList.add("hidden");
-      $("loading-title").textContent = title;
-      $("loading-error-text").textContent = err?.message || String(err);
-      $("loading-error-text").classList.remove("hidden");
-      $("loading-actions").classList.remove("hidden");
     }
 
     function translateAuthError(err) {
       const code = err?.code || "";
-      if (code === "auth/email-already-in-use") return "هذا البريد الإلكتروني مسجّل مسبقاً، جرب تسجيل الدخول.";
+      if (code === "auth/email-already-in-use") return "هذا البريد مسجّل مسبقاً، اضغط تسجيل الدخول.";
       if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
-      if (code === "auth/weak-password") return "كلمة المرور ضعيفة، يجب أن تكون 6 خانات على الأقل.";
+      if (code === "auth/weak-password") return "كلمة المرور يجب أن تكون 6 خانات على الأقل.";
       if (code === "auth/invalid-email") return "صيغة البريد الإلكتروني غير صحيحة.";
-      if (code === "auth/operation-not-allowed") return "تسجيل الدخول بالبريد غير مفعّل في إعدادات Firebase.";
-      return err?.message || "حدث خطأ غير متوقع، حاول مرة أخرى.";
+      return err?.message || "حدث خطأ، حاول مرة أخرى.";
     }
 
-    function applyBrandColor(hex) {
-      document.documentElement.style.setProperty("--accent", hex || "#1D1D1F");
-    }
+    function applyBrandColor(hex) { document.documentElement.style.setProperty("--accent", hex || "#1D1D1F"); }
 
     function compressImage(file, maxW = 1000) {
       return new Promise((resolve) => {
@@ -703,8 +607,7 @@
           img.onload = () => {
             const scale = Math.min(1, maxW / img.width);
             const c = document.createElement("canvas");
-            c.width = img.width * scale;
-            c.height = img.height * scale;
+            c.width = img.width * scale; c.height = img.height * scale;
             c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
             resolve(c.toDataURL("image/jpeg", 0.72));
           };
@@ -714,60 +617,11 @@
       });
     }
 
-    const Store = {
-      async getUser(uidVal) {
-        const snap = await db.collection("users").doc(uidVal).get();
-        return snap.exists ? snap.data() : null;
-      },
-      async saveUser(uidVal, data) {
-        await db.collection("users").doc(uidVal).set(data, { merge: true });
-      },
-      async getAllUsers() {
-        const snap = await db.collection("users").get();
-        return snap.docs.map(d => ({ uid: d.id, ...d.data() }));
-      },
-      async getCodes() {
-        const snap = await db.collection("codes").get();
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      },
-      async addCode(codeObj) {
-        await db.collection("codes").doc(codeObj.code).set(codeObj);
-      },
-      async deleteCode(codeStr) {
-        await db.collection("codes").doc(codeStr).delete();
-      },
-      async redeemCode(codeStr, userUid, email) {
-        const clean = codeStr.trim().toUpperCase();
-        const ref = db.collection("codes").doc(clean);
-        const snap = await ref.get();
-        if (!snap.exists || snap.data().used) return false;
-        await ref.update({ used: true, usedBy: email });
-        await db.collection("users").doc(userUid).update({ status: "active" });
-        return true;
-      },
-      async getProjects(ownerUid) {
-        const snap = await db.collection("projects").where("ownerUid", "==", ownerUid).get();
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      },
-      async getProjectById(id) {
-        const snap = await db.collection("projects").doc(id).get();
-        return snap.exists ? { id: snap.id, ...snap.data() } : null;
-      },
-      async saveProject(project) {
-        await db.collection("projects").doc(project.id).set(project, { merge: true });
-      },
-      async deleteProject(id) {
-        await db.collection("projects").doc(id).delete();
-      }
-    };
-
     async function init() {
-      const savedTheme = localStorage.getItem("studio_theme") || "light";
-      document.documentElement.setAttribute("data-theme", savedTheme);
+      document.documentElement.setAttribute("data-theme", localStorage.getItem("studio_theme") || "light");
 
       if (location.hash.startsWith("#client=")) {
-        const pid = location.hash.replace("#client=", "").trim();
-        await loadClientPortal(pid);
+        await loadClientPortal(location.hash.replace("#client=", "").trim());
         return;
       }
 
@@ -776,52 +630,54 @@
           showView("auth-view");
           return;
         }
-        try {
-          await handleSignedInUser(fbUser.uid, fbUser.email, state.pendingName || fbUser.displayName);
-          state.pendingName = "";
-        } catch (err) {
-          showFatalError("تعذر الاتصال بقاعدة البيانات (Firestore)", err);
-        }
+        await enterStudio(fbUser);
       });
     }
 
-    async function handleSignedInUser(userUid, email, nameFallback) {
-      const isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-      let profile = await Store.getUser(userUid);
-      if (!profile) {
-        profile = {
-          uid: userUid,
-          email,
-          name: nameFallback || "استوديو التصميم",
-          color: "#1D1D1F",
-          logo: "",
-          status: isAdmin ? "active" : "pending",
-          role: isAdmin ? "admin" : "designer",
-          createdAt: new Date().toISOString()
-        };
-        await Store.saveUser(userUid, profile);
-      } else if (isAdmin && (profile.status !== "active" || profile.role !== "admin")) {
-        profile.status = "active";
-        profile.role = "admin";
-        await Store.saveUser(userUid, profile);
-      }
+    async function enterStudio(fbUser) {
+      const isAdmin = fbUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      let profile = {
+        uid: fbUser.uid,
+        email: fbUser.email,
+        name: state.regMeta?.name || fbUser.displayName || "استوديو التصميم",
+        phone: state.regMeta?.phone || "",
+        specialty: state.regMeta?.specialty || "",
+        color: "#1D1D1F",
+        logo: "",
+        createdAt: new Date().toISOString()
+      };
 
+      // فتح الواجهة فوراً بدون تعليق
       state.user = profile;
-      if (profile.status !== "active") {
-        showView("pending-view");
-        return;
+      showView("app-view");
+      $("user-email-display").textContent = fbUser.email;
+      $("nav-admin").classList.toggle("hidden", !isAdmin);
+      renderStudioBrand();
+
+      try {
+        const snap = await db.collection("users").doc(fbUser.uid).get();
+        if (snap.exists) {
+          profile = { ...profile, ...snap.data() };
+        } else {
+          await db.collection("users").doc(fbUser.uid).set(profile);
+        }
+        state.user = profile;
+        state.regMeta = null;
+        renderStudioBrand();
+
+        const pSnap = await db.collection("projects").where("ownerUid", "==", fbUser.uid).get();
+        state.projects = pSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        $("db-warning-banner").classList.add("hidden");
+      } catch (err) {
+        $("db-warning-banner").textContent = "تنبيه قاعدة البيانات (Firestore): " + err.message;
+        $("db-warning-banner").classList.remove("hidden");
+        state.projects = [];
       }
 
-      showView("app-view");
-      renderStudioBrand();
-      $("nav-admin").classList.toggle("hidden", profile.role !== "admin");
-
-      state.projects = await Store.getProjects(profile.uid);
       renderBoard();
       updatePricingCalc();
     }
 
-    // Auth UI
     function setAuthMsg(text, isSuccess = false) {
       const el = $("auth-msg");
       el.textContent = text;
@@ -831,11 +687,11 @@
 
     $("auth-mode-toggle").addEventListener("click", () => {
       state.isRegister = !state.isRegister;
-      $("auth-name-wrap").classList.toggle("hidden", !state.isRegister);
-      $("auth-heading").textContent = state.isRegister ? "إنشاء حساب مصمم جديد" : "تسجيل الدخول للاستوديو";
-      $("auth-submit-btn").textContent = state.isRegister ? "إنشاء الحساب" : "دخول";
+      $("register-fields").classList.toggle("hidden", !state.isRegister);
+      $("auth-heading").textContent = state.isRegister ? "إنشاء حساب مجاني" : "استوديو المصمم الرقمي";
+      $("auth-submit-btn").textContent = state.isRegister ? "إنشاء الحساب والدخول" : "دخول";
       $("auth-toggle-text").textContent = state.isRegister ? "عندك حساب مسبقاً؟" : "ما عندك حساب؟";
-      $("auth-mode-toggle").textContent = state.isRegister ? "تسجيل الدخول" : "إنشاء حساب جديد";
+      $("auth-mode-toggle").textContent = state.isRegister ? "تسجيل الدخول" : "إنشاء حساب مجاني";
       $("auth-msg").classList.add("hidden");
     });
 
@@ -843,7 +699,6 @@
       e.preventDefault();
       const email = $("auth-email").value.trim().toLowerCase();
       const pass = $("auth-pass").value;
-      const name = $("auth-name").value.trim() || "استوديو التصميم";
       const btn = $("auth-submit-btn");
       $("auth-msg").classList.add("hidden");
 
@@ -852,10 +707,13 @@
 
       try {
         if (state.isRegister) {
-          state.pendingName = name;
+          const name = $("auth-name").value.trim() || "استوديو التصميم";
+          const phone = $("auth-phone").value.trim();
+          const specialty = $("auth-specialty").value;
+          state.regMeta = { name, phone, specialty };
           const cred = await auth.createUserWithEmailAndPassword(email, pass);
           await cred.user.updateProfile({ displayName: name });
-          toast("تم إنشاء حسابك بنجاح");
+          toast("تم إنشاء حسابك بنجاح، أهلاً بك!");
         } else {
           await auth.signInWithEmailAndPassword(email, pass);
           toast("تم تسجيل الدخول بنجاح");
@@ -864,49 +722,27 @@
         setAuthMsg(translateAuthError(err), false);
       } finally {
         btn.disabled = false;
-        btn.textContent = state.isRegister ? "إنشاء الحساب" : "دخول";
+        btn.textContent = state.isRegister ? "إنشاء الحساب والدخول" : "دخول";
       }
     });
 
     $("forgot-pass-btn").addEventListener("click", async () => {
       const email = $("auth-email").value.trim();
-      if (!email) return setAuthMsg("اكتب بريدك الإلكتروني في الخانة أعلاه أولاً ثم اضغط نسيت كلمة المرور.", false);
+      if (!email) return setAuthMsg("اكتب بريدك الإلكتروني أولاً ثم اضغط نسيت كلمة المرور.", false);
       try {
         await auth.sendPasswordResetEmail(email);
-        setAuthMsg("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.", true);
+        setAuthMsg("تم إرسال رابط استعادة كلمة المرور لبريدك.", true);
       } catch (err) {
         setAuthMsg(translateAuthError(err), false);
       }
     });
 
-    $("activate-code-btn").addEventListener("click", async () => {
-      const code = $("pending-code-input").value;
-      if (!code.trim()) return;
-      const msg = $("pending-msg");
-      try {
-        const ok = await Store.redeemCode(code, state.user.uid, state.user.email);
-        msg.className = "alert " + (ok ? "alert-success" : "alert-error");
-        msg.textContent = ok ? "تم تفعيل حسابك بنجاح، جاري فتح الاستوديو..." : "كود التفعيل غير صحيح أو مستخدم مسبقاً.";
-        msg.classList.remove("hidden");
-        if (ok) setTimeout(() => handleSignedInUser(state.user.uid, state.user.email, state.user.name), 700);
-      } catch (err) {
-        msg.className = "alert alert-error";
-        msg.textContent = "خطأ في التفعيل: " + err.message;
-        msg.classList.remove("hidden");
-      }
-    });
-
-    async function logout() {
+    $("logout-btn").addEventListener("click", async () => {
       await auth.signOut();
       state.user = null;
       showView("auth-view");
-    }
-    $("logout-btn").addEventListener("click", logout);
-    $("pending-logout-btn").addEventListener("click", logout);
-    $("loading-logout-btn").addEventListener("click", logout);
-    $("loading-retry-btn").addEventListener("click", () => location.reload());
+    });
 
-    // Navigation & Theme
     document.querySelectorAll(".nav-pill").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active"));
@@ -933,26 +769,23 @@
       $("studio-logo-wrap").innerHTML = u.logo ? `<img src="${u.logo}" alt="logo"/>` : esc((u.name || "س").charAt(0));
     }
 
-    $("brand-color-input").addEventListener("input", (e) => {
-      $("brand-color-hex").textContent = e.target.value;
-      applyBrandColor(e.target.value);
-    });
+    $("brand-color-input").addEventListener("input", (e) => { $("brand-color-hex").textContent = e.target.value; applyBrandColor(e.target.value); });
 
     $("save-brand-btn").addEventListener("click", async () => {
       state.user.name = $("brand-name-input").value.trim() || "استوديو التصميم";
       state.user.color = $("brand-color-input").value;
       const file = $("brand-logo-file").files[0];
       if (file) state.user.logo = await compressImage(file, 300);
-      await Store.saveUser(state.user.uid, state.user);
+      await db.collection("users").doc(state.user.uid).set(state.user, { merge: true });
       for (const p of state.projects) {
         p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo };
-        await Store.saveProject(p);
+        await db.collection("projects").doc(p.id).set(p, { merge: true });
       }
       renderStudioBrand();
       toast("تم حفظ هوية الاستوديو");
     });
 
-    // Kanban Board
+    // Kanban
     function renderBoard() {
       const board = $("kanban-board");
       board.innerHTML = "";
@@ -977,21 +810,19 @@
         col.addEventListener("dragover", (e) => { e.preventDefault(); col.classList.add("drag-over"); });
         col.addEventListener("dragleave", () => col.classList.remove("drag-over"));
         col.addEventListener("drop", async (e) => {
-          e.preventDefault();
-          col.classList.remove("drag-over");
+          e.preventDefault(); col.classList.remove("drag-over");
           const pid = e.dataTransfer.getData("text/plain");
           const proj = state.projects.find(p => p.id === pid);
           if (proj && proj.stage !== st.id) {
             proj.stage = st.id;
-            await Store.saveProject(proj);
+            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
             renderBoard();
           }
         });
 
         items.forEach(p => {
           const card = document.createElement("div");
-          card.className = "project-card";
-          card.draggable = true;
+          card.className = "project-card"; card.draggable = true;
           card.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", p.id));
           card.addEventListener("click", () => openProjectModal(p.id));
           card.innerHTML = `
@@ -1001,8 +832,7 @@
             <div class="project-meta">
               <span>${p.due || "بدون تاريخ"}</span>
               <span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>
-            </div>
-          `;
+            </div>`;
           col.appendChild(card);
         });
         board.appendChild(col);
@@ -1018,7 +848,7 @@
         revisionsUsed: 0, stage: "pending", approved: false, tasks: [], colors: [], fonts: [], links: [],
         draft: "", comments: [], vault: [], brand: { name: state.user.name, color: state.user.color, logo: state.user.logo }
       };
-      await Store.saveProject(proj);
+      await db.collection("projects").doc(proj.id).set(proj);
       state.projects.unshift(proj);
       $("new-project-form").reset();
       $("new-project-modal").classList.add("hidden");
@@ -1027,7 +857,6 @@
     });
 
     function getActiveProject() { return state.projects.find(p => p.id === state.activeProjectId); }
-
     function openProjectModal(id) {
       state.activeProjectId = id;
       const p = getActiveProject(); if (!p) return;
@@ -1050,11 +879,7 @@
         </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
 
       $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `
-        <div class="swatch" onclick="copyText('${c}')">
-          <span class="swatch-dot" style="background:${c}"></span><span>${c}</span>
-          <span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span>
-        </div>`).join("");
-
+        <div class="swatch" onclick="copyText('${c}')"><span class="swatch-dot" style="background:${c}"></span><span>${c}</span><span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span></div>`).join("");
       $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm" onclick="removeFont(${i})">حذف</button></div>`).join("");
       $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank" style="color:var(--text);">${esc(l)}</a><button class="btn btn-sm" onclick="removeLink(${i})">حذف</button></div>`).join("");
 
@@ -1063,16 +888,15 @@
         ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("")
         : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
 
-      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات من العميل بعد.</p>`;
+      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات بعد.</p>`;
       $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><a href="${esc(f.url)}" target="_blank" style="font-weight:600;color:var(--text);">${esc(f.name)}</a><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><button class="btn btn-sm" onclick="removeVault(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
       fillClientMsg("draft");
     }
 
     async function saveActiveProject() {
       const p = getActiveProject(); if (!p) return;
-      await Store.saveProject(p);
-      renderProjectDetails();
-      renderBoard();
+      await db.collection("projects").doc(p.id).set(p, { merge: true });
+      renderProjectDetails(); renderBoard();
     }
 
     window.toggleTask = async (i) => { const p = getActiveProject(); p.tasks[i].done = !p.tasks[i].done; await saveActiveProject(); };
@@ -1093,7 +917,7 @@
     $("pm-draft-file").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; getActiveProject().draft = await compressImage(f, 1100); await saveActiveProject(); toast("تم رفع المسودة"); });
     $("pm-file-add").addEventListener("click", async () => { const name = $("pm-file-name").value.trim(), url = $("pm-file-url").value.trim(), type = $("pm-file-type").value; if (!name || !url) return; getActiveProject().vault.push({ name, url, type }); $("pm-file-name").value = ""; $("pm-file-url").value = ""; await saveActiveProject(); });
     $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط متابعة العميل"); });
-    $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await Store.deleteProject(state.activeProjectId); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); toast("تم حذف المشروع"); });
+    $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await db.collection("projects").doc(state.activeProjectId).delete(); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); toast("تم حذف المشروع"); });
 
     document.querySelectorAll("[data-pm-tab]").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1109,9 +933,9 @@
       const p = getActiveProject(); if (!p) return;
       const link = `${location.origin}${location.pathname}#client=${p.id}`;
       const templates = {
-        draft: `أهلاً ${p.client}،\nجهّزت لك المسودة الجديدة لمشروع «${p.title}».\nتقدر تستعرضها وتترك ملاحظاتك مباشرة على التصميم من خلال رابط المتابعة الخاص بك:\n${link}`,
-        remind: `مرحباً ${p.client}،\nتذكير لطيف بمراجعة مسودة مشروع «${p.title}» عشان نكمل باقي الخطوات في الموعد المحدد.\nرابط المشروع:\n${link}`,
-        final: `أهلاً ${p.client}،\nسعيدة جداً باعتمادك لتصميم «${p.title}».\nالملفات النهائية صارت مفتوحة وجاهزة للتحميل من خزنة المشروع عبر الرابط:\n${link}`
+        draft: `أهلاً ${p.client}،\nجهّزت لك المسودة الجديدة لمشروع «${p.title}».\nتقدر تستعرضها وتترك ملاحظاتك مباشرة على التصميم:\n${link}`,
+        remind: `مرحباً ${p.client}،\nتذكير لطيف بمراجعة مسودة مشروع «${p.title}»:\n${link}`,
+        final: `أهلاً ${p.client}،\nالملفات النهائية لمشروع «${p.title}» جاهزة للتحميل:\n${link}`
       };
       $("pm-msg-box").value = templates[type];
     }
@@ -1131,6 +955,7 @@
     ["calc-service","calc-base","calc-revs","calc-hours","calc-rate","calc-rush","calc-duration"].forEach(id => { $(id).addEventListener("input", updatePricingCalc); $(id).addEventListener("change", updatePricingCalc); });
     $("copy-quote-btn").addEventListener("click", () => { navigator.clipboard.writeText($("calc-output").value); toast("تم نسخ عرض السعر"); });
 
+    // Focus Timer
     let timerSec = 25 * 60, timerRunning = false, timerInt = null;
     let todaySessions = Number(localStorage.getItem("studio_sessions_" + new Date().toDateString()) || 0);
     $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions;
@@ -1153,37 +978,44 @@
       }
     });
 
+    // Admin Data Collection Table & CSV Export
     async function renderAdminPanel() {
-      const users = await Store.getAllUsers();
-      $("admin-users-tbody").innerHTML = users.map(u => `
-        <tr>
-          <td><strong>${esc(u.name)}</strong><div style="font-size:0.78rem;color:var(--text-muted);">${esc(u.email)}</div></td>
-          <td><span class="badge ${u.status === "active" ? "badge-success" : ""}">${u.status === "active" ? "مفعّل" : "بانتظار التفعيل"}</span></td>
-          <td>${u.email.toLowerCase() === ADMIN_EMAIL ? `<span style="font-size:0.78rem;color:var(--text-muted);">الإدارة</span>` : `<button class="btn btn-sm" onclick="toggleUserStatus('${u.uid}', '${u.status}')">${u.status === "active" ? "إيقاف" : "تفعيل"}</button>`}</td>
-        </tr>`).join("");
-
-      const codes = await Store.getCodes();
-      $("admin-codes-list").innerHTML = codes.map(c => `
-        <div class="list-item">
-          <div><strong style="letter-spacing:0.5px;">${esc(c.code)}</strong><span class="badge" style="margin-right:8px;">${c.used ? "مستخدم" : "متاح"}</span></div>
-          <div class="row"><button class="btn btn-sm" onclick="copyText('${esc(c.code)}')">نسخ</button>${!c.used ? `<button class="btn btn-danger btn-sm" onclick="removeCode('${esc(c.code)}')">حذف</button>` : ""}</div>
-        </div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد أكواد بعد.</p>`;
+      try {
+        const snap = await db.collection("users").get();
+        state.allUsers = snap.docs.map(d => d.data());
+        $("admin-total-users").textContent = state.allUsers.length;
+        $("admin-users-tbody").innerHTML = state.allUsers.map(u => `
+          <tr>
+            <td><strong>${esc(u.name || "-")}</strong></td>
+            <td>${esc(u.email || "-")}</td>
+            <td dir="ltr" style="text-align:right;">${esc(u.phone || "-")}</td>
+            <td>${esc(u.specialty || "-")}</td>
+            <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString("ar-SA") : "-"}</td>
+          </tr>`).join("");
+      } catch (err) {
+        toast("تأكدي من نشر قواعد Firestore لقراءة بيانات المسجلين");
+      }
     }
 
-    window.toggleUserStatus = async (userUid, cur) => { await Store.saveUser(userUid, { status: cur === "active" ? "pending" : "active" }); renderAdminPanel(); toast("تم تحديث حالة الحساب"); };
-    window.removeCode = async (codeStr) => { await Store.deleteCode(codeStr); renderAdminPanel(); };
-    $("gen-code-btn").addEventListener("click", async () => {
-      const custom = $("custom-code-input").value.trim().toUpperCase();
-      const code = custom || ("STUDIO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-" + Math.random().toString(36).slice(2, 6).toUpperCase());
-      await Store.addCode({ code, used: false, createdAt: new Date().toISOString() });
-      $("custom-code-input").value = ""; renderAdminPanel(); toast("تم إنشاء الكود: " + code);
+    $("export-csv-btn").addEventListener("click", () => {
+      if (!state.allUsers.length) return toast("لا توجد بيانات للتصدير");
+      const rows = [["الاسم", "البريد الإلكتروني", "رقم الواتساب", "التخصص", "تاريخ التسجيل"]];
+      state.allUsers.forEach(u => rows.push([u.name || "", u.email || "", u.phone || "", u.specialty || "", u.createdAt || ""]));
+      const csv = "\uFEFF" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "studio-users.csv";
+      a.click();
     });
 
+    // Client Portal
     async function loadClientPortal(pid) {
+      showView("client-view");
       try {
-        const proj = await Store.getProjectById(pid);
-        showView("client-view");
-        if (!proj) { $("client-project-title").textContent = "عذراً، رابط المشروع غير موجود."; return; }
+        const snap = await db.collection("projects").doc(pid).get();
+        if (!snap.exists) { $("client-project-title").textContent = "عذراً، رابط المشروع غير موجود."; return; }
+        const proj = { id: snap.id, ...snap.data() };
         const brand = proj.brand || { name: "استوديو التصميم", color: "#1D1D1F", logo: "" };
         applyBrandColor(brand.color);
         $("client-studio-name").textContent = brand.name;
@@ -1207,7 +1039,7 @@
             if (!note || !note.trim()) return;
             proj.comments = proj.comments || [];
             proj.comments.push({ x, y, text: note.trim(), date: new Date().toLocaleDateString("ar-SA") });
-            await Store.saveProject(proj);
+            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
             loadClientPortal(pid); toast("تمت إضافة ملاحظتك");
           };
         }
@@ -1219,7 +1051,8 @@
           proj.comments = proj.comments || [];
           proj.comments.push({ text: txt, date: new Date().toLocaleDateString("ar-SA") });
           $("client-general-comment").value = "";
-          await Store.saveProject(proj); loadClientPortal(pid);
+          await db.collection("projects").doc(proj.id).set(proj, { merge: true });
+          loadClientPortal(pid);
         };
 
         const refs = (proj.vault || []).filter(f => f.type !== "final");
@@ -1234,11 +1067,12 @@
           $("client-approve-btn").onclick = async () => {
             if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return;
             proj.approved = true; proj.stage = "done";
-            await Store.saveProject(proj); loadClientPortal(pid); toast("تم اعتماد التصميم وفتح الملفات النهائية");
+            await db.collection("projects").doc(proj.id).set(proj, { merge: true });
+            loadClientPortal(pid); toast("تم اعتماد التصميم وفتح الملفات النهائية");
           };
         }
       } catch (err) {
-        showFatalError("تعذر فتح رابط المشروع", err);
+        $("client-project-title").textContent = "تعذر تحميل المشروع: " + err.message;
       }
     }
 
