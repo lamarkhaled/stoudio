@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استوديو المصمم | من أكاديمية لمار الحربي</title>
+  <title>استوديو المصمم | أكاديمية لمار الحربي</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,254 +16,223 @@
       --accent: #000000;
       --bg: #FFFFFF;
       --surface: #FFFFFF;
-      --surface-2: #F3F3F3;
-      --border: #E5E5E5;
-      --border-strong: #000000;
-      --text: #000000;
-      --text-muted: #555555;
+      --surface-2: #F5F5F5;
+      --border: #E8E8E8;
+      --text: #111111;
+      --text-muted: #666666;
       --invert-bg: #000000;
       --invert-text: #FFFFFF;
-      --invert-muted: #BDBDBD;
       --danger: #D93025;
-      --danger-soft: rgba(217, 48, 37, 0.08);
+      --danger-soft: #FEF2F2;
       --success: #1E8E3E;
-      --dot-color: #CFCFCF;
-      --radius: 24px;
-      --radius-lg: 32px;
-      --radius-sm: 14px;
+      --success-soft: #ECFDF5;
+      --radius: 20px;
+      --radius-sm: 12px;
     }
 
     [data-theme="dark"] {
       --accent: #FFFFFF;
       --bg: #0A0A0A;
       --surface: #121212;
-      --surface-2: #1C1C1C;
-      --border: #2A2A2A;
-      --border-strong: #FFFFFF;
-      --text: #FFFFFF;
-      --text-muted: #A3A3A3;
+      --surface-2: #1A1A1A;
+      --border: #262626;
+      --text: #F5F5F5;
+      --text-muted: #9A9A9A;
       --invert-bg: #FFFFFF;
       --invert-text: #000000;
-      --invert-muted: #555555;
-      --dot-color: #2E2E2E;
-      --danger-soft: rgba(217, 48, 37, 0.16);
+      --danger-soft: rgba(217, 48, 37, 0.14);
+      --success-soft: rgba(30, 142, 62, 0.14);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    ::selection { background: var(--text); color: var(--bg); }
+    ::selection { background: var(--invert-bg); color: var(--invert-text); }
     body {
       font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.65;
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background 0.2s ease, color 0.2s ease;
+      -webkit-font-smoothing: antialiased;
     }
 
     button, input, select, textarea { font-family: inherit; color: inherit; }
     a { text-decoration: none; color: inherit; }
     .hidden { display: none !important; }
 
-    /* Academy Signature Buttons */
+    /* Clean Minimal Buttons */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 20px; border-radius: 999px; border: 2px solid var(--border-strong);
-      background: var(--surface); color: var(--text); font-size: 0.88rem; font-weight: 700;
-      cursor: pointer; transition: all 0.16s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 9px 18px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text); font-size: 0.86rem; font-weight: 600;
+      cursor: pointer; transition: background 0.15s, border-color 0.15s, transform 0.15s;
     }
-    .btn:hover:not(:disabled) { background: var(--invert-bg); color: var(--invert-text); transform: translateY(-2px); }
+    .btn:hover:not(:disabled) { background: var(--surface-2); border-color: var(--text); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-    .btn-primary:hover:not(:disabled) { background: var(--bg); color: var(--accent); }
-    .btn-invert { background: var(--invert-text); color: var(--invert-bg); border-color: var(--invert-text); }
-    .btn-invert:hover { background: transparent; color: var(--invert-text); }
-    .btn-ghost-invert { background: transparent; color: var(--invert-text); border-color: var(--invert-text); }
-    .btn-ghost-invert:hover { background: var(--invert-text); color: var(--invert-bg); }
-    .btn-soft { background: var(--surface-2); border-color: transparent; color: var(--text); }
-    .btn-soft:hover { border-color: var(--border-strong); background: var(--surface); color: var(--text); }
-    .btn-danger { color: var(--danger); border-color: var(--danger); }
-    .btn-danger:hover { background: var(--danger); color: #fff; }
-    .btn-sm { padding: 7px 15px; font-size: 0.82rem; border-width: 1.5px; }
-    .btn-icon { width: 40px; height: 40px; padding: 0; border-radius: 50%; }
-
-    .lm-pill {
-      display: inline-block; background: var(--invert-bg); color: var(--invert-text);
-      font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 999px;
-    }
+    .btn-primary:hover:not(:disabled) { opacity: 0.88; background: var(--accent); color: var(--bg); }
+    .btn-soft { background: var(--surface-2); border-color: transparent; }
+    .btn-soft:hover { background: var(--border); border-color: transparent; }
+    .btn-danger { color: var(--danger); border-color: rgba(217, 48, 37, 0.3); }
+    .btn-danger:hover { background: var(--danger-soft); border-color: var(--danger); }
+    .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+    .btn-icon { width: 36px; height: 36px; padding: 0; border-radius: 50%; }
 
     /* Inputs */
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-    .field label { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+    .field label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
     .input, select.input, textarea.input {
-      width: 100%; padding: 11px 15px; border-radius: var(--radius-sm);
-      border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
-      font-size: 0.91rem; outline: none; transition: border-color 0.18s;
+      width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font-size: 0.9rem; outline: none; transition: border-color 0.15s;
     }
-    .input:focus { border-color: var(--border-strong); }
+    .input:focus { border-color: var(--text); }
 
     .card {
-      background: var(--surface); border: 1.5px solid var(--border-strong);
-      border-radius: var(--radius); padding: 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
     }
 
-    /* Auth Screen with Dot Grid Vibe */
-    .center-screen {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
-      background: var(--surface-2) radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
-      background-size: 22px 22px;
-    }
-    .auth-box { width: 100%; max-width: 440px; padding: 34px 30px; border-radius: var(--radius-lg); }
-    .brand-logo-img { width: 54px; height: 54px; object-fit: contain; border-radius: 14px; margin-bottom: 14px; display: block; }
-    .auth-title { font-size: 1.55rem; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
-    .auth-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
-    .alert { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.86rem; font-weight: 600; margin-bottom: 16px; background: var(--surface-2); border: 1.5px solid var(--border); }
-    .alert-error { color: var(--danger); border-color: var(--danger); background: var(--danger-soft); }
-    .alert-success { color: var(--success); border-color: var(--success); }
+    /* Auth Screen */
+    .center-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--surface-2); }
+    .auth-box { width: 100%; max-width: 420px; padding: 32px 28px; border-radius: 26px; background: var(--surface); border: 1px solid var(--border); }
+    .brand-logo-img { width: 48px; height: 48px; object-fit: contain; border-radius: 12px; margin-bottom: 16px; display: block; }
+    .auth-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+    .auth-sub { font-size: 0.86rem; color: var(--text-muted); margin-bottom: 22px; }
+    .alert { padding: 11px 15px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; margin-bottom: 16px; background: var(--surface-2); border: 1px solid var(--border); }
+    .alert-error { color: var(--danger); border-color: rgba(217, 48, 37, 0.3); background: var(--danger-soft); }
+    .alert-success { color: var(--success); border-color: rgba(30, 142, 62, 0.3); background: var(--success-soft); }
 
     /* Top Header */
     .topbar {
       position: sticky; top: 0; z-index: 40; background: var(--bg);
       border-bottom: 1px solid var(--border); padding: 12px 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
     }
-    .topbar-brand { display: flex; align-items: center; gap: 12px; }
+    .topbar-brand { display: flex; align-items: center; gap: 11px; }
     .topbar-logo {
-      width: 38px; height: 38px; border-radius: 12px; background: var(--accent); color: var(--bg);
-      display: flex; align-items: center; justify-content: center; font-weight: 700; overflow: hidden; flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: var(--bg);
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; overflow: hidden; flex-shrink: 0;
     }
     .topbar-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .nav-pills { display: flex; align-items: center; gap: 6px; background: var(--surface-2); padding: 5px; border-radius: 999px; flex-wrap: wrap; }
-    .nav-pill { padding: 7px 16px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted); font-size: 0.86rem; font-weight: 700; cursor: pointer; transition: all 0.16s; }
-    .nav-pill.active { background: var(--invert-bg); color: var(--invert-text); }
+    .nav-pills { display: flex; align-items: center; gap: 4px; background: var(--surface-2); padding: 4px; border-radius: 999px; }
+    .nav-pill { padding: 6px 14px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted); font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: 0.15s; }
+    .nav-pill.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 
-    .container { max-width: 1380px; margin: 0 auto; padding: 24px 24px 100px; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 28px 24px 64px; }
 
-    /* Daily Greeting (Dot-grid Editorial Card) */
-    .greeting-card {
-      background: var(--surface-2) radial-gradient(var(--dot-color) 1.3px, transparent 1.3px);
-      background-size: 20px 20px;
-      border-radius: var(--radius); padding: 22px 26px; margin-bottom: 18px;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    /* Greeting + Subtle Academy Bar */
+    .top-intro {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap; margin-bottom: 22px;
     }
-    .greeting-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
-    .greeting-quote { font-size: 0.92rem; color: var(--text-muted); }
+    .greeting-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+    .greeting-quote { font-size: 0.88rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* Marquee Strip (Academy Signature) */
-    .lm-marquee { background: var(--invert-bg); color: var(--invert-text); overflow: hidden; direction: ltr; border-radius: 999px; padding: 12px 0; margin-bottom: 20px; }
-    .lm-track { display: flex; width: max-content; animation: lm-scroll 30s linear infinite; }
-    .lm-track span { font-size: 0.95rem; font-weight: 700; padding: 0 20px; white-space: nowrap; direction: rtl; }
-    @keyframes lm-scroll { to { transform: translateX(-50%); } }
-
-    /* Academy Spotlight Banner */
-    .academy-spotlight {
-      background: var(--invert-bg); color: var(--invert-text);
-      border-radius: var(--radius-lg); padding: 28px 30px; margin-bottom: 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    .academy-strip {
+      background: var(--surface-2); border-radius: var(--radius); padding: 16px 20px;
+      margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
     }
-    .academy-spotlight h3 { font-size: 1.35rem; font-weight: 700; margin: 8px 0 6px; line-height: 1.35; }
-    .academy-spotlight p { font-size: 0.9rem; color: var(--invert-muted); max-width: 620px; }
-
-    /* Social Tiles (Academy Signature) */
-    .lm-tiles { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .lm-tile {
-      width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      border: 2px solid var(--border-strong); transition: 0.18s;
-    }
-    .lm-tile.dark, .lm-tile.light:hover { background: var(--invert-bg); color: var(--invert-text); }
-    .lm-tile.light, .lm-tile.dark:hover { background: var(--surface); color: var(--text); }
-    .lm-tile:hover { transform: translateY(-3px); }
-    .lm-tile svg { width: 20px; height: 20px; fill: currentColor; }
+    .academy-strip strong { font-size: 0.95rem; display: block; margin-bottom: 2px; }
+    .academy-strip span { font-size: 0.83rem; color: var(--text-muted); }
 
     /* Stats */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
-    .stat-card { background: var(--surface-2); border-radius: var(--radius); padding: 20px 22px; text-align: center; }
-    .stat-value { font-size: 1.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
-    .stat-label { font-size: 0.84rem; color: var(--text-muted); font-weight: 600; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 26px; }
+    .stat-card { background: var(--surface-2); border-radius: var(--radius); padding: 18px 20px; }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-value { font-size: 1.55rem; font-weight: 700; line-height: 1.2; }
 
-    /* Kanban */
+    /* Board Header & Kanban */
     .board-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
-    .board-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .search-input { width: 230px; padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--border-strong); background: var(--surface); font-size: 0.85rem; outline: none; }
+    .board-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .search-input { width: 220px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); font-size: 0.84rem; outline: none; }
+    .search-input:focus { border-color: var(--text); }
 
-    .kanban { display: grid; grid-template-columns: repeat(5, minmax(245px, 1fr)); gap: 14px; overflow-x: auto; padding-bottom: 12px; }
-    .kanban-col { background: var(--surface-2); border-radius: var(--radius); padding: 14px; min-height: 460px; display: flex; flex-direction: column; gap: 10px; border: 1.5px solid transparent; }
-    .kanban-col.drag-over { border-color: var(--border-strong); }
-    .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px 8px; font-size: 0.9rem; font-weight: 700; }
-    .col-count { font-size: 0.76rem; padding: 2px 10px; border-radius: 999px; background: var(--invert-bg); color: var(--invert-text); font-weight: 700; }
+    .kanban { display: grid; grid-template-columns: repeat(5, minmax(235px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 10px; }
+    .kanban-col { background: var(--surface-2); border-radius: var(--radius); padding: 12px; min-height: 440px; display: flex; flex-direction: column; gap: 10px; border: 1px solid transparent; transition: border-color 0.15s; }
+    .kanban-col.drag-over { border-color: var(--text); }
+    .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px 6px; font-size: 0.86rem; font-weight: 700; }
+    .col-count { font-size: 0.74rem; padding: 2px 8px; border-radius: 999px; background: var(--surface); color: var(--text-muted); font-weight: 600; }
+
     .project-card {
-      background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px;
-      padding: 14px; cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      padding: 14px; cursor: pointer; transition: transform 0.15s, border-color 0.15s;
     }
-    .project-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+    .project-card:hover { transform: translateY(-2px); border-color: var(--text); }
     .project-card.is-overdue { border-color: var(--danger); }
-    .project-thumb { width: 100%; height: 115px; border-radius: 12px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
-    .project-title { font-size: 0.96rem; font-weight: 700; margin-bottom: 4px; }
-    .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 8px; gap: 6px; flex-wrap: wrap; }
-    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: var(--surface-2); color: var(--text); }
-    .badge-success { background: rgba(30, 142, 62, 0.12); color: var(--success); }
+    .project-thumb { width: 100%; height: 110px; border-radius: 10px; object-fit: cover; background: var(--surface-2); margin-bottom: 10px; display: block; }
+    .project-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+    .project-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; color: var(--text-muted); margin-top: 10px; gap: 6px; flex-wrap: wrap; }
+
+    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 600; background: var(--surface-2); color: var(--text-muted); }
+    .badge-success { background: var(--success-soft); color: var(--success); }
     .badge-danger { background: var(--danger-soft); color: var(--danger); }
 
-    /* Academy Modal Sections (Matching lamar.sayan.pro) */
-    .lm-feat-grid, .lm-aud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0; }
-    .lm-feat { display: flex; align-items: flex-start; gap: 12px; padding: 18px; background: var(--surface-2); border: 1.5px solid transparent; border-radius: 20px; }
-    .lm-check { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--invert-bg); color: var(--invert-text); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-top: 2px; }
-    .lm-outcomes { padding: 20px; border: 1.5px solid var(--border-strong); border-radius: 20px; margin: 16px 0; }
-    .lm-out-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .lm-out-tag { padding: 6px 14px; background: var(--surface-2); border-radius: 999px; font-size: 0.84rem; font-weight: 700; }
-    .lm-aud-card { border-radius: 22px; padding: 20px; }
-    .lm-aud-card.yes { background: var(--surface); border: 2px solid var(--border-strong); }
-    .lm-aud-card.no { background: var(--surface-2); border: 1.5px solid var(--border); }
-    .lm-aud-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 12px; font-size: 0.88rem; }
-    .lm-aud-card li { display: flex; gap: 8px; align-items: flex-start; }
-    .lm-faq-item { border: 1.5px solid var(--border); border-radius: 18px; margin-bottom: 10px; overflow: hidden; }
-    .lm-faq-item[open] { border-color: var(--border-strong); }
-    .lm-faq-item summary { list-style: none; cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 0.92rem; display: flex; justify-content: space-between; align-items: center; }
-    .lm-faq-item p { padding: 0 18px 16px; font-size: 0.86rem; color: var(--text-muted); }
-
-    /* Modal */
-    .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 18px; }
-    .modal { width: 100%; max-width: 860px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 2px solid var(--border-strong); border-radius: 28px; padding: 26px; }
-    .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1.5px solid var(--border); gap: 12px; }
-    .tabs { display: flex; gap: 6px; background: var(--surface-2); padding: 5px; border-radius: 999px; margin-bottom: 18px; overflow-x: auto; }
-    .tab-btn { padding: 7px 14px; background: none; border: none; border-radius: 999px; color: var(--text-muted); font-size: 0.84rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
-    .tab-btn.active { background: var(--invert-bg); color: var(--invert-text); }
-
-    .client-info-box { background: var(--surface-2); border-radius: 18px; padding: 16px; margin-bottom: 18px; }
-    .swatch-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-    .swatch { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface-2); cursor: pointer; font-size: 0.82rem; font-weight: 600; }
-    .swatch-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
-    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--surface-2); margin-bottom: 8px; font-size: 0.88rem; }
-
-    .draft-stage { position: relative; border-radius: 18px; overflow: hidden; border: 1.5px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
-    .draft-stage img { width: 100%; display: block; max-height: 520px; object-fit: contain; background: #111; }
-    .pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; cursor: pointer; }
-
-    .timer-pill { position: fixed; bottom: 20px; left: 20px; z-index: 50; background: var(--surface); border: 2px solid var(--border-strong); border-radius: 999px; padding: 7px 14px; display: flex; align-items: center; gap: 10px; }
-    .timer-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.98rem; min-width: 52px; text-align: center; }
-
-    .stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 22px 0; }
-    .step-item { text-align: center; padding: 10px 6px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--surface); font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
-    .step-item.done { border-color: var(--border-strong); color: var(--text); }
-    .step-item.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    /* Social Icons (X & WhatsApp Only) */
+    .social-row { display: flex; gap: 8px; align-items: center; justify-content: center; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: 0.15s;
+    }
+    .social-btn:hover { background: var(--invert-bg); color: var(--invert-text); border-color: var(--invert-bg); }
+    .social-btn svg { width: 17px; height: 17px; fill: currentColor; }
 
     .studio-footer {
-      margin-top: 48px; padding: 24px 28px; background: var(--surface-2); border-radius: 28px;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      font-size: 0.83rem; color: var(--text-muted);
     }
 
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); }
-    th { color: var(--text-muted); font-weight: 700; font-size: 0.82rem; }
+    /* Modals */
+    .modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 18px; }
+    .modal { width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 26px; }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 1px solid var(--border); gap: 12px; }
+    .tabs { display: flex; gap: 4px; background: var(--surface-2); padding: 4px; border-radius: 999px; margin-bottom: 18px; overflow-x: auto; }
+    .tab-btn { padding: 6px 14px; background: none; border: none; border-radius: 999px; color: var(--text-muted); font-size: 0.83rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .tab-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 
-    .toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--invert-bg); color: var(--invert-text); padding: 10px 22px; border-radius: 999px; font-size: 0.86rem; font-weight: 700; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    /* Academy Modal Content */
+    .lm-feat-grid, .lm-aud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 16px 0; }
+    .lm-feat { display: flex; align-items: flex-start; gap: 10px; padding: 16px; background: var(--surface-2); border-radius: 16px; }
+    .lm-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--invert-bg); color: var(--invert-text); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; margin-top: 2px; }
+    .lm-outcomes { padding: 18px; border: 1px solid var(--border); border-radius: 16px; margin: 16px 0; }
+    .lm-out-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .lm-out-tag { padding: 5px 12px; background: var(--surface-2); border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .lm-aud-card { border-radius: 16px; padding: 18px; background: var(--surface-2); }
+    .lm-aud-card.yes { background: var(--surface); border: 1.5px solid var(--text); }
+    .lm-aud-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; font-size: 0.85rem; }
+    .lm-aud-card li { display: flex; gap: 8px; align-items: flex-start; }
+    .lm-faq-item { border: 1px solid var(--border); border-radius: 14px; margin-bottom: 8px; overflow: hidden; }
+    .lm-faq-item summary { list-style: none; cursor: pointer; padding: 13px 16px; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; }
+    .lm-faq-item p { padding: 0 16px 14px; font-size: 0.84rem; color: var(--text-muted); }
+
+    .client-info-box { background: var(--surface-2); border-radius: 16px; padding: 16px; margin-bottom: 18px; }
+    .swatch-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .swatch { display: flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+    .swatch-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+    .list-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--surface-2); margin-bottom: 8px; font-size: 0.86rem; }
+
+    .draft-stage { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); cursor: crosshair; user-select: none; }
+    .draft-stage img { width: 100%; display: block; max-height: 500px; object-fit: contain; background: #111; }
+    .pin { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; cursor: pointer; }
+
+    .stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 20px 0; }
+    .step-item { text-align: center; padding: 9px 6px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+    .step-item.done { border-color: var(--text); color: var(--text); }
+    .step-item.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
+
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 120; background: var(--invert-bg); color: var(--invert-text); padding: 9px 20px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     @media (max-width: 720px) {
       .stepper { grid-template-columns: 1fr; }
-      .timer-pill { left: 12px; right: 12px; justify-content: space-between; }
       .search-input { width: 100%; }
     }
   </style>
@@ -274,15 +243,15 @@
 
   <!-- 1. AUTH VIEW -->
   <section id="auth-view" class="center-screen">
-    <div style="width:100%; max-width:440px;">
-      <div class="card auth-box">
+    <div style="width:100%; max-width:420px;">
+      <div class="auth-box">
         <img src="https://api.sayan.pro/static/branding/ff2498d1-709f-4f4a-a88f-92140c137c8e.png" alt="لمار الحربي" class="brand-logo-img" />
         <h1 class="auth-title" id="auth-heading">استوديو المصمم الرقمي</h1>
-        <p class="auth-sub" id="auth-subheading">مساحة عمل مجانية لإدارة مشاريعك وعملائك بأسلوب المحترفين، مقدّمة من أكاديمية لمار الحربي.</p>
+        <p class="auth-sub" id="auth-subheading">مساحة مجانية لتنظيم مشاريعك ومشاركة رابط المتابعة مع عملائك.</p>
         <div id="auth-msg" class="alert hidden"></div>
         <form id="auth-form">
           <div id="register-fields" class="hidden">
-            <div class="field"><label>اسم المصمم أو الاستوديو</label><input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار للتصميم" /></div>
+            <div class="field"><label>اسم المصمم أو الاستوديو</label><input type="text" id="auth-name" class="input" placeholder="مثال: استوديو لمار" /></div>
             <div class="field"><label>رقم الجوال (واتساب)</label><input type="tel" id="auth-phone" class="input" placeholder="05XXXXXXXX" /></div>
             <div class="field">
               <label>مجال التصميم</label>
@@ -297,22 +266,22 @@
           </div>
           <div class="field"><label>البريد الإلكتروني</label><input type="email" id="auth-email" class="input" placeholder="name@example.com" required /></div>
           <div class="field"><label>كلمة المرور (6 خانات على الأقل)</label><input type="password" id="auth-pass" class="input" placeholder="••••••••" minlength="6" required /></div>
-          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;" id="auth-submit-btn">دخول</button>
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:4px;" id="auth-submit-btn">دخول</button>
         </form>
-        <div style="text-align:center; margin-top:14px;">
-          <button type="button" id="forgot-pass-btn" style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;">نسيت كلمة المرور؟</button>
+        <div style="text-align:center; margin-top:12px;">
+          <button type="button" id="forgot-pass-btn" style="background:none;border:none;color:var(--text-muted);font-size:0.8rem;cursor:pointer;">نسيت كلمة المرور؟</button>
         </div>
-        <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-muted);">
+        <div style="text-align:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.84rem; color:var(--text-muted);">
           <span id="auth-toggle-text">ما عندك حساب؟</span>
           <button type="button" id="auth-mode-toggle" style="background:none;border:none;color:var(--text);font-weight:700;cursor:pointer;text-decoration:underline;">إنشاء حساب مجاني</button>
         </div>
       </div>
 
       <div style="text-align:center; margin-top:18px;">
-        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">
-          تصفّح دورات <button type="button" class="open-academy-trigger" style="background:none;border:none;color:var(--text);font-weight:700;text-decoration:underline;cursor:pointer;">أكاديمية لمار الحربي</button>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
+          مقدّمة من <button type="button" class="open-academy-trigger" style="background:none;border:none;color:var(--text);font-weight:700;text-decoration:underline;cursor:pointer;">أكاديمية لمار الحربي</button>
         </p>
-        <div class="lm-tiles" id="auth-social-bar"></div>
+        <div class="social-row" id="auth-social-bar"></div>
       </div>
     </div>
   </section>
@@ -323,56 +292,50 @@
       <div class="topbar-brand">
         <div class="topbar-logo" id="studio-logo-wrap">س</div>
         <div>
-          <div style="font-weight:700; font-size:0.98rem;" id="studio-name-display">استوديو التصميم</div>
-          <div style="font-size:0.75rem; color:var(--text-muted);" id="user-email-display"></div>
+          <div style="font-weight:700; font-size:0.94rem;" id="studio-name-display">استوديو التصميم</div>
+          <div style="font-size:0.74rem; color:var(--text-muted);" id="user-email-display"></div>
         </div>
       </div>
 
       <nav class="nav-pills">
-        <button class="nav-pill active" data-section="board">لوحة المشاريع</button>
-        <button class="nav-pill" data-section="brand">هوية الاستوديو</button>
-        <button class="nav-pill hidden" id="nav-admin" data-section="admin">قاعدة بيانات المسجلين</button>
+        <button class="nav-pill active" data-section="board">المشاريع</button>
+        <button class="nav-pill" data-section="brand">الهوية</button>
+        <button class="nav-pill hidden" id="nav-admin" data-section="admin">المسجلون</button>
       </nav>
 
       <div class="row">
-        <button type="button" class="btn btn-primary btn-sm open-academy-trigger">الأكاديمية والدورة</button>
+        <button type="button" class="btn btn-sm open-academy-trigger">الأكاديمية</button>
         <button class="btn btn-icon btn-soft" id="theme-toggle-btn" title="تبديل المظهر">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
         <button class="btn btn-sm btn-soft" id="logout-btn">خروج</button>
       </div>
     </header>
 
     <main class="container">
-      <!-- DAILY MORNING GREETING -->
-      <div class="greeting-card">
+      <!-- GREETING -->
+      <div class="top-intro">
         <div>
           <div class="greeting-title" id="daily-greeting-title">صباح الخير</div>
           <div class="greeting-quote" id="daily-greeting-quote"></div>
         </div>
-        <span class="lm-pill" id="daily-date-badge"></span>
+        <span class="badge" id="daily-date-badge"></span>
       </div>
 
       <!-- OVERDUE PROJECTS ALERT -->
       <div id="overdue-alert-banner" class="alert alert-error hidden"></div>
 
-      <!-- ACADEMY SPOTLIGHT PROMO -->
-      <div id="academy-banner" class="academy-spotlight">
+      <!-- SUBTLE ACADEMY BAR -->
+      <div id="academy-banner" class="academy-strip">
         <div>
-          <span class="lm-pill" style="background:rgba(150,150,155,0.22); color:var(--invert-text);">أكاديمية لمار الحربي • منذ 2019</span>
-          <h3>تعلّم كيف تسعّر شغلك، توقّع عقودك، وتدير عملاءك بأسلوب المحترفين</h3>
-          <p>دورات عملية في التصميم والعمل الحر مبنية على خبرة حقيقية في السوق منذ 2019 — خطوات تطبيقية واضحة، قوالب جاهزة، ومتابعة مباشرة بعيداً عن التنظير.</p>
+          <strong>دورة التصميم والعمل الحر — أكاديمية لمار الحربي</strong>
+          <span>تعلّم كيف تسعّر شغلك، توقّع عقودك، وتدير عملاءك بخطوات تطبيقية واضحة بعيداً عن التنظير.</span>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-invert btn-sm open-academy-trigger">تفاصيل الدورة والمحاور</button>
-          <a href="https://lamar.sayan.pro/courses" target="_blank" rel="noopener" class="btn btn-ghost-invert btn-sm">استعرض الدورات</a>
-          <button id="banner-close" class="btn btn-ghost-invert btn-sm" style="padding:6px 12px;" title="إخفاء">×</button>
+          <button type="button" class="btn btn-sm open-academy-trigger">تفاصيل الدورة</button>
+          <a href="https://lamar.sayan.pro/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">التسجيل الآن</a>
+          <button id="banner-close" class="btn btn-sm btn-soft" style="padding:5px 10px;" title="إخفاء">×</button>
         </div>
-      </div>
-
-      <!-- SIGNATURE MARQUEE -->
-      <div class="lm-marquee" aria-hidden="true">
-        <div class="lm-track" id="lm-marquee-track"></div>
       </div>
 
       <div id="db-warning-banner" class="alert alert-error hidden"></div>
@@ -380,19 +343,16 @@
       <!-- BOARD -->
       <section id="section-board">
         <div class="stats-grid">
-          <div class="stat-card"><div class="stat-value" id="stat-active">0</div><div class="stat-label">مشاريع قيد العمل</div></div>
-          <div class="stat-card"><div class="stat-value" id="stat-review">0</div><div class="stat-label">بانتظار رد العميل</div></div>
-          <div class="stat-card"><div class="stat-value" id="stat-done">0</div><div class="stat-label">مشاريع مكتملة</div></div>
-          <div class="stat-card"><div class="stat-value" id="stat-revenue">0 ر.س</div><div class="stat-label">إجمالي قيمة المشاريع</div></div>
+          <div class="stat-card"><div class="stat-label">قيد العمل</div><div class="stat-value" id="stat-active">0</div></div>
+          <div class="stat-card"><div class="stat-label">بانتظار العميل</div><div class="stat-value" id="stat-review">0</div></div>
+          <div class="stat-card"><div class="stat-label">مكتملة</div><div class="stat-value" id="stat-done">0</div></div>
+          <div class="stat-card"><div class="stat-label">إجمالي القيمة</div><div class="stat-value" id="stat-revenue">0 ر.س</div></div>
         </div>
 
         <div class="board-header">
-          <div>
-            <h2 style="font-size:1.35rem; font-weight:700;">لوحة المشاريع المرئية</h2>
-            <p style="font-size:0.86rem; color:var(--text-muted);">اسحب البطاقات بين المراحل أو اضغط على أي مشروع لفتح مساحته الكاملة.</p>
-          </div>
+          <h2 style="font-size:1.15rem; font-weight:700;">لوحة المشاريع</h2>
           <div class="board-controls">
-            <input type="search" id="board-search" class="search-input" placeholder="ابحث باسم المشروع أو العميل..." />
+            <input type="search" id="board-search" class="search-input" placeholder="بحث باسم المشروع أو العميل..." />
             <button type="button" id="filter-overdue-btn" class="btn btn-sm btn-soft">المتأخرة فقط</button>
             <button class="btn btn-primary btn-sm" id="new-project-btn">+ مشروع جديد</button>
           </div>
@@ -403,61 +363,47 @@
 
       <!-- BRANDING -->
       <section id="section-brand" class="hidden">
-        <div class="card" style="max-width:600px;">
-          <h2 style="font-size:1.2rem; margin-bottom:6px;">تخصيص هوية الاستوديو</h2>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">تظهر هذه الهوية تلقائياً للعميل عند فتح رابط المتابعة الخاص به.</p>
+        <div class="card" style="max-width:560px;">
+          <h2 style="font-size:1.1rem; margin-bottom:4px;">تخصيص هوية الاستوديو</h2>
+          <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:20px;">تظهر هذه الهوية لعملائك عند فتح رابط متابعة المشروع.</p>
           <div class="field"><label>اسم الاستوديو أو المصمم</label><input type="text" id="brand-name-input" class="input" /></div>
           <div class="field">
-            <label>اللون الأساسي للهوية</label>
+            <label>اللون الأساسي</label>
             <div class="row">
-              <input type="color" id="brand-color-input" style="width:52px;height:40px;border:none;background:none;cursor:pointer;" />
-              <span id="brand-color-hex" style="font-size:0.88rem; color:var(--text-muted);">#000000</span>
+              <input type="color" id="brand-color-input" style="width:46px;height:36px;border:none;background:none;cursor:pointer;" />
+              <span id="brand-color-hex" style="font-size:0.85rem; color:var(--text-muted);">#000000</span>
             </div>
           </div>
-          <div class="field"><label>شعار الاستوديو (يُضغط تلقائياً)</label><input type="file" id="brand-logo-file" class="input" accept="image/*" /></div>
-          <button class="btn btn-primary" id="save-brand-btn">حفظ الهوية</button>
+          <div class="field"><label>شعار الاستوديو</label><input type="file" id="brand-logo-file" class="input" accept="image/*" /></div>
+          <button class="btn btn-primary btn-sm" id="save-brand-btn">حفظ الهوية</button>
         </div>
       </section>
 
-      <!-- ADMIN: COLLECTED LEADS / USERS -->
+      <!-- ADMIN: COLLECTED LEADS -->
       <section id="section-admin" class="hidden">
         <div class="card">
-          <div class="board-header" style="margin-bottom:16px;">
+          <div class="board-header" style="margin-bottom:14px;">
             <div>
-              <h2 style="font-size:1.2rem;">قاعدة بيانات المصممين المسجلين</h2>
-              <p style="font-size:0.85rem; color:var(--text-muted);">إجمالي المسجلين: <strong id="admin-total-users">0</strong></p>
+              <h2 style="font-size:1.1rem;">قاعدة بيانات المسجلين</h2>
+              <p style="font-size:0.83rem; color:var(--text-muted);">الإجمالي: <strong id="admin-total-users">0</strong></p>
             </div>
-            <button class="btn btn-primary btn-sm" id="export-csv-btn">تصدير البيانات (Excel / CSV)</button>
+            <button class="btn btn-primary btn-sm" id="export-csv-btn">تصدير Excel (CSV)</button>
           </div>
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr><th>الاسم / الاستوديو</th><th>البريد الإلكتروني</th><th>رقم الواتساب</th><th>التخصص</th><th>تاريخ التسجيل</th></tr>
-              </thead>
+              <thead><tr><th>الاسم</th><th>البريد الإلكتروني</th><th>الواتساب</th><th>التخصص</th><th>التاريخ</th></tr></thead>
               <tbody id="admin-users-tbody"></tbody>
             </table>
           </div>
         </div>
       </section>
 
-      <!-- FOOTER WITH FOLLOW SECTION -->
+      <!-- CLEAN FOOTER -->
       <footer class="studio-footer">
-        <div>
-          <strong style="font-size:1.05rem; display:block;">تابعني في أكاديمية لمار الحربي</strong>
-          <span style="font-size:0.85rem; color:var(--text-muted);">نصايح وتحديثات الدورات في حساباتي، أو كلمني على طول.</span>
-        </div>
-        <div class="lm-tiles" id="footer-social-bar"></div>
+        <div>أكاديمية لمار الحربي — <a href="https://lamar.sayan.pro/" target="_blank" rel="noopener" style="text-decoration:underline; color:var(--text); font-weight:600;">lamar.sayan.pro</a></div>
+        <div class="social-row" id="footer-social-bar"></div>
       </footer>
     </main>
-
-    <div class="timer-pill">
-      <button class="btn btn-sm btn-soft" id="timer-mode-25" style="padding:4px 10px;">25د</button>
-      <button class="btn btn-sm btn-soft" id="timer-mode-50" style="padding:4px 10px;">50د</button>
-      <span class="timer-time" id="timer-display">25:00</span>
-      <button class="btn btn-primary btn-sm" id="timer-toggle">ابدأ</button>
-      <button class="btn btn-sm btn-soft" id="timer-reset" style="padding:4px 10px;">إعادة</button>
-      <span style="font-size:0.78rem; color:var(--text-muted); font-weight:600;" id="timer-sessions">إنجاز اليوم: 0</span>
-    </div>
   </div>
 
   <!-- 3. CLIENT PORTAL VIEW -->
@@ -466,20 +412,20 @@
       <div class="topbar-brand">
         <div class="topbar-logo" id="client-logo">س</div>
         <div>
-          <div style="font-weight:700; font-size:0.98rem;" id="client-studio-name">استوديو التصميم</div>
-          <div style="font-size:0.78rem; color:var(--text-muted);">بوابة متابعة المشروع</div>
+          <div style="font-weight:700; font-size:0.94rem;" id="client-studio-name">استوديو التصميم</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);">بوابة متابعة المشروع</div>
         </div>
       </div>
-      <span class="lm-pill" id="client-rev-badge">التعديل 0 من 3</span>
+      <span class="badge" id="client-rev-badge">التعديل 0 من 3</span>
     </header>
 
-    <main class="container" style="max-width:1020px;">
+    <main class="container" style="max-width:980px;">
       <div class="row" style="justify-content:space-between; margin-bottom:8px;">
         <div>
-          <h1 style="font-size:1.6rem; font-weight:700;" id="client-project-title">اسم المشروع</h1>
-          <p style="font-size:0.88rem; color:var(--text-muted);" id="client-project-meta"></p>
+          <h1 style="font-size:1.45rem; font-weight:700;" id="client-project-title">اسم المشروع</h1>
+          <p style="font-size:0.85rem; color:var(--text-muted);" id="client-project-meta"></p>
         </div>
-        <button class="btn btn-primary" id="client-approve-btn">اعتماد التصميم النهائي</button>
+        <button class="btn btn-primary btn-sm" id="client-approve-btn">اعتماد التصميم النهائي</button>
       </div>
 
       <div class="stepper" id="client-stepper"></div>
@@ -487,13 +433,13 @@
       <div class="grid-2" style="align-items:start;">
         <div class="card">
           <div class="row" style="justify-content:space-between; margin-bottom:12px;">
-            <h3 style="font-size:1.05rem;">معرض المسودات والتعديلات</h3>
-            <span style="font-size:0.78rem; color:var(--text-muted);">اضغط على أي مكان في التصميم لإضافة ملاحظة</span>
+            <h3 style="font-size:0.98rem;">معرض المسودات والتعديلات</h3>
+            <span style="font-size:0.76rem; color:var(--text-muted);">اضغط على التصميم لإضافة ملاحظة</span>
           </div>
-          <div id="client-draft-stage" class="draft-stage" style="min-height:240px; display:flex; align-items:center; justify-content:center;">
-            <span style="color:var(--text-muted); font-size:0.88rem;">لم يتم رفع مسودة بعد</span>
+          <div id="client-draft-stage" class="draft-stage" style="min-height:220px; display:flex; align-items:center; justify-content:center;">
+            <span style="color:var(--text-muted); font-size:0.85rem;">لم يتم رفع مسودة بعد</span>
           </div>
-          <div style="margin-top:16px;">
+          <div style="margin-top:14px;">
             <div class="row" style="margin-bottom:12px;">
               <input type="text" id="client-general-comment" class="input" placeholder="أو اكتب ملاحظة عامة هنا..." style="flex:1;" />
               <button class="btn btn-primary btn-sm" id="client-send-comment">إرسال</button>
@@ -502,68 +448,62 @@
           </div>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card"><h3 style="font-size:1.05rem; margin-bottom:12px;">خزنة العقد والملفات المرجعية</h3><div id="client-vault-list"></div></div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div class="card"><h3 style="font-size:0.98rem; margin-bottom:10px;">خزنة العقد والملفات</h3><div id="client-vault-list"></div></div>
           <div class="card">
-            <h3 style="font-size:1.05rem; margin-bottom:8px;">الملفات النهائية</h3>
-            <div id="client-final-box" style="font-size:0.88rem; color:var(--text-muted);">تُفتح الملفات النهائية تلقائياً فور ضغطك على زر «اعتماد التصميم النهائي».</div>
+            <h3 style="font-size:0.98rem; margin-bottom:8px;">الملفات النهائية</h3>
+            <div id="client-final-box" style="font-size:0.85rem; color:var(--text-muted);">تُفتح الملفات النهائية تلقائياً فور اعتمادك للتصميم.</div>
           </div>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- MODAL: ACADEMY & COURSE FULL DETAILS (FROM lamar.sayan.pro) -->
+  <!-- MODAL: ACADEMY & COURSE DETAILS -->
   <div id="academy-modal" class="modal-backdrop hidden">
-    <div class="modal" style="max-width:820px;">
+    <div class="modal">
       <div class="modal-head">
         <div class="row">
-          <img src="https://api.sayan.pro/static/branding/ff2498d1-709f-4f4a-a88f-92140c137c8e.png" alt="لمار" style="width:42px;height:42px;object-fit:contain;border-radius:10px;" />
+          <img src="https://api.sayan.pro/static/branding/ff2498d1-709f-4f4a-a88f-92140c137c8e.png" alt="لمار" style="width:38px;height:38px;object-fit:contain;border-radius:10px;" />
           <div>
-            <span class="lm-pill">أكاديمية لمار الحربي</span>
-            <h3 style="font-size:1.25rem; margin-top:4px;">وش بتطلع منه من دورة التصميم والعمل الحر؟</h3>
+            <div style="font-size:0.76rem; color:var(--text-muted); font-weight:600;">أكاديمية لمار الحربي</div>
+            <h3 style="font-size:1.15rem;">دورة التصميم والعمل الحر</h3>
           </div>
         </div>
         <button class="btn btn-sm btn-soft" data-close-modal="academy-modal">إغلاق</button>
       </div>
 
-      <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:14px;">
-        دورات عملية في التصميم والعمل الحر، مبنية على خبرة حقيقية في السوق منذ 2019. نختصر لك الطريق بخطوات تطبيقية واضحة بعيداً عن التنظير.
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:14px;">
+        دورات عملية في التصميم والعمل الحر مبنية على خبرة حقيقية في السوق منذ 2019. نختصر لك الطريق بخطوات تطبيقية واضحة بعيداً عن التنظير.
       </p>
 
-      <!-- Features -->
       <div class="lm-feat-grid" id="am-feats"></div>
 
-      <!-- Outcomes -->
       <div class="lm-outcomes">
-        <strong style="font-size:1rem;">حقيبة قوالب جاهزة للنسخ واللصق:</strong>
+        <strong style="font-size:0.92rem;">حقيبة قوالب جاهزة للنسخ واللصق:</strong>
         <div class="lm-out-list" id="am-outcomes"></div>
       </div>
 
-      <!-- Audience -->
       <div class="lm-aud-grid" id="am-audience"></div>
 
-      <!-- FAQ -->
-      <h4 style="font-size:1.05rem; margin:20px 0 12px;">أسئلة ممكن تدور في بالك</h4>
+      <h4 style="font-size:0.96rem; margin:18px 0 10px;">أسئلة شائعة</h4>
       <div id="am-faq"></div>
 
-      <!-- CTA -->
-      <div style="background:var(--invert-bg); color:var(--invert-text); border-radius:24px; padding:24px; text-align:center; margin-top:20px;">
-        <h4 style="font-size:1.25rem; margin-bottom:6px;">ابدأ رحلتك اليوم</h4>
-        <p style="font-size:0.88rem; color:var(--invert-muted); margin-bottom:16px;">اختر دورتك الأولى، أو كلمني وأساعدك تختار.</p>
-        <div class="row" style="justify-content:center;">
-          <a href="https://lamar.sayan.pro/courses" target="_blank" rel="noopener" class="btn btn-invert">تصفّح الدورات في الأكاديمية</a>
-          <a href="https://wa.me/966549748594?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%84%D9%85%D8%A7%D8%B1%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AF%D9%88%D8%B1%D8%A7%D8%AA%D9%83" target="_blank" rel="noopener" class="btn btn-ghost-invert">كلمني واتساب</a>
+      <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div class="row">
+          <a href="https://lamar.sayan.pro/" target="_blank" rel="noopener" class="btn btn-primary">التسجيل في الدورة الآن</a>
+          <a href="https://wa.me/966549748594?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%84%D9%85%D8%A7%D8%B1%D8%8C%20%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AF%D9%88%D8%B1%D8%A7%D8%AA%D9%83" target="_blank" rel="noopener" class="btn">كلمني واتساب</a>
         </div>
+        <div class="social-row" id="modal-social-bar"></div>
       </div>
     </div>
   </div>
 
   <!-- MODAL: NEW PROJECT -->
   <div id="new-project-modal" class="modal-backdrop hidden">
-    <div class="modal" style="max-width:520px;">
+    <div class="modal" style="max-width:480px;">
       <div class="modal-head">
-        <h3 style="font-size:1.1rem;">إنشاء مشروع جديد</h3>
+        <h3 style="font-size:1.05rem;">مشروع جديد</h3>
         <button class="btn btn-sm btn-soft" data-close-modal="new-project-modal">إغلاق</button>
       </div>
       <form id="new-project-form">
@@ -588,8 +528,8 @@
     <div class="modal">
       <div class="modal-head">
         <div>
-          <h3 id="pm-title" style="font-size:1.18rem;">تفاصيل المشروع</h3>
-          <span id="pm-client" style="font-size:0.84rem; color:var(--text-muted);"></span>
+          <h3 id="pm-title" style="font-size:1.12rem;">تفاصيل المشروع</h3>
+          <span id="pm-client" style="font-size:0.82rem; color:var(--text-muted);"></span>
         </div>
         <div class="row">
           <button class="btn btn-primary btn-sm" id="pm-copy-link">نسخ رابط العميل</button>
@@ -599,20 +539,20 @@
       </div>
 
       <div class="tabs">
-        <button class="tab-btn active" data-pm-tab="overview">المهام وبيانات العميل</button>
-        <button class="tab-btn" data-pm-tab="mood">مساحة المزاج</button>
-        <button class="tab-btn" data-pm-tab="drafts">المسودات والتعليقات</button>
-        <button class="tab-btn" data-pm-tab="vault">خزنة الملفات والعقد</button>
-        <button class="tab-btn" data-pm-tab="messages">رسالة للعميل</button>
+        <button class="tab-btn active" data-pm-tab="overview">المهام والعميل</button>
+        <button class="tab-btn" data-pm-tab="mood">المزاج</button>
+        <button class="tab-btn" data-pm-tab="drafts">المسودات</button>
+        <button class="tab-btn" data-pm-tab="vault">الملفات والعقد</button>
+        <button class="tab-btn" data-pm-tab="messages">رسالة جاهزة</button>
       </div>
 
       <div id="pm-tab-overview">
         <div class="client-info-box">
           <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-            <strong style="font-size:0.9rem;">بيانات العميل</strong>
+            <strong style="font-size:0.86rem;">بيانات العميل</strong>
             <div class="row">
-              <a id="pm-wa-quick" href="#" target="_blank" class="btn btn-sm hidden">مراسلة واتساب</a>
-              <button type="button" id="pm-save-client" class="btn btn-primary btn-sm">حفظ بيانات العميل</button>
+              <a id="pm-wa-quick" href="#" target="_blank" class="btn btn-sm hidden">واتساب</a>
+              <button type="button" id="pm-save-client" class="btn btn-primary btn-sm">حفظ</button>
             </div>
           </div>
           <div class="grid-2">
@@ -623,18 +563,18 @@
         </div>
 
         <div class="grid-2" style="margin-bottom:16px;">
-          <div class="field"><label>المرحلة الحالية</label><select id="pm-stage" class="input"></select></div>
+          <div class="field"><label>المرحلة</label><select id="pm-stage" class="input"></select></div>
           <div class="field">
-            <label>عدد التعديلات المستخدمة</label>
+            <label>التعديلات المستخدمة</label>
             <div class="row">
               <button class="btn btn-sm btn-soft" id="pm-rev-minus">-</button>
-              <span id="pm-rev-text" style="font-weight:700;">0 / 3</span>
+              <span id="pm-rev-text" style="font-weight:700; font-size:0.9rem;">0 / 3</span>
               <button class="btn btn-sm btn-soft" id="pm-rev-plus">+</button>
             </div>
           </div>
         </div>
         <div class="field">
-          <label>قائمة المهام الذكية</label>
+          <label>قائمة المهام</label>
           <div class="row">
             <input type="text" id="pm-task-input" class="input" placeholder="أضف خطوة جديدة..." style="flex:1;" />
             <button class="btn btn-primary btn-sm" id="pm-task-add">إضافة</button>
@@ -645,43 +585,43 @@
 
       <div id="pm-tab-mood" class="hidden">
         <div class="field">
-          <label>أكواد الألوان (اضغط على اللون لنسخ الكود)</label>
+          <label>أكواد الألوان (اضغط للنسخ)</label>
           <div class="row">
-            <input type="color" id="pm-color-picker" value="#000000" style="width:46px;height:38px;border:none;background:none;" />
+            <input type="color" id="pm-color-picker" value="#000000" style="width:42px;height:36px;border:none;background:none;" />
             <button class="btn btn-sm" id="pm-color-add">إضافة لون</button>
           </div>
           <div id="pm-colors-list" class="swatch-grid"></div>
         </div>
-        <div class="field" style="margin-top:18px;">
-          <label>الخطوط المستخدمة</label>
+        <div class="field" style="margin-top:16px;">
+          <label>الخطوط</label>
           <div class="row">
             <input type="text" id="pm-font-input" class="input" placeholder="مثال: IBM Plex Sans Arabic" style="flex:1;" />
-            <button class="btn btn-sm" id="pm-font-add">إضافة خط</button>
+            <button class="btn btn-sm" id="pm-font-add">إضافة</button>
           </div>
-          <div id="pm-fonts-list" style="margin-top:10px;"></div>
+          <div id="pm-fonts-list" style="margin-top:8px;"></div>
         </div>
-        <div class="field" style="margin-top:18px;">
+        <div class="field" style="margin-top:16px;">
           <label>روابط الإلهام</label>
           <div class="row">
             <input type="url" id="pm-link-input" class="input" placeholder="https://..." style="flex:1;" />
-            <button class="btn btn-sm" id="pm-link-add">إضافة رابط</button>
+            <button class="btn btn-sm" id="pm-link-add">إضافة</button>
           </div>
-          <div id="pm-links-list" style="margin-top:10px;"></div>
+          <div id="pm-links-list" style="margin-top:8px;"></div>
         </div>
       </div>
 
       <div id="pm-tab-drafts" class="hidden">
-        <div class="field"><label>رفع صورة مسودة جديدة (تُضغط تلقائياً)</label><input type="file" id="pm-draft-file" class="input" accept="image/*" /></div>
-        <div id="pm-draft-preview" class="draft-stage" style="margin-bottom:16px; min-height:180px; display:flex; align-items:center; justify-content:center;">
-          <span style="color:var(--text-muted); font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>
+        <div class="field"><label>رفع صورة مسودة من جهازك</label><input type="file" id="pm-draft-file" class="input" accept="image/*" /></div>
+        <div id="pm-draft-preview" class="draft-stage" style="margin-bottom:14px; min-height:170px; display:flex; align-items:center; justify-content:center;">
+          <span style="color:var(--text-muted); font-size:0.84rem;">لا توجد مسودة مرفوعة حالياً</span>
         </div>
-        <h4 style="font-size:0.92rem; margin-bottom:8px;">ملاحظات العميل على التصميم</h4>
+        <h4 style="font-size:0.88rem; margin-bottom:8px;">ملاحظات العميل</h4>
         <div id="pm-comments-list"></div>
       </div>
 
       <div id="pm-tab-vault" class="hidden">
         <div class="field">
-          <label>رفع ملف مباشرة من جهازك (عقد PDF، صورة، بريف، أو ملف نهائي — بحد أقصى 700KB)</label>
+          <label>رفع ملف مباشرة من جهازك (PDF، صورة، بريف — بحد أقصى 700KB)</label>
           <div class="row">
             <input type="text" id="pm-file-name" class="input" placeholder="اسم الملف (اختياري)" style="flex:1;" />
             <select id="pm-file-type" class="input" style="width:auto;">
@@ -691,28 +631,26 @@
           </div>
           <div class="row" style="margin-top:8px;">
             <input type="file" id="pm-file-upload" class="input" style="flex:1;" />
-            <button class="btn btn-primary btn-sm" id="pm-file-add">رفع وحفظ الملف</button>
+            <button class="btn btn-primary btn-sm" id="pm-file-add">رفع الملف</button>
           </div>
         </div>
         <div id="pm-vault-list" style="margin-top:12px;"></div>
       </div>
 
       <div id="pm-tab-messages" class="hidden">
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">اختر نوع الرسالة وانسخها جاهزة للعميل مع رابط المتابعة الخاص به.</p>
-        <div class="row" style="margin-bottom:12px;">
-          <button class="btn btn-sm btn-soft" data-msg-tpl="draft">إرسال مسودة جديدة</button>
-          <button class="btn btn-sm btn-soft" data-msg-tpl="remind">تذكير لطيف بالرد</button>
-          <button class="btn btn-sm btn-soft" data-msg-tpl="final">تسليم الملفات النهائية</button>
+        <div class="row" style="margin-bottom:10px;">
+          <button class="btn btn-sm btn-soft" data-msg-tpl="draft">إرسال مسودة</button>
+          <button class="btn btn-sm btn-soft" data-msg-tpl="remind">تذكير بالرد</button>
+          <button class="btn btn-sm btn-soft" data-msg-tpl="final">تسليم النهائي</button>
         </div>
-        <textarea id="pm-msg-box" class="input" rows="6"></textarea>
-        <button class="btn btn-primary" id="pm-msg-copy" style="margin-top:10px;">نسخ الرسالة</button>
+        <textarea id="pm-msg-box" class="input" rows="5"></textarea>
+        <button class="btn btn-primary btn-sm" id="pm-msg-copy" style="margin-top:10px;">نسخ الرسالة</button>
       </div>
     </div>
   </div>
 
   <script>
     const ACADEMY = {
-      words: ["تصميم", "عمل حر", "تسعير", "عقود", "تسويق", "عملاء"],
       features: [
         ["تأسيس رسمي ومالي صح", "وثيقة العمل الحر، حساب تجاري، روابط دفع، وواتساب أعمال مرتب كبزنس رسمي."],
         ["بورتفوليو يقنع العميل", "تبني معرض أعمال احترافي يقنع أصحاب المتاجر حتى لو ما عندك عملاء سابقين."],
@@ -732,8 +670,8 @@
         "تدور على نتائج سريعة بدون التزام بالواجبات والتطبيق."
       ],
       faq: [
-        ["هل الدروس بث مباشر ولا مسجلة؟", "الدروس مسجلة بالكامل وتنزل لك تدريجياً كل أسبوع لمدة 4 أسابيع، عشان تتابعها في الوقت اللي يناسبك بدون ارتباط بمواعيد بث."],
-        ["هل أحتاج يكون عندي عملاء سابقين عشان أشترك؟", "لا أبداً، داخل الدورة بننشئ براند من الصفر سوا ونبني بورتفوليو احترافي يقنع العميل حتى لو ما اشتغلت مع أحد من قبل."],
+        ["هل الدروس بث مباشر ولا مسجلة؟", "الدروس مسجلة بالكامل وتنزل لك تدريجياً كل أسبوع لمدة 4 أسابيع، عشان تتابعها في الوقت اللي يناسبك."],
+        ["هل أحتاج يكون عندي عملاء سابقين عشان أشترك؟", "لا أبداً، داخل الدورة بننشئ براند من الصفر سوا ونبني بورتفوليو احترافي يقنع العميل."],
         ["كيف تكون المتابعة وتصحيح الواجبات؟", "بمجرد اشتراكك تدخل قروب خاص بالدفعة، أجاوب فيه على أسئلتك يومياً، ومع كل أسبوع تسلّم واجبك وأصححه لك بنفسي."],
         ["هل القوالب الجاهزة مشمولة مع السعر؟", "إيه نعم، حقيبة القوالب كاملة تجيك جاهزة للنسخ واللصق بدون أي رسوم إضافية."]
       ],
@@ -744,12 +682,11 @@
     };
 
     const DAILY_QUOTES = [
-      "كل مشروع تنجزه اليوم هو خطوة تقرّبك من الاستوديو الذي تحلم به.",
+      "كل مشروع تنجزه اليوم خطوة تقرّبك من الاستوديو الذي تطمح له.",
       "البساطة في التصميم ليست نقصاً، بل هي قمة الاحترافية والوضوح.",
       "ابدأ بأهم مهمة واحدة الآن، والباقي سيأتي بسلاسة.",
       "الاستمرارية الهادئة تتفوق دائماً على الحماس المؤقت.",
       "ذوقك وتفاصيلك الصغيرة هي ما يميز شغلك عن الجميع.",
-      "اليوم فرصة جديدة لصناعة عمل تفخر بوضعه في معرض أعمالك.",
       "تنظيم وقتك ومشاريعك يمنحك مساحة أكبر للإبداع الحقيقي.",
       "ثقتك بقيمة عملك هي أول ما يقنع العميل بالاستثمار معك."
     ];
@@ -768,7 +705,7 @@
     const STAGES = [
       { id: "pending", label: "قيد الانتظار" },
       { id: "designing", label: "جاري التصميم" },
-      { id: "review", label: "بانتظار رد العميل" },
+      { id: "review", label: "بانتظار العميل" },
       { id: "revisions", label: "تعديلات" },
       { id: "done", label: "مكتمل" }
     ];
@@ -782,7 +719,7 @@
     const $ = (id) => document.getElementById(id);
     const esc = (s = "") => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
     const uid = () => "p_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-    const toast = (msg) => { const el = $("toast"); el.textContent = msg; el.classList.remove("hidden"); clearTimeout(window._t); window._t = setTimeout(() => el.classList.add("hidden"), 3200); };
+    const toast = (msg) => { const el = $("toast"); el.textContent = msg; el.classList.remove("hidden"); clearTimeout(window._t); window._t = setTimeout(() => el.classList.add("hidden"), 2800); };
 
     function formatWaLink(phone) {
       const digits = String(phone || "").replace(/\D/g, "");
@@ -791,25 +728,17 @@
     }
 
     function initAcademyUI() {
-      // Marquee
-      let trackHtml = "";
-      for (let i = 0; i < 4; i++) ACADEMY.words.forEach(w => trackHtml += `<span>${w} ✦</span>`);
-      $("lm-marquee-track").innerHTML = trackHtml;
-
-      // Social Tiles
-      const tilesHtml = ACADEMY.socials.map((s, i) => `
-        <a href="${s.url}" target="_blank" rel="noopener" class="lm-tile ${i % 2 === 0 ? "dark" : "light"}" title="${s.name} - ${s.handle}" aria-label="${s.name}">
+      const socialHtml = ACADEMY.socials.map(s => `
+        <a href="${s.url}" target="_blank" rel="noopener" class="social-btn" title="${s.name} - ${s.handle}" aria-label="${s.name}">
           <svg viewBox="0 0 24 24"><path d="${s.path}"/></svg>
         </a>`).join("");
-      $("auth-social-bar").innerHTML = tilesHtml;
-      $("footer-social-bar").innerHTML = tilesHtml;
+      ["auth-social-bar", "footer-social-bar", "modal-social-bar"].forEach(id => { if ($(id)) $(id).innerHTML = socialHtml; });
 
-      // Modal Content
-      $("am-feats").innerHTML = ACADEMY.features.map(f => `<div class="lm-feat"><span class="lm-check">✓</span><div><strong style="display:block;margin-bottom:4px;">${f[0]}</strong><p style="font-size:0.85rem;color:var(--text-muted);">${f[1]}</p></div></div>`).join("");
+      $("am-feats").innerHTML = ACADEMY.features.map(f => `<div class="lm-feat"><span class="lm-check">✓</span><div><strong style="display:block;font-size:0.88rem;margin-bottom:2px;">${f[0]}</strong><p style="font-size:0.82rem;color:var(--text-muted);">${f[1]}</p></div></div>`).join("");
       $("am-outcomes").innerHTML = ACADEMY.outcomes.map(o => `<span class="lm-out-tag">✦ ${o}</span>`).join("");
       $("am-audience").innerHTML = `
-        <div class="lm-aud-card yes"><strong>مناسبة لك إذا...</strong><ul>${ACADEMY.yes.map(x => `<li><span>✓</span><span>${x}</span></li>`).join("")}</ul></div>
-        <div class="lm-aud-card no"><strong>مو مناسبة لك إذا...</strong><ul>${ACADEMY.no.map(x => `<li><span>✕</span><span>${x}</span></li>`).join("")}</ul></div>`;
+        <div class="lm-aud-card yes"><strong style="font-size:0.9rem;">مناسبة لك إذا...</strong><ul>${ACADEMY.yes.map(x => `<li><span>✓</span><span>${x}</span></li>`).join("")}</ul></div>
+        <div class="lm-aud-card no"><strong style="font-size:0.9rem;">مو مناسبة لك إذا...</strong><ul>${ACADEMY.no.map(x => `<li><span>✕</span><span>${x}</span></li>`).join("")}</ul></div>`;
       $("am-faq").innerHTML = ACADEMY.faq.map((q, i) => `<details class="lm-faq-item" ${i === 0 ? "open" : ""}><summary>${q[0]}<span>+</span></summary><p>${q[1]}</p></details>`).join("");
 
       if (sessionStorage.getItem("hide_academy_banner") === "1") $("academy-banner").classList.add("hidden");
@@ -916,7 +845,7 @@
           state.regMeta = { name, phone: $("auth-phone").value.trim(), specialty: $("auth-specialty").value };
           const cred = await auth.createUserWithEmailAndPassword(email, pass);
           await cred.user.updateProfile({ displayName: name });
-          toast("تم إنشاء حسابك بنجاح!");
+          toast("تم إنشاء حسابك بنجاح");
         } else {
           await auth.signInWithEmailAndPassword(email, pass);
           toast("تم تسجيل الدخول");
@@ -957,7 +886,7 @@
       const file = $("brand-logo-file").files[0]; if (file) state.user.logo = await compressImage(file, 300);
       await db.collection("users").doc(state.user.uid).set(state.user, { merge: true });
       for (const p of state.projects) { p.brand = { name: state.user.name, color: state.user.color, logo: state.user.logo }; await db.collection("projects").doc(p.id).set(p, { merge: true }); }
-      renderStudioBrand(); renderDailyGreeting(state.user.name); toast("تم حفظ هوية الاستوديو");
+      renderStudioBrand(); renderDailyGreeting(state.user.name); toast("تم حفظ الهوية");
     });
 
     $("board-search").addEventListener("input", (e) => { state.search = e.target.value.trim().toLowerCase(); renderBoard(); });
@@ -986,7 +915,7 @@
           const card = document.createElement("div"); card.className = "project-card" + (overdue ? " is-overdue" : ""); card.draggable = true;
           card.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", p.id));
           card.addEventListener("click", () => openProjectModal(p.id));
-          card.innerHTML = `${p.draft ? `<img class="project-thumb" src="${p.draft}" alt="مسودة"/>` : ""}<div class="project-title">${esc(p.title)}</div><div style="font-size:0.8rem;color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div><div class="project-meta"><span>${p.due || "بدون تاريخ"}</span>${overdue ? `<span class="badge badge-danger">متأخر</span>` : `<span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>`}</div>`;
+          card.innerHTML = `${p.draft ? `<img class="project-thumb" src="${p.draft}" alt="مسودة"/>` : ""}<div class="project-title">${esc(p.title)}</div><div style="font-size:0.78rem;color:var(--text-muted);">${esc(p.client)}${p.clientPhone ? " • " + esc(p.clientPhone) : ""}</div><div class="project-meta"><span>${p.due || "بدون تاريخ"}</span>${overdue ? `<span class="badge badge-danger">متأخر</span>` : `<span class="badge ${p.approved ? "badge-success" : ""}">${p.approved ? "معتمد" : `${p.revisionsUsed || 0}/${p.maxRevisions || 3} تعديل`}</span>`}</div>`;
           col.appendChild(card);
         });
         board.appendChild(col);
@@ -1016,13 +945,13 @@
       if (waUrl) { $("pm-wa-quick").href = waUrl; $("pm-wa-quick").classList.remove("hidden"); } else $("pm-wa-quick").classList.add("hidden");
 
       $("pm-rev-text").textContent = `${p.revisionsUsed || 0} / ${p.maxRevisions || 3}`;
-      $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `<div class="list-item"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1;${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}"><input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" /> ${esc(t.text)}</label><button class="btn btn-sm btn-soft" onclick="removeTask(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
+      $("pm-tasks-list").innerHTML = (p.tasks || []).map((t, i) => `<div class="list-item"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1;${t.done ? "text-decoration:line-through;opacity:0.6;" : ""}"><input type="checkbox" ${t.done ? "checked" : ""} onchange="toggleTask(${i})" /> ${esc(t.text)}</label><button class="btn btn-sm btn-soft" onclick="removeTask(${i})">حذف</button></div>`).join("") || `<p style="font-size:0.83rem;color:var(--text-muted);">لا توجد مهام بعد.</p>`;
       $("pm-colors-list").innerHTML = (p.colors || []).map((c, i) => `<div class="swatch" onclick="copyText('${c}')"><span class="swatch-dot" style="background:${c}"></span><span>${c}</span><span style="opacity:0.5;" onclick="event.stopPropagation(); removeColor(${i})">×</span></div>`).join("");
       $("pm-fonts-list").innerHTML = (p.fonts || []).map((f, i) => `<div class="list-item"><span>${esc(f)}</span><button class="btn btn-sm btn-soft" onclick="removeFont(${i})">حذف</button></div>`).join("");
       $("pm-links-list").innerHTML = (p.links || []).map((l, i) => `<div class="list-item"><a href="${esc(l)}" target="_blank">${esc(l)}</a><button class="btn btn-sm btn-soft" onclick="removeLink(${i})">حذف</button></div>`).join("");
-      $("pm-draft-preview").innerHTML = p.draft ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("") : `<span style="color:var(--text-muted);font-size:0.86rem;">لا توجد مسودة مرفوعة حالياً</span>`;
-      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملاحظات بعد.</p>`;
-      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><strong>${esc(f.name)}</strong><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><div class="row"><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a><button class="btn btn-danger btn-sm" onclick="removeVault(${i})">حذف</button></div></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
+      $("pm-draft-preview").innerHTML = p.draft ? `<img src="${p.draft}" alt="draft"/>` + (p.comments || []).filter(c => c.x != null).map((c, idx) => `<div class="pin" style="left:${c.x}%; top:${c.y}%;" title="${esc(c.text)}">${idx + 1}</div>`).join("") : `<span style="color:var(--text-muted);font-size:0.84rem;">لا توجد مسودة مرفوعة حالياً</span>`;
+      $("pm-comments-list").innerHTML = (p.comments || []).map((c, idx) => `<div class="list-item"><div><strong>#${idx + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.74rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("") || `<p style="font-size:0.83rem;color:var(--text-muted);">لا توجد ملاحظات بعد.</p>`;
+      $("pm-vault-list").innerHTML = (p.vault || []).map((f, i) => `<div class="list-item"><div><strong>${esc(f.name)}</strong><span class="badge" style="margin-right:8px;">${f.type === "final" ? "ملف نهائي" : "عقد / مرجع"}</span></div><div class="row"><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a><button class="btn btn-danger btn-sm" onclick="removeVault(${i})">حذف</button></div></div>`).join("") || `<p style="font-size:0.83rem;color:var(--text-muted);">الخزنة فارغة.</p>`;
       fillClientMsg("draft");
     }
 
@@ -1053,7 +982,7 @@
       getActiveProject().vault.push({ name: $("pm-file-name").value.trim() || file.name, fileName: file.name, data: dataUrl, type: $("pm-file-type").value });
       $("pm-file-name").value = ""; fileInput.value = ""; await saveActiveProject(); toast("تم رفع الملف بنجاح");
     });
-    $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط متابعة العميل"); });
+    $("pm-copy-link").addEventListener("click", () => { navigator.clipboard.writeText(`${location.origin}${location.pathname}#client=${state.activeProjectId}`); toast("تم نسخ رابط العميل"); });
     $("pm-delete").addEventListener("click", async () => { if (!confirm("متأكدة من حذف هذا المشروع؟")) return; await db.collection("projects").doc(state.activeProjectId).delete(); state.projects = state.projects.filter(p => p.id !== state.activeProjectId); $("project-modal").classList.add("hidden"); renderBoard(); checkOverdueAlerts(); toast("تم حذف المشروع"); });
 
     document.querySelectorAll("[data-pm-tab]").forEach(btn => btn.addEventListener("click", () => {
@@ -1071,21 +1000,6 @@
     document.querySelectorAll("[data-msg-tpl]").forEach(b => b.addEventListener("click", () => fillClientMsg(b.dataset.msgTpl)));
     $("pm-msg-copy").addEventListener("click", () => { navigator.clipboard.writeText($("pm-msg-box").value); toast("تم نسخ الرسالة"); });
 
-    let timerSec = 25 * 60, timerRunning = false, timerInt = null;
-    let todaySessions = Number(localStorage.getItem("studio_sessions_" + new Date().toDateString()) || 0);
-    $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions;
-    function renderTimer() { $("timer-display").textContent = `${String(Math.floor(timerSec / 60)).padStart(2, "0")}:${String(timerSec % 60).padStart(2, "0")}`; }
-    $("timer-mode-25").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 25 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
-    $("timer-mode-50").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 50 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
-    $("timer-reset").addEventListener("click", () => { clearInterval(timerInt); timerRunning = false; timerSec = 25 * 60; $("timer-toggle").textContent = "ابدأ"; renderTimer(); });
-    $("timer-toggle").addEventListener("click", () => {
-      if (timerRunning) { clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "استكمال"; }
-      else {
-        timerRunning = true; $("timer-toggle").textContent = "إيقاف";
-        timerInt = setInterval(() => { timerSec--; renderTimer(); if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; $("timer-toggle").textContent = "ابدأ"; todaySessions++; localStorage.setItem("studio_sessions_" + new Date().toDateString(), todaySessions); $("timer-sessions").textContent = "إنجاز اليوم: " + todaySessions; toast("انتهت جلسة التركيز بنجاح"); } }, 1000);
-      }
-    });
-
     async function renderAdminPanel() {
       try {
         const snap = await db.collection("users").get();
@@ -1096,7 +1010,7 @@
     }
     $("export-csv-btn").addEventListener("click", () => {
       if (!state.allUsers.length) return toast("لا توجد بيانات للتصدير");
-      const rows = [["الاسم", "البريد الإلكتروني", "رقم الواتساب", "التخصص", "تاريخ التسجيل"]];
+      const rows = [["الاسم", "البريد الإلكتروني", "الواتساب", "التخصص", "التاريخ"]];
       state.allUsers.forEach(u => rows.push([u.name || "", u.email || "", u.phone || "", u.specialty || "", u.createdAt || ""]));
       const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\uFEFF" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n")], { type: "text/csv;charset=utf-8;" })); a.download = "studio-users.csv"; a.click();
     });
@@ -1131,7 +1045,7 @@
           };
         }
 
-        $("client-comments-list").innerHTML = (proj.comments || []).map((c, i) => `<div class="list-item"><div><strong>#${i + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.75rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("");
+        $("client-comments-list").innerHTML = (proj.comments || []).map((c, i) => `<div class="list-item"><div><strong>#${i + 1}</strong> ${esc(c.text)}</div><span style="font-size:0.74rem;color:var(--text-muted);">${c.date || ""}</span></div>`).join("");
         $("client-send-comment").onclick = async () => {
           if (proj.approved) return toast("تم اعتماد التصميم مسبقاً.");
           const txt = $("client-general-comment").value.trim(); if (!txt) return;
@@ -1140,11 +1054,11 @@
         };
 
         const refs = (proj.vault || []).filter(f => f.type !== "final"), finals = (proj.vault || []).filter(f => f.type === "final");
-        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
+        $("client-vault-list").innerHTML = refs.map(f => `<div class="list-item"><span>${esc(f.name)}</span><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-sm btn-soft">تحميل</a></div>`).join("") || `<p style="font-size:0.84rem;color:var(--text-muted);">لا توجد ملفات مرفقة حالياً.</p>`;
 
         if (proj.approved) {
           $("client-approve-btn").textContent = "تم اعتماد التصميم"; $("client-approve-btn").disabled = true;
-          $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.85rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
+          $("client-final-box").innerHTML = finals.map(f => `<div class="list-item"><strong>${esc(f.name)}</strong><a href="${f.data || f.url}" download="${esc(f.fileName || f.name)}" class="btn btn-primary btn-sm">تحميل</a></div>`).join("") || `<p style="font-size:0.84rem;color:var(--success);">تم الاعتماد! سيقوم المصمم برفع الملفات النهائية هنا قريباً.</p>`;
         } else {
           $("client-approve-btn").onclick = async () => { if (!confirm("هل أنت متأكد من اعتماد التصميم النهائي وإغلاق التعديلات؟")) return; proj.approved = true; proj.stage = "done"; await db.collection("projects").doc(proj.id).set(proj, { merge: true }); loadClientPortal(pid); toast("تم اعتماد التصميم"); };
         }
